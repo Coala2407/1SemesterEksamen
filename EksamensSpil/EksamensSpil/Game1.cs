@@ -16,6 +16,7 @@ namespace EksamensSpil
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+			// Martin can write stuff
         }
 
         /// <summary>
