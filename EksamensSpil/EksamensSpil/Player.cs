@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EksamensSpil.GameObject.Character
+namespace EksamensSpil
 {
-    class Enemy
+    class Player : Character
     {
     }
 }

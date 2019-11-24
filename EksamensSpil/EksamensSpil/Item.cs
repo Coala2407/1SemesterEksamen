@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EksamensSpil.GameObject.Weapon
+namespace EksamensSpil
 {
-    class Sword
+    class Item : GameObject
     {
     }
 }

@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EksamensSpil.GameObject
+namespace EksamensSpil
 {
-    class Tile
+    class Chest : GameObject
     {
     }
 }
