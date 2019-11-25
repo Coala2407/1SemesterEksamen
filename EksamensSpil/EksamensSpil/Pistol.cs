@@ -8,5 +8,21 @@ namespace EksamensSpil
 {
     class Pistol : Weapon
     {
+
+		private float projectileSpeed;
+
+		/// <summary>
+		/// Default Constructor
+		/// </summary>
+		public Pistol()
+		{
+
+		}
+
+		public void Attack()
+		{
+
+		}
+
     }
 }
