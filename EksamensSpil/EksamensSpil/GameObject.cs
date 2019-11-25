@@ -14,6 +14,7 @@ namespace EksamensSpil
 
         protected float drawLayer;
 
+		//TODO Placed name here to avoid repeating the same variable. 
 		protected string name;
 
 		protected Vector2 origin;
