@@ -12,6 +12,7 @@ namespace EksamensSpil
 
         protected float movementSpeed;
         protected int health;
+        protected Vector2 velocity;
 
         public abstract void Die();
 

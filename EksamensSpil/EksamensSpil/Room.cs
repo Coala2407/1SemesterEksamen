@@ -28,11 +28,16 @@ namespace EksamensSpil
             set { gameObjects = value; }
         }
 
+        public bool IsActive
+        {
+            get { return isActive; }
+            set { isActive = value; }
+        }
+
         /// <summary>
         /// Default constructor
         /// </summary>
-        public Room()
-        { }
+        //public Room(){}
 
         /// <summary>
         /// Constructor. Most used. 
@@ -67,6 +72,15 @@ namespace EksamensSpil
         public Room(bool isExit)
         {
             this.isExit = isExit;
+        }
+
+        /// <summary>
+        /// Add an object to the room
+        /// </summary>
+        /// <param name="gameObject"></param>
+        public void Add(GameObject gameObject)
+        {
+            GameObjects.Add(gameObject);
         }
     }
 }
