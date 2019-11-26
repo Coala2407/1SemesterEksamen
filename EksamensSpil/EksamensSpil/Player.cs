@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 
 namespace EksamensSpil
 {
@@ -18,18 +20,6 @@ namespace EksamensSpil
 		/// Default Constructor
 		/// </summary>
 		public Player()
-		{
-
-		}
-
-		//TODO Do we need this?
-		public void Attack()
-		{
-
-		}
-
-		//TODO Do we need this?
-		public void Reload()
 		{
 
 		}
@@ -69,5 +59,29 @@ namespace EksamensSpil
 
 		}
 
+        public override void Die()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Attack()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override int UpdateHealth(int change)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Reload()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void LoadContent(ContentManager content)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
