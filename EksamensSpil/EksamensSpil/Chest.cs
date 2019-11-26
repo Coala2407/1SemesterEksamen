@@ -14,12 +14,12 @@ namespace EksamensSpil
 		private GameObject item;
 		private bool isOpen;
 
-		public override void LoadContent(ContentManager content)
-		{
-			throw new NotImplementedException();
-		}
+        public override void LoadContent(ContentManager content)
+        {
+            throw new NotImplementedException();
+        }
 
-		public override void OnCollision(GameObject otherObject)
+        public override void OnCollision(GameObject otherObject)
 		{
 			throw new NotImplementedException();
 		}
