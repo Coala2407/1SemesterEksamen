@@ -20,12 +20,20 @@ namespace EksamensSpil
         //To add and remove objects in runtime
         public static List<GameObject> NewGameObjects = new List<GameObject>();
         public static List<GameObject> RemoveGameObjects = new List<GameObject>();
-
         public void AddGameObject(GameObject gameObject, Room room)
         {
             gameObject.Room = room;
             NewGameObjects.Add(gameObject);
         }
+
+        //Levels
+        Level level;
+        //Rooms
+        Room theRoom;
+        Room theHall;
+
+        //Player
+        Player player;
 
         public GameWorld()
         {
@@ -41,10 +49,29 @@ namespace EksamensSpil
         /// </summary>
         protected override void Initialize()
         {
-			// TODO: Add your initialization logic here
+            // TODO: Add your initialization logic here
 
-			IsMouseVisible = true;
+            IsMouseVisible = true;
 
+            //Make player
+            player = new Player();
+
+            //Make levels
+            level = new Level();
+
+            //Make rooms
+            theRoom = new Room(false, false, "The Room");
+            theHall = new Room(false, false, "The Hall");
+
+            //Active room
+            theHall.IsActive = true;
+
+            //Add object to room
+            theHall.Add(new Enemy());
+
+            //Add rooms to level
+            level.Rooms.Add(theRoom);
+            level.Rooms.Add(theHall);
             base.Initialize();
         }
 
@@ -86,6 +113,23 @@ namespace EksamensSpil
 			//TODO: Test Player
 
 			player.Update(gameTime);
+            
+            //Update the player, each frame
+            //player.Update(gameTime);
+
+            foreach (Room room in level.Rooms  /*active level*/)
+            {
+                if (room.IsActive /*active room*/)
+                {
+                    foreach (GameObject go in room.GameObjects)
+                    {
+                        //Update all objects in active room, each frame
+                        go.Update(gameTime);
+                    }
+                    break;
+                }
+            }
+            // TODO: Add your update logic here
 
             base.Update(gameTime);
         }

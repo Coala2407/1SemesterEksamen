@@ -19,7 +19,7 @@ namespace EksamensSpil
 			throw new NotImplementedException();
 		}
 
-		public override void OnCollision(GameObject otherObject)
+        public override void OnCollision(GameObject otherObject)
 		{
 			throw new NotImplementedException();
 		}
