@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
@@ -30,6 +31,8 @@ namespace EksamensSpil
             get { return room; }
             set { room = value; }
         }
+
+        public abstract void LoadContent(ContentManager content);
 
         public abstract void Update(GameTime gameTime);
 

@@ -21,15 +21,25 @@ namespace EksamensSpil
 		}
 
 		//TODO Do we need this?
-		public void Attack()
+		public override void Attack()
 		{
 
 		}
 
-		//TODO Do we need this?
-		public void Reload()
+        public override void Die()
+        {
+            throw new NotImplementedException();
+        }
+
+        //TODO Do we need this?
+        public override void Reload()
 		{
 
 		}
+
+        public override int UpdateHealth(int change)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

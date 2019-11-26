@@ -7,51 +7,36 @@ using Microsoft.Xna.Framework;
 
 namespace EksamensSpil
 {
-	class Character : GameObject
-	{
+    abstract class Character : GameObject
+    {
 
-		protected float movementSpeed;
-		protected int health;
+        protected float movementSpeed;
+        protected int health;
 
+        public abstract void Die();
 
-		//TODO bool meybe?
-		public void Die()
-		{
+        // This can be used by both Player and Enemy.
+        public abstract void Attack();
 
-		}
+        //TODO get & set metode?
+        public abstract int UpdateHealth(int change);
 
-		// This can be used by both Player and Enemy.
-		public void Attack()
-		{
+        public virtual void Move()
+        {
 
-		}
+        }
 
-		//TODO get & set metode?
-		public int UpdateHealth(int change)
-		{
-			return health;
-		}
+        public abstract void Reload();
 
-		public void Move()
-		{
+        // This can be used for Player and Enemy
+        public override void OnCollision(GameObject otherObject)
+        {
+            throw new NotImplementedException();
+        }
 
-		}
-
-		//TODO meybe keep this method in here?
-		public void Reload()
-		{
-
-		}
-
-		// This can be used for Player and Enemy
-		public override void OnCollision(GameObject otherObject)
-		{
-			throw new NotImplementedException();
-		}
-
-		public override void Update(GameTime gameTime)
-		{
-			throw new NotImplementedException();
-		}
-	}
+        public override void Update(GameTime gameTime)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

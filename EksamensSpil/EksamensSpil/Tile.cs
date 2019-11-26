@@ -14,9 +14,9 @@ namespace EksamensSpil
 		private bool isWall;
 
 		/// <summary>
-		/// Places the tiles in an area randomly
+		/// Randomizes tiles
 		/// </summary>
-		public void Randomized()
+		public void Randomize()
 		{
 
 		}
