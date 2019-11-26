@@ -13,6 +13,17 @@ namespace EksamensSpil
         protected float movementSpeed;
         protected int health;
 
+
+		public Character()
+		{
+
+		}
+
+		public Character(Vector2 position) : base(position)
+		{
+
+		}
+
         public abstract void Die();
 
         // This can be used by both Player and Enemy.
@@ -34,9 +45,5 @@ namespace EksamensSpil
             throw new NotImplementedException();
         }
 
-        public override void Update(GameTime gameTime)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

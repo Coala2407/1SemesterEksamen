@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,20 +19,11 @@ namespace EksamensSpil
 		/// <summary>
 		/// Default Constructor
 		/// </summary>
-		public Player()
+		public Player(Vector2 postition) : base(postition)
 		{
 
-		}
-
-		//TODO Do we need this?
-		public void Attack()
-		{
-
-		}
-
-		//TODO Do we need this?
-		public void Reload()
-		{
+			// Sets default Player sprite
+			ChangeSprite(Assets.PlayerSprite);
 
 		}
 
@@ -64,10 +57,46 @@ namespace EksamensSpil
 		/// User input to Player
 		/// </summary>
 		/// <param name="gameTime"></param>
-		public void HandleInput(GameTime gameTime)
+		public void HandleInput()
 		{
+
+
+
+			// =================================
+			// rotation (Look at mouse)
+
+			LookAt(GameWorld.GetMousePosition());
 
 		}
 
-    }
+		public override void Die()
+		{
+			throw new NotImplementedException();
+		}
+
+		public override void Attack()
+		{
+			throw new NotImplementedException();
+		}
+
+		public override int UpdateHealth(int change)
+		{
+			throw new NotImplementedException();
+		}
+
+		public override void Reload()
+		{
+			throw new NotImplementedException();
+		}
+
+		public override void LoadContent(ContentManager content)
+		{
+			throw new NotImplementedException();
+		}
+
+		public override void Update(GameTime gameTime)
+		{
+			HandleInput();
+		}
+	}
 }

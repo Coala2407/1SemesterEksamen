@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 
 namespace EksamensSpil
 {
@@ -13,6 +14,10 @@ namespace EksamensSpil
 		private GameObject item;
 		private bool isOpen;
 
+		public override void LoadContent(ContentManager content)
+		{
+			throw new NotImplementedException();
+		}
 
 		public override void OnCollision(GameObject otherObject)
 		{

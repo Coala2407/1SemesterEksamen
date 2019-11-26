@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 
 namespace EksamensSpil
 {
@@ -31,13 +33,23 @@ namespace EksamensSpil
             throw new NotImplementedException();
         }
 
-        //TODO Do we need this?
-        public override void Reload()
+		public override void LoadContent(ContentManager content)
+		{
+			throw new NotImplementedException();
+		}
+
+		//TODO Do we need this?
+		public override void Reload()
 		{
 
 		}
 
-        public override int UpdateHealth(int change)
+		public override void Update(GameTime gameTime)
+		{
+			throw new NotImplementedException();
+		}
+
+		public override int UpdateHealth(int change)
         {
             throw new NotImplementedException();
         }

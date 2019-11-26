@@ -13,6 +13,8 @@ namespace EksamensSpil
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+		//TODO: Test
+		Player player;
         //To get random numbers
         public static Random rng = new Random();
         //To add and remove objects in runtime
@@ -39,7 +41,10 @@ namespace EksamensSpil
         /// </summary>
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
+			// TODO: Add your initialization logic here
+
+			IsMouseVisible = true;
+
             base.Initialize();
         }
 
@@ -52,8 +57,10 @@ namespace EksamensSpil
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             Assets.LoadAssets(Content);
-            // TODO: use this.Content to load your game content here
-        }
+			// TODO: use this.Content to load your game content here
+
+			player = new Player(new Vector2(200, 400));
+		}
 
         /// <summary>
         /// UnloadContent will be called once per game and is the place to unload
@@ -74,7 +81,11 @@ namespace EksamensSpil
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            // TODO: Add your update logic here
+			// TODO: Add your update logic here
+
+			//TODO: Test Player
+
+			player.Update(gameTime);
 
             base.Update(gameTime);
         }
@@ -87,9 +98,22 @@ namespace EksamensSpil
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            // TODO: Add your drawing code here
+			// TODO: Add your drawing code here
+
+			spriteBatch.Begin();
+
+			//TODO: Tester rotation
+			player.Draw(spriteBatch);
 
             base.Draw(gameTime);
+
+			spriteBatch.End();
         }
-    }
+
+		// Borrowed from another projekt
+		public static Vector2 GetMousePosition()
+		{
+			return Mouse.GetState().Position.ToVector2();
+		}
+	}
 }

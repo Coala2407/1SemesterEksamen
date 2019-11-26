@@ -15,7 +15,9 @@ namespace EksamensSpil
 
         protected float drawLayer;
 
-		//TODO Placed name here to avoid repeating the same variable. 
+		protected float rotation;
+
+		//TODO: Placed name here to avoid repeating the same variable. 
 		protected string name;
 
 		protected Vector2 origin;
@@ -26,7 +28,17 @@ namespace EksamensSpil
 
         protected Room room;
 
-        public Room Room
+		public GameObject(Vector2 position)
+		{
+			this.position = position;
+		}
+
+		public GameObject()
+		{
+
+		}
+
+		public Room Room
         {
             get { return room; }
             set { room = value; }
@@ -42,7 +54,7 @@ namespace EksamensSpil
         {
             if (sprite != null)
             {
-                spriteBatch.Draw(sprite, position, null, Color.White, 0, origin, 1, SpriteEffects.None, drawLayer);
+                spriteBatch.Draw(sprite, position, null, Color.White, MathHelper.ToRadians(rotation), origin, 1, SpriteEffects.None, drawLayer);
             }
         }
 
@@ -65,5 +77,23 @@ namespace EksamensSpil
                 OnCollision(otherObject);
             }
         }
+
+		// Rotates a sprite towards a location
+		public void LookAt(Vector2 positionToLookAt)
+		{
+			rotation = Helper.CalculateAngleBetweenPositions(this.position, positionToLookAt);
+		}
+
+		// sets sprites for GameObjects and defines the origin point. Can also be used to chage gameObjects sprite in run time
+		public void ChangeSprite(Texture2D sprite)
+		{
+			if(sprite != null)
+			{
+				this.sprite = sprite;
+			}
+
+			this.origin = new Vector2(sprite.Width / 2, sprite.Height / 2);
+		}
+
     }
 }
