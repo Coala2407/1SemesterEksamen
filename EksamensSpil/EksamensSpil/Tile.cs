@@ -8,5 +8,9 @@ namespace EksamensSpil
 {
     class Tile : GameObject
     {
+        private bool canBeRandomized;
+        private bool isWall;
+
+        public void Randomize() { }
     }
 }

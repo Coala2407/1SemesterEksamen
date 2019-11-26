@@ -6,7 +6,17 @@ using System.Threading.Tasks;
 
 namespace EksamensSpil
 {
-    class Character
+    abstract class Character : GameObject
     {
+        protected float movementSpeed;
+        protected int health;
+
+
+        public abstract void Die();
+        public abstract void Attack();
+        public abstract int UpdateHealth(int change);
+        public abstract void Move();
+        public abstract void Reload();
+
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace EksamensSpil
 {
-    class Room
+    public class Room
     {
         List<GameObject> gameObjects = new List<GameObject>();
 
@@ -19,6 +19,8 @@ namespace EksamensSpil
         bool isActive;
 
         float exitTimer;
+
+        string name;
 
         public List<GameObject> GameObjects
         {
@@ -38,11 +40,12 @@ namespace EksamensSpil
         /// <param name="gameObjects">Objects inside the room</param>
         /// <param name="isSpawnable">Can enemies spawn randomly inside the room?</param>
         /// <param name="isBossRoom">Is it a boss room?</param>
-        public Room(List<GameObject> gameObjects, bool isSpawnable, bool isBossRoom)
+        public Room(List<GameObject> gameObjects, bool isSpawnable, bool isBossRoom, string name)
         {
             GameObjects = gameObjects;
             this.isSpawnable = isSpawnable;
             this.isBossRoom = isBossRoom;
+            this.name = name;
         }
 
         /// <summary>
@@ -50,10 +53,11 @@ namespace EksamensSpil
         /// </summary>
         /// <param name="isSpawnable">Can enemies spawn randomly inside the room?</param>
         /// <param name="isBossRoom">Is it a boss room?</param>
-        public Room(bool isSpawnable, bool isBossRoom)
+        public Room(bool isSpawnable, bool isBossRoom, string name)
         {
             this.isSpawnable = isSpawnable;
             this.isBossRoom = isBossRoom;
+            this.name = name;
         }
 
         /// <summary>

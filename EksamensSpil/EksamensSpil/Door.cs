@@ -8,5 +8,14 @@ namespace EksamensSpil
 {
     class Door : GameObject
     {
+        private string name;
+        private bool isOpen;
+        private bool isLocked;
+
+        public void goToRoom(Room room)
+        {
+
+        }
     }
 }
+    

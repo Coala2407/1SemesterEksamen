@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace EksamensSpil
 {
-    abstract class GameObject
+    public abstract class GameObject
     {
         protected Vector2 position;
 
@@ -21,6 +21,12 @@ namespace EksamensSpil
         protected Texture2D[] sprites;
 
         protected Room room;
+
+        public Room Room
+        {
+            get { return room; }
+            set { room = value; }
+        }
 
         public abstract void Update(GameTime gameTime);
 

@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System;
 using System.Collections.Generic;
 
 namespace EksamensSpil
@@ -12,6 +13,17 @@ namespace EksamensSpil
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        //To get random numbers
+        public static Random rng = new Random();
+        //To add and remove objects in runtime
+        public static List<GameObject> NewGameObjects = new List<GameObject>();
+        public static List<GameObject> RemoveGameObjects = new List<GameObject>();
+
+        public void AddGameObject(GameObject gameObject, Room room)
+        {
+            gameObject.Room = room;
+            NewGameObjects.Add(gameObject);
+        }
 
         public GameWorld()
         {

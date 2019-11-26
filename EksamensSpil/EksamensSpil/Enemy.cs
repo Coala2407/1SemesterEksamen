@@ -8,5 +8,8 @@ namespace EksamensSpil
 {
     class Enemy : Character
     {
+        private Weapon weapon;
+        private int lootDropChance;
+
     }
 }
