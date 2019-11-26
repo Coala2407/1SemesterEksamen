@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Xna.Framework.Content;
 
 namespace EksamensSpil
 {
@@ -27,6 +28,11 @@ namespace EksamensSpil
 		}
 
         public override void Die()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void LoadContent(ContentManager content)
         {
             throw new NotImplementedException();
         }
