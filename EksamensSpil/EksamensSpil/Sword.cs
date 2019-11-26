@@ -8,5 +8,21 @@ namespace EksamensSpil
 {
     class Sword : Weapon
     {
+
+		private float range;
+
+		/// <summary>
+		/// Default Constructor
+		/// </summary>
+		public Sword()
+		{
+
+		}
+
+		public void Attack()
+		{
+
+		}
+
     }
 }

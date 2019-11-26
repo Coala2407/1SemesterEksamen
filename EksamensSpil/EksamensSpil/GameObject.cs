@@ -14,7 +14,10 @@ namespace EksamensSpil
 
         protected float drawLayer;
 
-        protected Vector2 origin;
+		//TODO Placed name here to avoid repeating the same variable. 
+		protected string name;
+
+		protected Vector2 origin;
 
         protected Texture2D sprite;
 

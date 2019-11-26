@@ -8,8 +8,28 @@ namespace EksamensSpil
 {
     class Enemy : Character
     {
-        private Weapon weapon;
-        private int lootDropChance;
 
+		private Weapon weapon;
+		private int lootDropChance;
+
+		/// <summary>
+		/// Default Constructor
+		/// </summary>
+		public Enemy()
+		{
+
+		}
+
+		//TODO Do we need this?
+		public void Attack()
+		{
+
+		}
+
+		//TODO Do we need this?
+		public void Reload()
+		{
+
+		}
     }
 }
