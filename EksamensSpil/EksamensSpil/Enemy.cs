@@ -46,7 +46,7 @@ namespace EksamensSpil
 
 		public override void Update(GameTime gameTime)
 		{
-			throw new NotImplementedException();
+			//throw new NotImplementedException();
 		}
 
 		public override int UpdateHealth(int change)

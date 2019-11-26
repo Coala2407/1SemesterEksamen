@@ -13,8 +13,6 @@ namespace EksamensSpil
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-		//TODO: Test
-		Player player;
         //To get random numbers
         public static Random rng = new Random();
         //To add and remove objects in runtime
@@ -54,7 +52,7 @@ namespace EksamensSpil
             IsMouseVisible = true;
 
             //Make player
-            player = new Player();
+            //player = new Player();
 
             //Make levels
             level = new Level();
