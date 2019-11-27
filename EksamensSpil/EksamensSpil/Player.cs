@@ -82,7 +82,6 @@ namespace EksamensSpil
             // rotation (Look at mouse)
 
             LookAt(GameWorld.GetMousePosition());
-
 		}
 
 		public override void Die()

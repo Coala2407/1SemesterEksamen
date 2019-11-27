@@ -25,6 +25,8 @@ namespace EksamensSpil
             gameObject.Room = room;
             NewGameObjects.Add(gameObject);
         }
+		// TODO: To be removed.
+		Sword sword;
 
         //Active room. Only objects from the active room, player and crosshair get updated
         public static Room ActiveRoom;
@@ -104,6 +106,10 @@ namespace EksamensSpil
             theHall.Add(new Wall(new Vector2(280, 600), true, Wall.WallMode.Toggled));
             //Make walls random
             level.RandomizeWalls();
+			player = new Player(new Vector2(200, 400));
+
+			// TODO: To be removed.
+			sword = new Sword();
         }
 
         /// <summary>
@@ -136,6 +142,16 @@ namespace EksamensSpil
                 go.Update(gameTime);
             }
 
+			// TODO: Remove when test is done.
+			MouseState mouse = Mouse.GetState();
+
+			if (mouse.LeftButton == ButtonState.Pressed)
+			{
+				sword.Attack();
+			}
+
+			sword.Update(gameTime);
+            // TODO: Add your update logic here
             base.Update(gameTime);
         }
 
