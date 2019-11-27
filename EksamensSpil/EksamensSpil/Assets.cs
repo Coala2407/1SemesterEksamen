@@ -19,10 +19,12 @@ namespace EksamensSpil
         public static Texture2D TileWallSprite;
         public static Texture2D DoorOpenSprite;
         public static Texture2D DoorClosedSprite;
+        public static Texture2D CrosshairSprite;
 
         public static void LoadAssets(ContentManager content)
         {
             PlayerSprite = content.Load<Texture2D>("characters");
+            CrosshairSprite = content.Load<Texture2D>("Corshair");
             //EnemySprite = content.Load<Texture2D>("example2");
             //BossSprite = content.Load<Texture2D>("example3");
         }

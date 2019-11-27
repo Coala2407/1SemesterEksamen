@@ -33,6 +33,9 @@ namespace EksamensSpil
         //Player
         Player player;
 
+        //Crosshair
+        Crosshair crosshair;
+
         public GameWorld()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -49,7 +52,7 @@ namespace EksamensSpil
         {
             // TODO: Add your initialization logic here
 
-            IsMouseVisible = true;
+            
 
             //Make player
             //player = new Player();
@@ -82,7 +85,8 @@ namespace EksamensSpil
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             Assets.LoadAssets(Content);
-			// TODO: use this.Content to load your game content here
+            // TODO: use this.Content to load your game content here
+            crosshair = new Crosshair();
 
 			player = new Player(new Vector2(200, 400));
 		}
@@ -111,9 +115,11 @@ namespace EksamensSpil
 			//TODO: Test Player
 
 			player.Update(gameTime);
-            
+
             //Update the player, each frame
             //player.Update(gameTime);
+
+            crosshair.Update(gameTime);
 
             foreach (Room room in level.Rooms  /*active level*/)
             {
@@ -146,6 +152,8 @@ namespace EksamensSpil
 
 			//TODO: Tester rotation
 			player.Draw(spriteBatch);
+
+            crosshair.Draw(spriteBatch);
 
             base.Draw(gameTime);
 
