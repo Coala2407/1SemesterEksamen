@@ -13,6 +13,7 @@
 
 #---------------------------------- Content ---------------------------------#
 
+
 #begin Bullet.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -25,7 +26,7 @@
 /processorParam:TextureFormat=Color
 /build:Bullet.png
 
-#begin characters.png
+#begin archerguy.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -35,7 +36,31 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:characters.png
+/build:archerguy.png
+
+#begin goldguy.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:goldguy.png
+
+#begin kingguy.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:kingguy.png
 
 #begin Corshair.png
 /importer:TextureImporter

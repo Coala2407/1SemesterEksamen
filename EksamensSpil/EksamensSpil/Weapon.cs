@@ -8,23 +8,49 @@ using Microsoft.Xna.Framework.Content;
 
 namespace EksamensSpil
 {
+
+	public enum ShootResult { Successfull, NotEnoughAmmo, CoolDownActive}
+
 	class Weapon : GameObject
 	{
 
 		protected float attackSpeed;
 		protected float reloadSpeed;
+		protected float cooldown;
 		protected int ammo;
 		protected int clipSize;
 
 
-		public void attack()
+		public virtual ShootResult Attack()
 		{
+
+			if(ammo != 0 && cooldown <= 0)
+			{
+				return ShootResult.Successfull;
+			}
+			else
+			{
+				if(ammo <= 0 && cooldown <= 0)
+				{
+					Reload();
+					return ShootResult.NotEnoughAmmo;
+				}
+				else
+				{
+					return ShootResult.CoolDownActive;
+				}
+			}
 
 		}
 
 		public void Reload()
 		{
+			cooldown = reloadSpeed;
 
+			Console.WriteLine($"reloading in {cooldown}");
+
+			ammo = clipSize;
+	
 		}
 
 		public string Name
@@ -70,7 +96,11 @@ namespace EksamensSpil
 
 		public override void Update(GameTime gameTime)
 		{
-			throw new NotImplementedException();
+			cooldown -= (float)gameTime.ElapsedGameTime.TotalSeconds;
+			//if(cooldown >= 0)
+			//{
+			//	Console.WriteLine($"{cooldown}");
+			//}
 		}
 
 		public override void LoadContent(ContentManager content)

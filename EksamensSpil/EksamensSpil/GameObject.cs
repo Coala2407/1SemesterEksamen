@@ -15,12 +15,14 @@ namespace EksamensSpil
 
         protected float drawLayer;
 
-		protected float rotation;
+        protected float rotation;
 
-		//TODO: Placed name here to avoid repeating the same variable. 
-		protected string name;
+        protected float size = 1;
 
-		protected Vector2 origin;
+        //TODO: Placed name here to avoid repeating the same variable. 
+        protected string name;
+
+        protected Vector2 origin;
 
         protected Texture2D sprite;
 
@@ -28,17 +30,17 @@ namespace EksamensSpil
 
         protected Room room;
 
-		public GameObject(Vector2 position)
-		{
-			this.position = position;
-		}
+        public GameObject(Vector2 position)
+        {
+            this.position = position;
+        }
 
-		public GameObject()
-		{
+        public GameObject()
+        {
 
-		}
+        }
 
-		public Room Room
+        public Room Room
         {
             get { return room; }
             set { room = value; }
@@ -54,7 +56,7 @@ namespace EksamensSpil
         {
             if (sprite != null)
             {
-                spriteBatch.Draw(sprite, position, null, Color.White, MathHelper.ToRadians(rotation), origin, 1, SpriteEffects.None, drawLayer);
+                spriteBatch.Draw(sprite, position, null, Color.White, MathHelper.ToRadians(rotation), origin, size, SpriteEffects.None, drawLayer);
             }
         }
 
@@ -78,22 +80,21 @@ namespace EksamensSpil
             }
         }
 
-		// Rotates a sprite towards a location
-		public void LookAt(Vector2 positionToLookAt)
-		{
-			rotation = Helper.CalculateAngleBetweenPositions(this.position, positionToLookAt);
-		}
+        // Rotates a sprite towards a location
+        public void LookAt(Vector2 positionToLookAt)
+        {
+            rotation = Helper.CalculateAngleBetweenPositions(this.position, positionToLookAt);
+        }
 
-		// sets sprites for GameObjects and defines the origin point. Can also be used to chage gameObjects sprite in run time
-		public void ChangeSprite(Texture2D sprite)
-		{
-			if(sprite != null)
-			{
-				this.sprite = sprite;
-			}
-
-			this.origin = new Vector2(sprite.Width / 2, sprite.Height / 2);
-		}
+        // sets sprites for GameObjects and defines the origin point. Can also be used to change gameObjects sprite in run time
+        public void ChangeSprite(Texture2D sprite)
+        {
+            if (sprite != null)
+            {
+                this.sprite = sprite;
+                this.origin = new Vector2(sprite.Width / 2, sprite.Height / 2);
+            }
+        }
 
     }
 }

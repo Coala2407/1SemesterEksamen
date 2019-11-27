@@ -12,6 +12,8 @@ namespace EksamensSpil
     public class GameWorld : Game
     {
         GraphicsDeviceManager graphics;
+        
+
         SpriteBatch spriteBatch;
         //To get random numbers
         public static Random rng = new Random();
@@ -23,9 +25,11 @@ namespace EksamensSpil
             gameObject.Room = room;
             NewGameObjects.Add(gameObject);
         }
+		// TODO: To be removed.
+		Sword sword;
 
-        //Levels
-        Level level;
+		//Levels
+		Level level;
         //Rooms
         Room theRoom;
         Room theHall;
@@ -51,11 +55,10 @@ namespace EksamensSpil
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-
-            
-
-            //Make player
-            //player = new Player();
+            //Screen setup
+            //graphics.PreferredBackBufferWidth = 1920;
+            //graphics.PreferredBackBufferHeight = 1080;
+            //graphics.ToggleFullScreen();
 
             //Make levels
             level = new Level();
@@ -89,6 +92,9 @@ namespace EksamensSpil
             crosshair = new Crosshair();
 
 			player = new Player(new Vector2(200, 400));
+
+			// TODO: To be removed.
+			sword = new Sword();
 		}
 
         /// <summary>
@@ -133,6 +139,16 @@ namespace EksamensSpil
                     break;
                 }
             }
+
+			// TODO: Remove when test is done.
+			MouseState mouse = Mouse.GetState();
+
+			if (mouse.LeftButton == ButtonState.Pressed)
+			{
+				sword.Attack();
+			}
+
+			sword.Update(gameTime);
             // TODO: Add your update logic here
 
             base.Update(gameTime);
@@ -150,8 +166,21 @@ namespace EksamensSpil
 
 			spriteBatch.Begin();
 
-			//TODO: Tester rotation
-			player.Draw(spriteBatch);
+            //Draws all objects in active room
+            foreach (Room room in level.Rooms  /*active level*/)
+            {
+                if (room.IsActive /*active room*/)
+                {
+                    foreach (GameObject go in room.GameObjects)
+                    {
+                        go.Draw(spriteBatch);
+                    }
+                    break;
+                }
+            }
+
+            //TODO: Tester rotation
+            player.Draw(spriteBatch);
 
             crosshair.Draw(spriteBatch);
 

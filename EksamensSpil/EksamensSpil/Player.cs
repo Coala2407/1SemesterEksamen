@@ -24,8 +24,8 @@ namespace EksamensSpil
 		public Player(Vector2 postition) : base(postition)
 		{
 
-			// Sets default Player sprite
-			ChangeSprite(Assets.PlayerSprite);
+            // Sets default Player sprite
+            ChangeSprite(Assets.PlayerSprite);
 
 		}
 
@@ -61,6 +61,7 @@ namespace EksamensSpil
 		/// <param name="gameTime"></param>
 		public void HandleInput()
 		{
+
 
 
 
