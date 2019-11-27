@@ -16,12 +16,25 @@ namespace EksamensSpil
 		/// </summary>
 		public Sword()
 		{
-
+			this.ammo = 1;
+			this.attackSpeed = 0;
+			this.clipSize = 1;
+			this.reloadSpeed = 1.20f;
 		}
 
-		public void Attack()
+		public override ShootResult Attack()
 		{
 
+			ShootResult shootResult = base.Attack();
+
+			if(shootResult == ShootResult.Successfull)
+			{
+				--ammo;
+				Console.WriteLine("Swing sword");
+				return shootResult;
+			}
+
+			return shootResult;
 		}
 
     }

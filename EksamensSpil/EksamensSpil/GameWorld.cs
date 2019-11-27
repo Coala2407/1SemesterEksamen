@@ -25,9 +25,11 @@ namespace EksamensSpil
             gameObject.Room = room;
             NewGameObjects.Add(gameObject);
         }
+		// TODO: To be removed.
+		Sword sword;
 
-        //Levels
-        Level level;
+		//Levels
+		Level level;
         //Rooms
         Room theRoom;
         Room theHall;
@@ -54,11 +56,9 @@ namespace EksamensSpil
         {
             // TODO: Add your initialization logic here
             //Screen setup
-            graphics.PreferredBackBufferWidth = 1920;
-            graphics.PreferredBackBufferHeight = 1080;
-            graphics.ToggleFullScreen();
-            //Mouse
-            IsMouseVisible = true;
+            //graphics.PreferredBackBufferWidth = 1920;
+            //graphics.PreferredBackBufferHeight = 1080;
+            //graphics.ToggleFullScreen();
 
             //Make levels
             level = new Level();
@@ -92,6 +92,9 @@ namespace EksamensSpil
             crosshair = new Crosshair();
 
 			player = new Player(new Vector2(200, 400));
+
+			// TODO: To be removed.
+			sword = new Sword();
 		}
 
         /// <summary>
@@ -136,6 +139,16 @@ namespace EksamensSpil
                     break;
                 }
             }
+
+			// TODO: Remove when test is done.
+			MouseState mouse = Mouse.GetState();
+
+			if (mouse.LeftButton == ButtonState.Pressed)
+			{
+				sword.Attack();
+			}
+
+			sword.Update(gameTime);
             // TODO: Add your update logic here
 
             base.Update(gameTime);

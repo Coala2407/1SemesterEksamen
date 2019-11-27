@@ -16,13 +16,27 @@ namespace EksamensSpil
 		/// </summary>
 		public Pistol()
 		{
-
+			this.ammo = 6;
+			this.attackSpeed = 0.20f;
+			this.clipSize = 6;
+			this.reloadSpeed = 0.70f;
 		}
 
-		public void Attack()
+		public override ShootResult Attack()
 		{
 
+			ShootResult shootResult = base.Attack();
+
+			if (shootResult == ShootResult.Successfull)
+			{
+				--ammo;
+				cooldown = attackSpeed;
+				Console.WriteLine($"Shoot pistol: {ammo}");
+				return shootResult;
+			}
+
+			return shootResult;
 		}
 
-    }
+	}
 }
