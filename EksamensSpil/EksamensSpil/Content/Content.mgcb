@@ -25,6 +25,18 @@
 /processorParam:TextureFormat=Color
 /build:archerguy.png
 
+#begin Corshair.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Corshair.png
+
 #begin goldguy.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -49,7 +61,7 @@
 /processorParam:TextureFormat=Color
 /build:kingguy.png
 
-#begin Corshair.png
+#begin wall0.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -59,5 +71,5 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Corshair.png
+/build:wall0.png
 

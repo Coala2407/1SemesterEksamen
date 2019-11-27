@@ -16,8 +16,6 @@ namespace EksamensSpil
 
         bool isBossRoom;
 
-        bool isActive;
-
         float exitTimer;
 
         string name;
@@ -26,12 +24,6 @@ namespace EksamensSpil
         {
             get { return gameObjects; }
             set { gameObjects = value; }
-        }
-
-        public bool IsActive
-        {
-            get { return isActive; }
-            set { isActive = value; }
         }
 
         /// <summary>
@@ -80,7 +72,10 @@ namespace EksamensSpil
         /// <param name="gameObject"></param>
         public void Add(GameObject gameObject)
         {
-            GameObjects.Add(gameObject);
+            if (gameObject != null)
+            {
+                GameObjects.Add(gameObject);
+            }
         }
     }
 }
