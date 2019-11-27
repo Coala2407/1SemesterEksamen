@@ -17,11 +17,12 @@ namespace EksamensSpil
         public Crosshair()
         {
             drawLayer = 1;
+            ChangeSprite(Assets.CrosshairSprite);
         }
 
         public override void LoadContent(ContentManager content)
         {
-            sprite = content.Load<Texture2D>("Corshair");
+            
         }
 
         public override void Update(GameTime gameTime)
