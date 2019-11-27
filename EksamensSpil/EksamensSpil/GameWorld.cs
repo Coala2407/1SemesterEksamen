@@ -12,6 +12,8 @@ namespace EksamensSpil
     public class GameWorld : Game
     {
         GraphicsDeviceManager graphics;
+        
+
         SpriteBatch spriteBatch;
         //To get random numbers
         public static Random rng = new Random();
@@ -48,11 +50,12 @@ namespace EksamensSpil
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-
+            //Screen setup
+            graphics.PreferredBackBufferWidth = 1920;
+            graphics.PreferredBackBufferHeight = 1080;
+            graphics.ToggleFullScreen();
+            //Mouse
             IsMouseVisible = true;
-
-            //Make player
-            //player = new Player();
 
             //Make levels
             level = new Level();
@@ -144,8 +147,21 @@ namespace EksamensSpil
 
 			spriteBatch.Begin();
 
-			//TODO: Tester rotation
-			player.Draw(spriteBatch);
+            //Draws all objects in active room
+            foreach (Room room in level.Rooms  /*active level*/)
+            {
+                if (room.IsActive /*active room*/)
+                {
+                    foreach (GameObject go in room.GameObjects)
+                    {
+                        go.Draw(spriteBatch);
+                    }
+                    break;
+                }
+            }
+
+            //TODO: Tester rotation
+            player.Draw(spriteBatch);
 
             base.Draw(gameTime);
 

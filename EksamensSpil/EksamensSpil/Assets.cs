@@ -22,7 +22,7 @@ namespace EksamensSpil
 
         public static void LoadAssets(ContentManager content)
         {
-            PlayerSprite = content.Load<Texture2D>("characters");
+            PlayerSprite = content.Load<Texture2D>("archerguy");
             //EnemySprite = content.Load<Texture2D>("example2");
             //BossSprite = content.Load<Texture2D>("example3");
         }
