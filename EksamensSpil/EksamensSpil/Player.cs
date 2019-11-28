@@ -14,16 +14,15 @@ namespace EksamensSpil
     public class Player : Character
     {
 
-		private List<Weapon> weapons = new List<Weapon>();
-		private List<Item> items = new List<Item>();
-		private Weapon selectedWeapon;
-		private Item selectedItem;
+        private List<Weapon> weapons = new List<Weapon>();
+        private List<Item> items = new List<Item>();
+        private Weapon selectedWeapon;
+        private Item selectedItem;
         public Vector2 Position;
 
+        private Room previousRoom;
+        private bool hasJustClicked;
 
-        /// <summary>
-        /// Default Constructor
-        /// </summary>
       
         private Room previousRoom;
 
@@ -32,93 +31,130 @@ namespace EksamensSpil
 		/// </summary>
 		public Player(Vector2 position)
 		{
+
+        public Player(Vector2 position)
+        {
             this.position = position;
             // Sets default Player sprite
             ChangeSprite(Assets.PlayerSprite);
-		}
 
-		/// <summary>
-		/// Method to use item.
-		/// </summary>
-		public void UseItem()
-		{
+            //Just a pistol for now. Will be random later.
+            selectedWeapon = new Pistol();
+        }
 
-		}
+        /// <summary>
+        /// Method to use item.
+        /// </summary>
+        public void UseItem()
+        {
 
-		/// <summary>
-		/// Method to pick up items
-		/// </summary>
-		/// <param name="item"></param>
-		public void PickUpItem(Item item)
-		{
+        }
 
-		}
+        /// <summary>
+        /// Method to pick up items
+        /// </summary>
+        /// <param name="item"></param>
+        public void PickUpItem(Item item)
+        {
 
-		/// <summary>
-		/// Method to pick up weapons
-		/// </summary>
-		/// <param name="weapon"></param>
-		public void PickUpWeapon(Weapon weapon)
-		{
+        }
 
-		}
+        /// <summary>
+        /// Method to pick up weapons
+        /// </summary>
+        /// <param name="weapon"></param>
+        public void PickUpWeapon(Weapon weapon)
+        {
 
-		/// <summary>
-		/// User input to Player
-		/// </summary>
-		/// <param name="gameTime"></param>
-		public void HandleInput()
-		{
+        }
+
+        /// <summary>
+        /// User input to Player
+        /// </summary>
+        /// <param name="gameTime"></param>
+        public void HandleInput()
+        {
+            //Stop moving when you're not pressing a key
+            velocity = Vector2.Zero;
 
             KeyboardState keyState = Keyboard.GetState();
+            MouseState mouse = Mouse.GetState();
+
             if (keyState.IsKeyDown(Keys.W))
             {
-                GameWorld.ActiveRoom = GameWorld.theHall;
+                velocity.Y = -1;
             }
-            else if (keyState.IsKeyDown(Keys.S))
+            if (keyState.IsKeyDown(Keys.S))
             {
-                GameWorld.ActiveRoom = GameWorld.theRoom;
+                velocity.Y = +1;
             }
-            else if (keyState.IsKeyDown(Keys.R))
+            if (keyState.IsKeyDown(Keys.A))
             {
-                GameWorld.level.RandomizeWalls();
+                velocity.X = -1;
+            }
+            if (keyState.IsKeyDown(Keys.D))
+            {
+                velocity.X = +1;
+            }
+            //Temp. TO test random walls
+            if (keyState.IsKeyDown(Keys.R))
+            {
+                if (!hasJustClicked)
+                {
+                    GameWorld.level.RandomizeWalls();
+                    hasJustClicked = true;
+                }
+            }
+            else
+            {
+                hasJustClicked = false;
+            }
+            //End of test
+            if (mouse.LeftButton == ButtonState.Pressed)
+            {
+                selectedWeapon.Attack();
             }
 
+            //To avoid too fast movement when holding down 2 movement keys
+            if (velocity != Vector2.Zero)
+            {
+                velocity.Normalize();
+            }
+        }
 
+        public override void Die()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Attack()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override int UpdateHealth(int change)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Reload()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void LoadContent(ContentManager content)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Update(GameTime gameTime)
+        {
+            HandleInput();
+            Move(gameTime);
             // =================================
             // rotation (Look at mouse)
-
             LookAt(GameWorld.GetMousePosition());
-		}
 
-		public override void Die()
-		{
-			throw new NotImplementedException();
-		}
-
-		public override void Attack()
-		{
-			throw new NotImplementedException();
-		}
-
-		public override int UpdateHealth(int change)
-		{
-			throw new NotImplementedException();
-		}
-
-		public override void Reload()
-		{
-			throw new NotImplementedException();
-		}
-
-		public override void LoadContent(ContentManager content)
-		{
-			throw new NotImplementedException();
-		}
-
-		public override void Update(GameTime gameTime)
-		{
-			HandleInput();
-		}
-	}
+        }
+    }
 }

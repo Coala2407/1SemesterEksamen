@@ -20,12 +20,11 @@ namespace EksamensSpil
         //To add and remove objects in runtime
         public static List<GameObject> NewGameObjects = new List<GameObject>();
         public static List<GameObject> RemoveGameObjects = new List<GameObject>();
-        public void AddGameObject(GameObject gameObject, Room room)
+        public static void AddGameObject(GameObject gameObject, Room room)
         {
             gameObject.Room = room;
             NewGameObjects.Add(gameObject);
         }
-        Pistol pistol;
 
         //Active room. Only objects from the active room, player and crosshair get updated
         public static Room ActiveRoom;
@@ -34,7 +33,7 @@ namespace EksamensSpil
         public static Level level;
 
         //Rooms
-        
+
         public static Room theRoom;
         public static Room theHall;
 
@@ -43,10 +42,6 @@ namespace EksamensSpil
 
         //Crosshair
         Crosshair crosshair;
-
-        //Bullet
-        Projectile bullet;
-        bool skyd = false;
 
         public GameWorld()
         {
@@ -96,6 +91,7 @@ namespace EksamensSpil
             Assets.LoadAssets(Content);
             //Assets loaded. All sprites etc. are accessable from this point:
 
+            //Make player and crosshair
             crosshair = new Crosshair();
             player = new Player(new Vector2(200, 400));
 
@@ -110,13 +106,7 @@ namespace EksamensSpil
             theHall.Add(new Wall(new Vector2(280, 600), true, Wall.WallMode.Toggled));
             //Make walls random
             level.RandomizeWalls();
-			player = new Player(new Vector2(200, 400));
-
-			// TODO: To be removed.
-			pistol = new Pistol();
 		}
-			
-        
 
         /// <summary>
         /// UnloadContent will be called once per game and is the place to unload
@@ -148,16 +138,14 @@ namespace EksamensSpil
                 go.Update(gameTime);
             }
 
-			// TODO: Remove when test is done.
-			MouseState mouse = Mouse.GetState();
+            //Add new objects to rooms
+            foreach (GameObject go in NewGameObjects)
+            {
+                go.Room.Add(go);
+            }
+            NewGameObjects.Clear();
 
-			if (mouse.LeftButton == ButtonState.Pressed)
-			{
-				pistol.Attack();
-                skyd = true;
-			}
 
-			pistol.Update(gameTime);
             // TODO: Add your update logic here
             base.Update(gameTime);
         }
@@ -191,12 +179,6 @@ namespace EksamensSpil
             player.Draw(spriteBatch);
 
             crosshair.Draw(spriteBatch);
-
-            if(skyd == true)
-            {
-
-               // bullet.Draw(spriteBatch);
-            }
 
             base.Draw(gameTime);
             spriteBatch.End();

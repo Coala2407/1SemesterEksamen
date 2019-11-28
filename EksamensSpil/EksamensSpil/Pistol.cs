@@ -12,9 +12,6 @@ namespace EksamensSpil
     {
 
 		private float projectileSpeed;
-        private Texture2D bulletSprite;
-        Projectile projectile;
-        GameWorld gameWorld;
         /// <summary>
         /// Default Constructor
         /// </summary>
@@ -33,10 +30,10 @@ namespace EksamensSpil
 
 			if (shootResult == ShootResult.Successfull)
 			{
-				--ammo;
+				ammo--;
 				cooldown = attackSpeed;
 				Console.WriteLine($"Shoot pistol: {ammo}");
-                projectile = new Projectile(new Vector2(100, 100));
+                GameWorld.AddGameObject(new Projectile(new Vector2(100, 100)), GameWorld.ActiveRoom);
                 return shootResult;
 			}
 
