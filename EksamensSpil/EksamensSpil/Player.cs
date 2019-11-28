@@ -19,12 +19,12 @@ namespace EksamensSpil
 		private Weapon selectedWeapon;
 		private Item selectedItem;
         public Vector2 Position;
-        
+
 
         /// <summary>
         /// Default Constructor
         /// </summary>
-        public Player(Vector2 postition) : base(postition)
+      
         private Room previousRoom;
 
 		/// <summary>

@@ -34,8 +34,7 @@ namespace EksamensSpil
         public static Level level;
 
         //Rooms
-        public Room theRoom;
-        Room theHall;
+        
         public static Room theRoom;
         public static Room theHall;
 
@@ -116,8 +115,8 @@ namespace EksamensSpil
 			// TODO: To be removed.
 			pistol = new Pistol();
 		}
-			sword = new Sword();
-        }
+			
+        
 
         /// <summary>
         /// UnloadContent will be called once per game and is the place to unload
