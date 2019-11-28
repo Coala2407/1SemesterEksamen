@@ -18,6 +18,7 @@ namespace EksamensSpil
         public static Texture2D[] DoorSprites;
         public static Texture2D CrosshairSprite;
         public static Texture2D BulletSprite;
+        public static Texture2D PistolSprite;
 
         public static void LoadAssets(ContentManager content)
         {
@@ -26,6 +27,7 @@ namespace EksamensSpil
             BossSprite = content.Load<Texture2D>("goldguy");
             CrosshairSprite = content.Load<Texture2D>("Corshair");
             BulletSprite = content.Load<Texture2D>("Bullet");
+            PistolSprite = content.Load<Texture2D>("pistol");
             WallSprites = new Texture2D[1];
             for (int i = 0; i < WallSprites.Length; i++)
             {

@@ -12,15 +12,16 @@ namespace EksamensSpil
 	class Projectile : GameObject
 	{
 
-		private float movementSpeed = 500;
-		private Vector2 targetCordinater;
-        private Vector2 movement = Crosshair.currentPosition - GameWorld.player.Position;
+		private float movementSpeed = 100;
+        private Vector2 movement;
 
-        public Projectile(Vector2 position)
+        public Projectile(Pistol pistol)
         {
+            this.position = pistol.Position;
+            movement = Crosshair.currentPosition - position;
             Console.WriteLine($"Spawn {position}");
-            //this.sprite = sprite;
             ChangeSprite(Assets.BulletSprite);
+            rotation = Helper.CalculateAngleBetweenPositions(position, Crosshair.currentPosition);
             drawLayer = 0.8f;
         }
 
@@ -44,5 +45,5 @@ namespace EksamensSpil
             //Gives the bullet movement
             position += movement * movementSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
         }
-	}
+    }
 }

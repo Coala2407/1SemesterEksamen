@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,7 +15,7 @@ namespace EksamensSpil
 		/// <summary>
 		/// Default Constructor
 		/// </summary>
-		public Sword()
+		public Sword(GameObject holder)
 		{
 			this.ammo = 1;
 			this.attackSpeed = 0;

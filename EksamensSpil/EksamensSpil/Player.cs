@@ -18,7 +18,6 @@ namespace EksamensSpil
         private List<Item> items = new List<Item>();
         private Weapon selectedWeapon;
         private Item selectedItem;
-        public Vector2 Position;
         private Room previousRoom;
         private bool hasJustClicked;
 
@@ -32,7 +31,7 @@ namespace EksamensSpil
             ChangeSprite(Assets.PlayerSprite);
 
             //Just a pistol for now. Will be random later.
-            selectedWeapon = new Pistol();
+            selectedWeapon = new Pistol(this);
         }
 
         /// <summary>

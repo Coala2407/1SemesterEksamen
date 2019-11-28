@@ -22,7 +22,6 @@ namespace EksamensSpil
 		protected int clipSize;
 		protected bool canGunReload;
 
-
 		public virtual ShootResult Attack()
 		{
 

@@ -46,6 +46,11 @@ namespace EksamensSpil
             set { room = value; }
         }
 
+        public Vector2 Position
+        {
+            get { return position; }
+        }
+
         //Not really needed anymore.
         public abstract void LoadContent(ContentManager content);
 
