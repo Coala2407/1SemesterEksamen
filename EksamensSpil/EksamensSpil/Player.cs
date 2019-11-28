@@ -10,18 +10,20 @@ using Microsoft.Xna.Framework.Content;
 
 namespace EksamensSpil
 {
-    class Player : Character
+    public class Player : Character
     {
 
 		private List<Weapon> weapons = new List<Weapon>();
 		private List<Item> items = new List<Item>();
 		private Weapon selectedWeapon;
 		private Item selectedItem;
+        public Vector2 Position;
+        
 
-		/// <summary>
-		/// Default Constructor
-		/// </summary>
-		public Player(Vector2 postition) : base(postition)
+        /// <summary>
+        /// Default Constructor
+        /// </summary>
+        public Player(Vector2 postition) : base(postition)
 		{
 
             // Sets default Player sprite

@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Content;
 
 namespace EksamensSpil
 {
-	class Item : GameObject
+	public class Item : GameObject
 	{
 
 		public string Name

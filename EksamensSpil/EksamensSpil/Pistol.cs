@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace EksamensSpil
 {
@@ -10,11 +12,13 @@ namespace EksamensSpil
     {
 
 		private float projectileSpeed;
-
-		/// <summary>
-		/// Default Constructor
-		/// </summary>
-		public Pistol()
+        private Texture2D bulletSprite;
+        Projectile projectile;
+        GameWorld gameWorld;
+        /// <summary>
+        /// Default Constructor
+        /// </summary>
+        public Pistol()
 		{
 			this.ammo = 6;
 			this.attackSpeed = 0.20f;
@@ -32,7 +36,8 @@ namespace EksamensSpil
 				--ammo;
 				cooldown = attackSpeed;
 				Console.WriteLine($"Shoot pistol: {ammo}");
-				return shootResult;
+                projectile = new Projectile(new Vector2(100, 100));
+                return shootResult;
 			}
 
 			return shootResult;

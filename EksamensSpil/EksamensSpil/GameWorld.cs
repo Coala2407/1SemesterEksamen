@@ -25,20 +25,23 @@ namespace EksamensSpil
             gameObject.Room = room;
             NewGameObjects.Add(gameObject);
         }
-		// TODO: To be removed.
-		Sword sword;
+        Pistol pistol;
 
 		//Levels
 		Level level;
         //Rooms
-        Room theRoom;
+        public Room theRoom;
         Room theHall;
 
         //Player
-        Player player;
+        public static Player player;
 
         //Crosshair
         Crosshair crosshair;
+
+        //Bullet
+        Projectile bullet;
+        bool skyd = false;
 
         public GameWorld()
         {
@@ -94,7 +97,7 @@ namespace EksamensSpil
 			player = new Player(new Vector2(200, 400));
 
 			// TODO: To be removed.
-			sword = new Sword();
+			pistol = new Pistol();
 		}
 
         /// <summary>
@@ -145,10 +148,11 @@ namespace EksamensSpil
 
 			if (mouse.LeftButton == ButtonState.Pressed)
 			{
-				sword.Attack();
+				pistol.Attack();
+                skyd = true;
 			}
 
-			sword.Update(gameTime);
+			pistol.Update(gameTime);
             // TODO: Add your update logic here
 
             base.Update(gameTime);
@@ -179,10 +183,18 @@ namespace EksamensSpil
                 }
             }
 
+
+
             //TODO: Tester rotation
             player.Draw(spriteBatch);
 
             crosshair.Draw(spriteBatch);
+
+            if(skyd == true)
+            {
+
+               // bullet.Draw(spriteBatch);
+            }
 
             base.Draw(gameTime);
 

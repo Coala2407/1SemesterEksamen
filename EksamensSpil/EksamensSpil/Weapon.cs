@@ -11,7 +11,7 @@ namespace EksamensSpil
 
 	public enum ShootResult { Successfull, NotEnoughAmmo, CoolDownActive}
 
-	class Weapon : GameObject
+	public class Weapon : GameObject
 	{
 
 		protected float attackSpeed;

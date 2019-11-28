@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework;
 
 namespace EksamensSpil
 {
-    abstract class Character : GameObject
+    public abstract class Character : GameObject
     {
 
         protected float movementSpeed;
