@@ -10,8 +10,6 @@ namespace EksamensSpil
 {
     class Pistol : Weapon
     {
-
-        private float projectileSpeed;
         /// <summary>
         /// Default Constructor
         /// </summary>
@@ -24,6 +22,7 @@ namespace EksamensSpil
 
         public Pistol(GameObject holder)
         {
+            this.holder = holder;
             this.position = holder.Position;
             initialize();
         }
@@ -34,6 +33,7 @@ namespace EksamensSpil
             this.attackSpeed = 0.20f;
             this.clipSize = 6;
             this.reloadSpeed = 0.70f;
+            sprite = Assets.PistolSprite;
         }
 
         public override ShootResult Attack()

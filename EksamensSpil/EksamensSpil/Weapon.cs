@@ -12,7 +12,7 @@ namespace EksamensSpil
 
 	public enum ShootResult { Successfull, NotEnoughAmmo, CoolDownActive}
 
-	public class Weapon : GameObject
+	public abstract class Weapon : GameObject
 	{
 
 		protected float attackSpeed;
@@ -21,6 +21,7 @@ namespace EksamensSpil
 		protected int ammo;
 		protected int clipSize;
 		protected bool canGunReload;
+        protected GameObject holder;
 
 		public virtual ShootResult Attack()
 		{
