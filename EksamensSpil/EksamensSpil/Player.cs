@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Input;
 
 namespace EksamensSpil
 {
@@ -24,11 +25,16 @@ namespace EksamensSpil
         /// Default Constructor
         /// </summary>
         public Player(Vector2 postition) : base(postition)
-		{
+        private Room previousRoom;
 
+		/// <summary>
+		/// Default Constructor
+		/// </summary>
+		public Player(Vector2 position)
+		{
+            this.position = position;
             // Sets default Player sprite
             ChangeSprite(Assets.PlayerSprite);
-
 		}
 
 		/// <summary>
@@ -64,14 +70,25 @@ namespace EksamensSpil
 		public void HandleInput()
 		{
 
+            KeyboardState keyState = Keyboard.GetState();
+            if (keyState.IsKeyDown(Keys.W))
+            {
+                GameWorld.ActiveRoom = GameWorld.theHall;
+            }
+            else if (keyState.IsKeyDown(Keys.S))
+            {
+                GameWorld.ActiveRoom = GameWorld.theRoom;
+            }
+            else if (keyState.IsKeyDown(Keys.R))
+            {
+                GameWorld.level.RandomizeWalls();
+            }
 
 
+            // =================================
+            // rotation (Look at mouse)
 
-			// =================================
-			// rotation (Look at mouse)
-
-			LookAt(GameWorld.GetMousePosition());
-
+            LookAt(GameWorld.GetMousePosition());
 		}
 
 		public override void Die()

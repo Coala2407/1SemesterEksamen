@@ -46,6 +46,7 @@ namespace EksamensSpil
             set { room = value; }
         }
 
+        //Not really needed anymore.
         public abstract void LoadContent(ContentManager content);
 
         public abstract void Update(GameTime gameTime);

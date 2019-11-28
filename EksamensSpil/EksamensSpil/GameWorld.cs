@@ -12,7 +12,7 @@ namespace EksamensSpil
     public class GameWorld : Game
     {
         GraphicsDeviceManager graphics;
-        
+
 
         SpriteBatch spriteBatch;
         //To get random numbers
@@ -27,11 +27,17 @@ namespace EksamensSpil
         }
         Pistol pistol;
 
-		//Levels
-		Level level;
+        //Active room. Only objects from the active room, player and crosshair get updated
+        public static Room ActiveRoom;
+
+        //Levels
+        public static Level level;
+
         //Rooms
         public Room theRoom;
         Room theHall;
+        public static Room theRoom;
+        public static Room theHall;
 
         //Player
         public static Player player;
@@ -59,8 +65,9 @@ namespace EksamensSpil
         {
             // TODO: Add your initialization logic here
             //Screen setup
-            //graphics.PreferredBackBufferWidth = 1920;
-            //graphics.PreferredBackBufferHeight = 1080;
+            graphics.PreferredBackBufferWidth = /*GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width*/ 1920;
+            graphics.PreferredBackBufferHeight = /*GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height*/ 1080;
+            graphics.ApplyChanges();
             //graphics.ToggleFullScreen();
 
             //Make levels
@@ -70,15 +77,12 @@ namespace EksamensSpil
             theRoom = new Room(false, false, "The Room");
             theHall = new Room(false, false, "The Hall");
 
-            //Active room
-            theHall.IsActive = true;
-
-            //Add object to room
-            theHall.Add(new Enemy());
-
             //Add rooms to level
-            level.Rooms.Add(theRoom);
-            level.Rooms.Add(theHall);
+            level.Add(theRoom);
+            level.Add(theHall);
+
+            ActiveRoom = theHall;
+            //Run, game, Run!
             base.Initialize();
         }
 
@@ -91,14 +95,29 @@ namespace EksamensSpil
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             Assets.LoadAssets(Content);
-            // TODO: use this.Content to load your game content here
-            crosshair = new Crosshair();
+            //Assets loaded. All sprites etc. are accessable from this point:
 
+            crosshair = new Crosshair();
+            player = new Player(new Vector2(200, 400));
+
+            //Add object to room
+            theHall.Add(new Enemy(new Vector2(600, 200)));
+            theHall.Add(new Enemy(new Vector2(900, 500), true));
+            for (int i = 0; i < 10; i++)
+            {
+                theHall.Add(new Wall(new Vector2(0, i * 64), false, Wall.WallMode.Randomized));
+            }
+            theHall.Add(new Wall(new Vector2(200, 600)));
+            theHall.Add(new Wall(new Vector2(280, 600), true, Wall.WallMode.Toggled));
+            //Make walls random
+            level.RandomizeWalls();
 			player = new Player(new Vector2(200, 400));
 
 			// TODO: To be removed.
 			pistol = new Pistol();
 		}
+			sword = new Sword();
+        }
 
         /// <summary>
         /// UnloadContent will be called once per game and is the place to unload
@@ -119,28 +138,15 @@ namespace EksamensSpil
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-			// TODO: Add your update logic here
 
-			//TODO: Test Player
-
-			player.Update(gameTime);
-
-            //Update the player, each frame
-            //player.Update(gameTime);
-
+            //Update player and crosshair
+            player.Update(gameTime);
             crosshair.Update(gameTime);
 
-            foreach (Room room in level.Rooms  /*active level*/)
+            foreach (GameObject go in ActiveRoom.GameObjects)
             {
-                if (room.IsActive /*active room*/)
-                {
-                    foreach (GameObject go in room.GameObjects)
-                    {
-                        //Update all objects in active room, each frame
-                        go.Update(gameTime);
-                    }
-                    break;
-                }
+                //Update all objects in active room
+                go.Update(gameTime);
             }
 
 			// TODO: Remove when test is done.
@@ -154,7 +160,6 @@ namespace EksamensSpil
 
 			pistol.Update(gameTime);
             // TODO: Add your update logic here
-
             base.Update(gameTime);
         }
 
@@ -166,21 +171,19 @@ namespace EksamensSpil
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-			// TODO: Add your drawing code here
+            // TODO: Add your drawing code here
 
-			spriteBatch.Begin();
+            spriteBatch.Begin(SpriteSortMode.FrontToBack);
+
+            //Draw player and croshair
+            player.Draw(spriteBatch);
+            crosshair.Draw(spriteBatch);
 
             //Draws all objects in active room
-            foreach (Room room in level.Rooms  /*active level*/)
+            foreach (GameObject go in ActiveRoom.GameObjects)
             {
-                if (room.IsActive /*active room*/)
-                {
-                    foreach (GameObject go in room.GameObjects)
-                    {
-                        go.Draw(spriteBatch);
-                    }
-                    break;
-                }
+                //Update all objects in active room
+                go.Draw(spriteBatch);
             }
 
 
@@ -197,14 +200,13 @@ namespace EksamensSpil
             }
 
             base.Draw(gameTime);
-
-			spriteBatch.End();
+            spriteBatch.End();
         }
 
-		// Borrowed from another projekt
-		public static Vector2 GetMousePosition()
-		{
-			return Mouse.GetState().Position.ToVector2();
-		}
-	}
+        // Borrowed from another projekt
+        public static Vector2 GetMousePosition()
+        {
+            return Mouse.GetState().Position.ToVector2();
+        }
+    }
 }
