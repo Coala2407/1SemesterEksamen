@@ -127,6 +127,7 @@ namespace EksamensSpil
 
         public override void Update(GameTime gameTime)
         {
+			selectedWeapon.ReloadCooldown(gameTime);
             HandleInput();
             Move(gameTime);
             // =================================

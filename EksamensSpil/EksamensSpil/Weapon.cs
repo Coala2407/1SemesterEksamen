@@ -34,7 +34,11 @@ namespace EksamensSpil
 			{
 				if(ammo <= 0 && cooldown <= 0)
 				{
-					ReloadCooldown();
+					if(cooldown < 0 && canGunReload != true)
+					{
+						cooldown = reloadSpeed;
+					}
+					canGunReload = true;
 					return ShootResult.NotEnoughAmmo;
 				}
 				else
@@ -47,8 +51,6 @@ namespace EksamensSpil
 
 		public void Reload()
 		{
-
-			Console.WriteLine($"reloading in {cooldown}");
 
 			ammo = clipSize;
 			canGunReload = false;
@@ -98,7 +100,6 @@ namespace EksamensSpil
 
 		public override void Update(GameTime gameTime)
 		{
-			cooldown -= (float)gameTime.ElapsedGameTime.TotalSeconds;
 			//if(cooldown >= 0)
 			//{
 			//	Console.WriteLine($"{cooldown}");
@@ -110,16 +111,10 @@ namespace EksamensSpil
 			throw new NotImplementedException();
 		}
 
-		public void ReloadCooldown()
+		public void ReloadCooldown(GameTime gameTime)
 		{
-			KeyboardState keyboard = Keyboard.GetState(); 
+			KeyboardState keyboard = Keyboard.GetState();
 
-			canGunReload = true;
-
-			if(canGunReload == true)
-			{
-				cooldown = reloadSpeed;
-			}
 
 			if(keyboard.IsKeyDown(Keys.F))
 			{
@@ -127,11 +122,13 @@ namespace EksamensSpil
 				Console.WriteLine("Reload Canceled");
 			}
 
-			if(cooldown <= 0 && canGunReload == true)
+			if(canGunReload == true && ammo < clipSize && cooldown <= 0)
 			{
 				Reload();
+				Console.WriteLine($"reloading in {cooldown}");
 			}
 
+			cooldown -= (float)gameTime.ElapsedGameTime.TotalSeconds;
 		}
 	}
 }
