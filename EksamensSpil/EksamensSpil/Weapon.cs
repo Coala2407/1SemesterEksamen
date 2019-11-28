@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Input;
 
 namespace EksamensSpil
 {
@@ -19,6 +20,7 @@ namespace EksamensSpil
 		protected float cooldown;
 		protected int ammo;
 		protected int clipSize;
+		protected bool canGunReload;
 
 
 		public virtual ShootResult Attack()
@@ -32,7 +34,7 @@ namespace EksamensSpil
 			{
 				if(ammo <= 0 && cooldown <= 0)
 				{
-					Reload();
+					ReloadCooldown();
 					return ShootResult.NotEnoughAmmo;
 				}
 				else
@@ -45,11 +47,11 @@ namespace EksamensSpil
 
 		public void Reload()
 		{
-			cooldown = reloadSpeed;
 
 			Console.WriteLine($"reloading in {cooldown}");
 
 			ammo = clipSize;
+			canGunReload = false;
 	
 		}
 
@@ -106,6 +108,30 @@ namespace EksamensSpil
 		public override void LoadContent(ContentManager content)
 		{
 			throw new NotImplementedException();
+		}
+
+		public void ReloadCooldown()
+		{
+			KeyboardState keyboard = Keyboard.GetState(); 
+
+			canGunReload = true;
+
+			if(canGunReload == true)
+			{
+				cooldown = reloadSpeed;
+			}
+
+			if(keyboard.IsKeyDown(Keys.F))
+			{
+				canGunReload = false;
+				Console.WriteLine("Reload Canceled");
+			}
+
+			if(cooldown <= 0 && canGunReload == true)
+			{
+				Reload();
+			}
+
 		}
 	}
 }
