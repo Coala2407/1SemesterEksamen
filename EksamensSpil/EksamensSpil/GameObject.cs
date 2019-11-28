@@ -96,6 +96,5 @@ namespace EksamensSpil
                 this.origin = new Vector2(sprite.Width / 2, sprite.Height / 2);
             }
         }
-
     }
 }
