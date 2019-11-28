@@ -12,8 +12,7 @@ namespace EksamensSpil
 	class Projectile : GameObject
 	{
 
-		private float movementSpeed = 500;
-		private Vector2 targetCordinater;
+		private float movementSpeed = 1800;
         private Vector2 movement = Crosshair.currentPosition - GameWorld.player.Position;
 
         public Projectile(Vector2 position)

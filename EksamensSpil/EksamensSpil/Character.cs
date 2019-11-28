@@ -10,7 +10,7 @@ namespace EksamensSpil
     public abstract class Character : GameObject
     {
 
-        protected float movementSpeed;
+        protected float movementSpeed = 50;
         protected int health;
         protected Vector2 velocity;
 
@@ -33,9 +33,13 @@ namespace EksamensSpil
         //TODO get & set metode?
         public abstract int UpdateHealth(int change);
 
-        public virtual void Move()
+        public virtual void Move(GameTime gameTime)
         {
+            //deltaTime based on gameTime
+            float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
+            //Moves the player based on velocity, speed, and deltaTime
+            position += ((velocity * movementSpeed) * deltaTime);
         }
 
         public abstract void Reload();
