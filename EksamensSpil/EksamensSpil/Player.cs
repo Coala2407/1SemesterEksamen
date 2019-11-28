@@ -9,36 +9,38 @@ using Microsoft.Xna.Framework.Input;
 
 namespace EksamensSpil
 {
-    public class Player : Character
-    {
+	public class Player : Character
+	{
 
-        private List<Weapon> weapons = new List<Weapon>();
-        private List<Item> items = new List<Item>();
-        private Weapon selectedWeapon;
-        private Item selectedItem;
-        private Room previousRoom;
-        private bool hasJustClicked;
-
-
-        /// <summary>
-        /// Default Constructor
-        /// </summary>
-        public Player(Vector2 position)
-        {
-            this.position = position;
-            // Sets default Player sprite
-            ChangeSprite(Assets.PlayerSprite);
+		private List<Weapon> weapons = new List<Weapon>();
+		private List<Item> items = new List<Item>();
+		private Weapon selectedWeapon;
+		private Item selectedItem;
+		private Room previousRoom;
+		private bool hasJustClicked;
 
 
-            //Just a pistol for now. Will be random later.
-            selectedWeapon = new Pistol(this);
-        }
+		/// <summary>
+		/// Default Constructor
+		/// </summary>
+		public Player(Vector2 position)
+		{
+			this.position = position;
+			// Sets default Player sprite
+			ChangeSprite(Assets.PlayerSprite);
 
-        /// <summary>
-        /// Method to use item.
-        /// </summary>
-        public void UseItem()
-        {
+			//Just a pistol for now. Will be random later.
+			selectedWeapon = new Pistol(this);
+		}
+
+		
+	
+
+		/// <summary>
+		/// Method to use item.
+		/// </summary>
+		public void UseItem()
+		{
 
         }
 

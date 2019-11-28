@@ -190,5 +190,8 @@ namespace EksamensSpil
         {
             return Mouse.GetState().Position.ToVector2();
         }
+
+
+
     }
 }
