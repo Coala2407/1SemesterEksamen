@@ -33,6 +33,7 @@ namespace EksamensSpil
         public static Level level;
 
         //Rooms
+
         public static Room theRoom;
         public static Room theHall;
 
@@ -56,15 +57,15 @@ namespace EksamensSpil
         /// </summary>
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
-            //Screen setup
-            graphics.PreferredBackBufferWidth = /*GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width*/ 1920;
-            graphics.PreferredBackBufferHeight = /*GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height*/ 1080;
-            graphics.ApplyChanges();
-            //graphics.ToggleFullScreen();
+			// TODO: Add your initialization logic here
+			//Screen setup
+			graphics.PreferredBackBufferWidth = /*GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width*/ 1920;
+			graphics.PreferredBackBufferHeight = /*GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height*/ 1080;
+			graphics.ApplyChanges();
+			//graphics.ToggleFullScreen();
 
-            //Make levels
-            level = new Level();
+			//Make levels
+			level = new Level();
 
             //Make rooms
             theRoom = new Room(false, false, "The Room");
@@ -107,7 +108,6 @@ namespace EksamensSpil
             //Make walls random
             level.RandomizeWalls();
 		}
-        
 
         /// <summary>
         /// UnloadContent will be called once per game and is the place to unload
