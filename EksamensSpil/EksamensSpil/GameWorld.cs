@@ -33,6 +33,7 @@ namespace EksamensSpil
         public static Level level;
 
         //Rooms
+
         public static Room theRoom;
         public static Room theHall;
 
@@ -106,7 +107,6 @@ namespace EksamensSpil
             //Make walls random
             level.RandomizeWalls();
 		}
-        
 
         /// <summary>
         /// UnloadContent will be called once per game and is the place to unload
