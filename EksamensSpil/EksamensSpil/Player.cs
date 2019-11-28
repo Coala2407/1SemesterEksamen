@@ -9,41 +9,38 @@ using Microsoft.Xna.Framework.Input;
 
 namespace EksamensSpil
 {
-    public class Player : Character
-    {
+	public class Player : Character
+	{
 
-        private List<Weapon> weapons = new List<Weapon>();
-        private List<Item> items = new List<Item>();
-        private Weapon selectedWeapon;
-        private Item selectedItem;
-        private Room previousRoom;
-        private bool hasJustClicked;
+		private List<Weapon> weapons = new List<Weapon>();
+		private List<Item> items = new List<Item>();
+		private Weapon selectedWeapon;
+		private Item selectedItem;
+		private Room previousRoom;
+		private bool hasJustClicked;
 
-        /// <summary>
-        /// Default Constructor
-        /// </summary>
-      
-        private Room previousRoom;
 
 		/// <summary>
 		/// Default Constructor
 		/// </summary>
 		public Player(Vector2 position)
 		{
-            this.position = position;
-            // Sets default Player sprite
-            ChangeSprite(Assets.PlayerSprite);
+			this.position = position;
+			// Sets default Player sprite
+			ChangeSprite(Assets.PlayerSprite);
+
+			//Just a pistol for now. Will be random later.
+			selectedWeapon = new Pistol(this);
 		}
 
-            //Just a pistol for now. Will be random later.
-            selectedWeapon = new Pistol(this);
-        }
+		
+	
 
-        /// <summary>
-        /// Method to use item.
-        /// </summary>
-        public void UseItem()
-        {
+		/// <summary>
+		/// Method to use item.
+		/// </summary>
+		public void UseItem()
+		{
 
 		}
 
@@ -71,25 +68,29 @@ namespace EksamensSpil
 		/// <param name="gameTime"></param>
 		public void HandleInput()
 		{
+			MouseState mouse = Mouse.GetState();
+			KeyboardState keyState = Keyboard.GetState();
+			if (keyState.IsKeyDown(Keys.W))
+			{
+				GameWorld.ActiveRoom = GameWorld.theHall;
+			}
+			else if (keyState.IsKeyDown(Keys.S))
+			{
+				GameWorld.ActiveRoom = GameWorld.theRoom;
+			}
+			else if (keyState.IsKeyDown(Keys.R))
+			{
+				GameWorld.level.RandomizeWalls();
+			}
+			if(mouse.LeftButton == ButtonState.Pressed)
+			{
+				selectedWeapon.Attack();
+			}
 
-            KeyboardState keyState = Keyboard.GetState();
-            if (keyState.IsKeyDown(Keys.W))
-            {
-                GameWorld.ActiveRoom = GameWorld.theHall;
-            }
-            else if (keyState.IsKeyDown(Keys.S))
-            {
-                GameWorld.ActiveRoom = GameWorld.theRoom;
-            }
-            else if (keyState.IsKeyDown(Keys.R))
-            {
-                GameWorld.level.RandomizeWalls();
-            }
+			// =================================
+			// rotation (Look at mouse)
 
-            // =================================
-            // rotation (Look at mouse)
-
-            LookAt(GameWorld.GetMousePosition());
+			LookAt(GameWorld.GetMousePosition());
 		}
 
 		public override void Die()
@@ -123,4 +124,5 @@ namespace EksamensSpil
 			HandleInput();
 		}
 	}
+
 }
