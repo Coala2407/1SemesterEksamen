@@ -10,7 +10,7 @@ namespace EksamensSpil
     public abstract class Character : GameObject
     {
 
-        protected float movementSpeed = 50;
+        protected float movementSpeed = 500;
         protected int health;
         protected Vector2 velocity;
 

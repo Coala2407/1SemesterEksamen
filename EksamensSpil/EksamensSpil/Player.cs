@@ -20,6 +20,7 @@ namespace EksamensSpil
         private Item selectedItem;
         public Vector2 Position;
         private Room previousRoom;
+        private bool hasJustClicked;
 
         /// <summary>
         /// Default Constructor
@@ -88,16 +89,30 @@ namespace EksamensSpil
             {
                 velocity.X = +1;
             }
+            //Temp. TO test random walls
             if (keyState.IsKeyDown(Keys.R))
             {
-                GameWorld.level.RandomizeWalls();
+                if (!hasJustClicked)
+                {
+                    GameWorld.level.RandomizeWalls();
+                    hasJustClicked = true;
+                }
             }
+            else
+            {
+                hasJustClicked = false;
+            }
+            //End of test
             if (mouse.LeftButton == ButtonState.Pressed)
             {
                 selectedWeapon.Attack();
             }
 
-            //velocity.Normalize();
+            //To avoid too fast movement when holding down 2 movement keys
+            if (velocity != Vector2.Zero)
+            {
+                velocity.Normalize();
+            }
         }
 
         public override void Die()
