@@ -14,6 +14,8 @@ namespace EksamensSpil
         private Weapon weapon;
         private int lootDropChance;
         private bool isBoss;
+        private float movementSpeed = 1;
+        Vector2 direction;
 
         /// <summary>
         /// Default Constructor
@@ -22,6 +24,8 @@ namespace EksamensSpil
         {
             this.position = position;
             sprite = Assets.EnemySprite;
+            ChangeSprite(Assets.EnemySprite);
+            rotation = Helper.CalculateAngleBetweenPositions(position, GameWorld.player.Position);
         }
 
         public Enemy(Vector2 position, bool isBoss)
@@ -64,6 +68,11 @@ namespace EksamensSpil
         public override void Update(GameTime gameTime)
         {
             //throw new NotImplementedException();
+            direction = GameWorld.player.Position - position;
+            float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+            position += direction * movementSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+           
         }
 
         public override int UpdateHealth(int change)

@@ -49,6 +49,9 @@ namespace EksamensSpil
         //Crosshair
         public static Crosshair Crosshair;
 
+        //Enemy
+        Enemy enemy;
+
         //Debug hitboxes
 #if DEBUG
         Texture2D collisionTexture;
@@ -66,6 +69,7 @@ namespace EksamensSpil
             spriteBatch.Draw(collisionTexture, rightLine, null, Color.Red, 0, Vector2.Zero, SpriteEffects.None, 1);
         }
 #endif
+
 
         public GameWorld()
         {
@@ -242,8 +246,6 @@ namespace EksamensSpil
         {
             return Mouse.GetState().Position.ToVector2();
         }
-
-
 
     }
 }
