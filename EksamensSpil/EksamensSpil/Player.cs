@@ -30,13 +30,14 @@ namespace EksamensSpil
             ChangeSprite(Assets.PlayerSprite);
 
             //Just a pistol for now. Will be random later.
-            selectedWeapon = new Pistol(this);
+            //selectedWeapon = new Pistol(this);
         }
 
 
         public Weapon SelectedWeapon
         {
             get { return selectedWeapon; }
+            set { selectedWeapon = value; }
         }
 
         /// <summary>
@@ -62,7 +63,12 @@ namespace EksamensSpil
         /// <param name="weapon"></param>
         public void PickUpWeapon(Weapon weapon)
         {
-
+            if (!weapons.Contains(weapon))
+            {
+                weapons.Add(weapon);
+            }
+            SelectedWeapon = weapon;
+            GameWorld.RemoveGameObject(weapon);
         }
 
         /// <summary>
@@ -92,12 +98,12 @@ namespace EksamensSpil
             {
                 velocity.X = +1;
             }
-            //Temp. T test random walls
+            //Temp. To test random walls
             if (keyState.IsKeyDown(Keys.R))
             {
                 if (!hasJustClicked)
                 {
-                    GameWorld.level.RandomizeWalls();
+                    GameWorld.Level.RandomizeWalls();
                     hasJustClicked = true;
                 }
             }
@@ -149,9 +155,21 @@ namespace EksamensSpil
             {
                 selectedWeapon.ReloadCooldown(gameTime);
                 selectedWeapon.PositionY = position.Y + 20;
-                selectedWeapon.PositionX = position.X + 20;
-                //// rotation (Look at mouse)
+                selectedWeapon.PositionX = position.X;
+                // rotation (Look at mouse)
                 selectedWeapon.LookAt(GameWorld.GetMousePosition());
+                //Flip the weapon depending on crosshair weapon
+                selectedWeapon.SpriteFlippedX = GameWorld.Crosshair.PositionX < position.X;
+            }
+            spriteFlippedY = GameWorld.Crosshair.PositionX < position.X;
+        }
+
+        public override void OnCollision(GameObject otherObject)
+        {
+            Weapon weapon = otherObject as Weapon;
+            if (weapon != null)
+            {
+                PickUpWeapon(weapon);
             }
         }
     }

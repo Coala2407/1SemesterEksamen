@@ -20,28 +20,34 @@ namespace EksamensSpil
         //To add and remove objects in runtime
         public static List<GameObject> NewGameObjects = new List<GameObject>();
         public static List<GameObject> RemoveGameObjects = new List<GameObject>();
+
         public static void AddGameObject(GameObject gameObject, Room room)
         {
             gameObject.Room = room;
             NewGameObjects.Add(gameObject);
         }
 
-        //Active room. Only objects from the active room, player and crosshair get updated
+        public static void RemoveGameObject(GameObject gameObject)
+        {
+            RemoveGameObjects.Add(gameObject);
+        }
+
+        //Active room. Only objects from the active room, Player and Crosshair get updated
         public static Room ActiveRoom;
 
         //Levels
-        public static Level level;
+        public static Level Level;
 
         //Rooms
 
-        public static Room theRoom;
-        public static Room theHall;
+        public static Room TheRoom;
+        public static Room TheHall;
 
         //Player
-        public static Player player;
+        public static Player Player;
 
         //Crosshair
-        Crosshair crosshair;
+        public static Crosshair Crosshair;
 
         //Debug hitboxes
 #if DEBUG
@@ -83,17 +89,17 @@ namespace EksamensSpil
             //graphics.ToggleFullScreen();
 
             //Make levels
-            level = new Level();
+            Level = new Level();
 
             //Make rooms
-            theRoom = new Room(false, false, "The Room");
-            theHall = new Room(false, false, "The Hall");
+            TheRoom = new Room(false, false, "The Room");
+            TheHall = new Room(false, false, "The Hall");
 
             //Add rooms to level
-            level.Add(theRoom);
-            level.Add(theHall);
+            Level.Add(TheRoom);
+            Level.Add(TheHall);
 
-            ActiveRoom = theHall;
+            ActiveRoom = TheHall;
             //Run, game, Run!
             base.Initialize();
         }
@@ -109,22 +115,23 @@ namespace EksamensSpil
             Assets.LoadAssets(Content);
             //Assets loaded. All sprites etc. are accessable from this point:
 
-            //Make player and crosshair
-            crosshair = new Crosshair();
-            player = new Player(new Vector2(200, 400));
+            //Make Player and Crosshair
+            Crosshair = new Crosshair();
+            Player = new Player(new Vector2(200, 400));
 
             //Add object to room
-            theHall.Add(new Enemy(new Vector2(600, 200)));
-            theHall.Add(new Enemy(new Vector2(900, 500), true));
+            TheHall.Add(new Enemy(new Vector2(600, 200)));
+            TheHall.Add(new Enemy(new Vector2(900, 500), true));
             for (int i = 0; i < 10; i++)
             {
-                theHall.Add(new Wall(new Vector2(0, i * 64), false, Wall.WallMode.Randomized));
+                TheHall.Add(new Wall(new Vector2(0, i * 64), false, Wall.WallMode.Randomized));
             }
-            theHall.Add(new Wall(new Vector2(200, 600)));
-            theHall.Add(new Wall(new Vector2(280, 600), true, Wall.WallMode.Toggled));
-            theHall.Add(new Pistol(new Vector2(1000, 1000)));
+            TheHall.Add(new Wall(new Vector2(200, 600)));
+            TheHall.Add(new Wall(new Vector2(280, 600), true, Wall.WallMode.Toggled));
+            TheHall.Add(new Pistol(new Vector2(1000, 1000)));
+            TheHall.Add(new Pistol(new Vector2(600, 100)));
             //Make walls random
-            level.RandomizeWalls();
+            Level.RandomizeWalls();
 
 
             //Load Debug hitbox
@@ -153,14 +160,20 @@ namespace EksamensSpil
                 Exit();
 
 
-            //Update player and crosshair
-            player.Update(gameTime);
-            crosshair.Update(gameTime);
+            //Update Player and Crosshair
+            Player.Update(gameTime);
+            Crosshair.Update(gameTime);
 
             foreach (GameObject go in ActiveRoom.GameObjects)
             {
                 //Update all objects in active room
                 go.Update(gameTime);
+                //Check player collision
+                Player.CheckCollision(go);
+                foreach (GameObject other in ActiveRoom.GameObjects)
+                {
+                    go.CheckCollision(other);
+                }
             }
 
             //Add new objects to rooms
@@ -169,6 +182,18 @@ namespace EksamensSpil
                 go.Room.Add(go);
             }
             NewGameObjects.Clear();
+            //Remove gameobjects from rooms
+            foreach (GameObject go in RemoveGameObjects)
+            {
+                if (go.Room != null)
+                {
+                    go.Room.Remove(go);
+                }
+                else
+                {
+                    ActiveRoom.Remove(go);
+                }
+            }
 
 
             // TODO: Add your update logic here
@@ -187,16 +212,16 @@ namespace EksamensSpil
 
             spriteBatch.Begin(SpriteSortMode.FrontToBack);
 
-            //Draw player, player selected weapon, and croshair
-            player.Draw(spriteBatch);
+            //Draw Player, Player selected weapon, and croshair
+            Player.Draw(spriteBatch);
 #if DEBUG
-            DrawCollisionBox(player);
+            DrawCollisionBox(Player);
 #endif
-            if (player.SelectedWeapon != null)
+            if (Player.SelectedWeapon != null)
             {
-                player.SelectedWeapon.Draw(spriteBatch);
+                Player.SelectedWeapon.Draw(spriteBatch);
             }
-            crosshair.Draw(spriteBatch);
+            Crosshair.Draw(spriteBatch);
 
             //Draws all objects in active room
             foreach (GameObject go in ActiveRoom.GameObjects)

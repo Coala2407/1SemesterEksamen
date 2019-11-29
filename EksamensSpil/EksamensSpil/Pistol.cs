@@ -49,7 +49,6 @@ namespace EksamensSpil
                 GameWorld.AddGameObject(new Projectile(this), GameWorld.ActiveRoom);
                 return shootResult;
             }
-
             return shootResult;
         }
 

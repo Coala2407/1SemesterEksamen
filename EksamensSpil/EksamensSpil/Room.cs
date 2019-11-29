@@ -77,5 +77,13 @@ namespace EksamensSpil
                 GameObjects.Add(gameObject);
             }
         }
+
+        public void Remove(GameObject gameObject)
+        {
+            if (gameObject != null)
+            {
+                GameObjects.Remove(gameObject);
+            }
+        }
     }
 }

@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace EksamensSpil
 {
-    class Crosshair : GameObject
+   public class Crosshair : GameObject
     {
 
         public static Vector2 currentPosition;
@@ -32,11 +32,6 @@ namespace EksamensSpil
             position = new Vector2(currentMouseState.X, currentMouseState.Y);
             currentPosition = new Vector2(currentMouseState.X, currentMouseState.Y);
 
-            //Flip the players selected weapon
-            if (GameWorld.player.SelectedWeapon != null)
-            {
-                GameWorld.player.SelectedWeapon.SpriteFlippedY = currentPosition.X < GameWorld.player.Position.X;
-            }
         }
 
         public override void OnCollision(GameObject otherObject)

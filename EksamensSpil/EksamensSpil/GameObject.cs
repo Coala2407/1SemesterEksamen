@@ -79,6 +79,11 @@ namespace EksamensSpil
             set { spriteFlippedY = value; }
         }
 
+        public Texture2D Sprite
+        {
+            get { return sprite; }
+        }
+
 
         //Not really needed anymore.
         public abstract void LoadContent(ContentManager content);
@@ -94,11 +99,11 @@ namespace EksamensSpil
                 SpriteEffects effect = SpriteEffects.None;
                 if (spriteFlippedX)
                 {
-                    effect = SpriteEffects.FlipHorizontally;
+                    effect = SpriteEffects.FlipVertically;
                 }
                 else if (spriteFlippedY)
                 {
-                    effect = SpriteEffects.FlipVertically;
+                    effect = SpriteEffects.FlipHorizontally;
 
                 }
                 spriteBatch.Draw(sprite, position, null, Color.White, MathHelper.ToRadians(rotation), origin, size, effect, drawLayer);

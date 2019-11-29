@@ -32,7 +32,14 @@ namespace EksamensSpil
 
         public override void OnCollision(GameObject otherObject)
 		{
-			throw new NotImplementedException();
+            Wall wall = otherObject as Wall;
+            if (wall != null)
+            {
+                if (!wall.IsHidden)
+                {
+                    GameWorld.RemoveGameObject(this);
+                }
+            }
 		}
 
 		public override void Update(GameTime gameTime)
