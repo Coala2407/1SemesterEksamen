@@ -43,6 +43,9 @@ namespace EksamensSpil
         //Crosshair
         Crosshair crosshair;
 
+        //Enemy
+        Enemy enemy;
+
         public GameWorld()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -129,9 +132,11 @@ namespace EksamensSpil
                 Exit();
 
 
+            
             //Update player and crosshair
             player.Update(gameTime);
             crosshair.Update(gameTime);
+            
 
             foreach (GameObject go in ActiveRoom.GameObjects)
             {
