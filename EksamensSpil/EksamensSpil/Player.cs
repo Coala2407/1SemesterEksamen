@@ -9,38 +9,41 @@ using Microsoft.Xna.Framework.Input;
 
 namespace EksamensSpil
 {
-	public class Player : Character
-	{
+    public class Player : Character
+    {
 
-		private List<Weapon> weapons = new List<Weapon>();
-		private List<Item> items = new List<Item>();
-		private Weapon selectedWeapon;
-		private Item selectedItem;
-		private Room previousRoom;
-		private bool hasJustClicked;
+        private List<Weapon> weapons = new List<Weapon>();
+        private List<Item> items = new List<Item>();
+        private Weapon selectedWeapon;
+        private Item selectedItem;
+        private Room previousRoom;
+        private bool hasJustClicked;
 
 
-		/// <summary>
-		/// Default Constructor
-		/// </summary>
-		public Player(Vector2 position)
-		{
-			this.position = position;
-			// Sets default Player sprite
-			ChangeSprite(Assets.PlayerSprite);
+        /// <summary>
+        /// Default Constructor
+        /// </summary>
+        public Player(Vector2 position)
+        {
+            this.position = position;
+            // Sets default Player sprite
+            ChangeSprite(Assets.PlayerSprite);
 
-			//Just a pistol for now. Will be random later.
-			selectedWeapon = new Pistol(this);
-		}
+            //Just a pistol for now. Will be random later.
+            selectedWeapon = new Pistol(this);
+        }
 
-		
-	
 
-		/// <summary>
-		/// Method to use item.
-		/// </summary>
-		public void UseItem()
-		{
+        public Weapon SelectedWeapon
+        {
+            get { return selectedWeapon; }
+        }
+
+        /// <summary>
+        /// Method to use item.
+        /// </summary>
+        public void UseItem()
+        {
 
         }
 
@@ -105,11 +108,8 @@ namespace EksamensSpil
             //End of test
             if (mouse.LeftButton == ButtonState.Pressed)
             {
-                selectedWeapon.Attack();
+                Attack();
             }
-
-            // rotation (Look at mouse)
-            LookAt(GameWorld.GetMousePosition());
         }
 
         public override void Die()
@@ -119,7 +119,10 @@ namespace EksamensSpil
 
         public override void Attack()
         {
-            throw new NotImplementedException();
+            if (this.selectedWeapon != null)
+            {
+                selectedWeapon.Attack();
+            }
         }
 
         public override int UpdateHealth(int change)
@@ -139,11 +142,17 @@ namespace EksamensSpil
 
         public override void Update(GameTime gameTime)
         {
-            selectedWeapon.ReloadCooldown(gameTime);
             Move(gameTime);
             HandleInput();
-            // rotation (Look at mouse)
-            LookAt(GameWorld.GetMousePosition());
+
+            if (selectedWeapon != null)
+            {
+                selectedWeapon.ReloadCooldown(gameTime);
+                selectedWeapon.PositionY = position.Y + 20;
+                selectedWeapon.PositionX = position.X + 20;
+                //// rotation (Look at mouse)
+                selectedWeapon.LookAt(GameWorld.GetMousePosition());
+            }
         }
     }
 }

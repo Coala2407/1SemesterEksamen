@@ -33,7 +33,7 @@ namespace EksamensSpil
             this.attackSpeed = 0.20f;
             this.clipSize = 6;
             this.reloadSpeed = 0.70f;
-            sprite = Assets.PistolSprite;
+            ChangeSprite(Assets.PistolSprite);
         }
 
         public override ShootResult Attack()
