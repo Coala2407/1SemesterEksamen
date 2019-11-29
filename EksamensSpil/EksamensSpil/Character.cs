@@ -11,7 +11,7 @@ namespace EksamensSpil
     {
 
         protected float movementSpeed = 500;
-        protected int health;
+        protected int health = 1;
         protected Vector2 velocity;
 
 

@@ -117,6 +117,10 @@ namespace EksamensSpil
             {
                 Attack();
             }
+            if (velocity != Vector2.Zero)
+            {
+                velocity.Normalize();
+            }
         }
 
         public override void Die()
@@ -150,7 +154,6 @@ namespace EksamensSpil
         public override void Update(GameTime gameTime)
         {
 			ItemDetectionRange();
-            selectedWeapon.ReloadCooldown(gameTime);
             Move(gameTime);
             HandleInput();
 
@@ -180,11 +183,11 @@ namespace EksamensSpil
 		{
 			Vector2 directionVector = new Vector2(0, 0);
 
-			foreach (GameObject gameObject in GameWorld.theHall.GameObjects)
+			foreach (GameObject gameObject in GameWorld.TheHall.GameObjects)
 			{
 				if(gameObject is Weapon || gameObject is Item)
 				{
-					directionVector = gameObject.Position - GameWorld.player.position;
+					directionVector = gameObject.Position - GameWorld.Player.position;
 				}
 			}
 
