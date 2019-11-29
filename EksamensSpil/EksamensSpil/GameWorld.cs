@@ -46,6 +46,25 @@ namespace EksamensSpil
         //Enemy
         Enemy enemy;
 
+        //Debug hitboxes
+#if DEBUG
+        Texture2D collisionTexture;
+        private void DrawCollisionBox(GameObject go)
+        {
+            Rectangle collisionBox = go.GetCollisionBox();
+            Rectangle topLine = new Rectangle(collisionBox.X, collisionBox.Y, collisionBox.Width, 1);
+            Rectangle bottomLine = new Rectangle(collisionBox.X, collisionBox.Y + collisionBox.Height, collisionBox.Width, 1);
+            Rectangle leftLine = new Rectangle(collisionBox.X, collisionBox.Y, 1, collisionBox.Height);
+            Rectangle rightLine = new Rectangle(collisionBox.X + collisionBox.Width, collisionBox.Y, 1, collisionBox.Height);
+
+            spriteBatch.Draw(collisionTexture, topLine, null, Color.Red, 0, Vector2.Zero, SpriteEffects.None, 1);
+            spriteBatch.Draw(collisionTexture, bottomLine, null, Color.Red, 0, Vector2.Zero, SpriteEffects.None, 1);
+            spriteBatch.Draw(collisionTexture, leftLine, null, Color.Red, 0, Vector2.Zero, SpriteEffects.None, 1);
+            spriteBatch.Draw(collisionTexture, rightLine, null, Color.Red, 0, Vector2.Zero, SpriteEffects.None, 1);
+        }
+#endif
+
+
         public GameWorld()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -60,15 +79,15 @@ namespace EksamensSpil
         /// </summary>
         protected override void Initialize()
         {
-			// TODO: Add your initialization logic here
-			//Screen setup
-			graphics.PreferredBackBufferWidth = /*GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width*/ 1920;
-			graphics.PreferredBackBufferHeight = /*GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height*/ 1080;
-			graphics.ApplyChanges();
-			//graphics.ToggleFullScreen();
+            // TODO: Add your initialization logic here
+            //Screen setup
+            graphics.PreferredBackBufferWidth = /*GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width*/ 1920;
+            graphics.PreferredBackBufferHeight = /*GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height*/ 1080;
+            graphics.ApplyChanges();
+            //graphics.ToggleFullScreen();
 
-			//Make levels
-			level = new Level();
+            //Make levels
+            level = new Level();
 
             //Make rooms
             theRoom = new Room(false, false, "The Room");
@@ -107,10 +126,16 @@ namespace EksamensSpil
             }
             theHall.Add(new Wall(new Vector2(200, 600)));
             theHall.Add(new Wall(new Vector2(280, 600), true, Wall.WallMode.Toggled));
-            theHall.Add(new Pistol(new Vector2(1000, 1000)));
+            theHall.Add(new Pistol(new Vector2(100, 100)));
             //Make walls random
             level.RandomizeWalls();
-		}
+
+
+            //Load Debug hitbox
+#if DEBUG
+            collisionTexture = Content.Load<Texture2D>("whitepixel");
+#endif
+        }
 
         /// <summary>
         /// UnloadContent will be called once per game and is the place to unload
@@ -168,8 +193,15 @@ namespace EksamensSpil
 
             spriteBatch.Begin(SpriteSortMode.FrontToBack);
 
-            //Draw player and croshair
+            //Draw player, player selected weapon, and croshair
             player.Draw(spriteBatch);
+#if DEBUG
+            DrawCollisionBox(player);
+#endif
+            if (player.SelectedWeapon != null)
+            {
+                player.SelectedWeapon.Draw(spriteBatch);
+            }
             crosshair.Draw(spriteBatch);
 
             //Draws all objects in active room
@@ -177,14 +209,10 @@ namespace EksamensSpil
             {
                 //Update all objects in active room
                 go.Draw(spriteBatch);
+#if DEBUG
+                DrawCollisionBox(go);
+#endif
             }
-
-
-
-            //TODO: Tester rotation
-            player.Draw(spriteBatch);
-
-            crosshair.Draw(spriteBatch);
 
             base.Draw(gameTime);
             spriteBatch.End();
@@ -195,8 +223,6 @@ namespace EksamensSpil
         {
             return Mouse.GetState().Position.ToVector2();
         }
-
-
 
     }
 }
