@@ -104,7 +104,7 @@ namespace EksamensSpil
             }
             theHall.Add(new Wall(new Vector2(200, 600)));
             theHall.Add(new Wall(new Vector2(280, 600), true, Wall.WallMode.Toggled));
-            theHall.Add(new Pistol(new Vector2(1000, 1000)));
+            theHall.Add(new Pistol(new Vector2(100, 100)));
             //Make walls random
             level.RandomizeWalls();
 		}
@@ -190,8 +190,6 @@ namespace EksamensSpil
         {
             return Mouse.GetState().Position.ToVector2();
         }
-
-
 
     }
 }

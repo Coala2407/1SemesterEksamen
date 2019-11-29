@@ -18,6 +18,7 @@ namespace EksamensSpil
 		private Item selectedItem;
 		private Room previousRoom;
 		private bool hasJustClicked;
+		private float detectionDistance = 180;
 
 
 		/// <summary>
@@ -68,8 +69,8 @@ namespace EksamensSpil
         /// <param name="gameTime"></param>
         public void HandleInput()
         {
-            //Stop moving when you're not pressing a key
-            velocity = Vector2.Zero;
+			//Stop moving when you're not pressing a key
+			velocity = Vector2.Zero;
             KeyboardState keyState = Keyboard.GetState();
             MouseState mouse = Mouse.GetState();
 
@@ -139,12 +140,39 @@ namespace EksamensSpil
 
         public override void Update(GameTime gameTime)
         {
+			ItemDetectionRange();
             selectedWeapon.ReloadCooldown(gameTime);
             Move(gameTime);
             HandleInput();
             // rotation (Look at mouse)
             LookAt(GameWorld.GetMousePosition());
         }
-    }
+
+		public bool ItemDetectionRange()
+		{
+			Vector2 directionVector = new Vector2(0, 0);
+
+			foreach (GameObject gameObject in GameWorld.theHall.GameObjects)
+			{
+				if(gameObject is Weapon || gameObject is Item)
+				{
+					directionVector = gameObject.Position - GameWorld.player.position;
+				}
+			}
+
+			float distance = directionVector.Length();
+
+			if (distance < detectionDistance)
+			{
+				Console.WriteLine($"Player within distance {distance}");
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+
+		}
+	}
 }
 
