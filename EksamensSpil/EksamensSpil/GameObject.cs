@@ -30,6 +30,9 @@ namespace EksamensSpil
 
         protected Room room;
 
+        protected bool spriteFlippedX;
+        protected bool spriteFlippedY;
+
         public GameObject(Vector2 position)
         {
             this.position = position;
@@ -49,7 +52,33 @@ namespace EksamensSpil
         public Vector2 Position
         {
             get { return position; }
+            set { position = value; }
         }
+
+        public float PositionY
+        {
+            get { return position.Y; }
+            set { position.Y = value; }
+        }
+
+        public float PositionX
+        {
+            get { return position.X; }
+            set { position.X = value; }
+        }
+
+        public bool SpriteFlippedX
+        {
+            get { return spriteFlippedX; }
+            set { spriteFlippedX = value; }
+        }
+
+        public bool SpriteFlippedY
+        {
+            get { return spriteFlippedY; }
+            set { spriteFlippedY = value; }
+        }
+
 
         //Not really needed anymore.
         public abstract void LoadContent(ContentManager content);
@@ -62,7 +91,17 @@ namespace EksamensSpil
         {
             if (sprite != null)
             {
-                spriteBatch.Draw(sprite, position, null, Color.White, MathHelper.ToRadians(rotation), origin, size, SpriteEffects.None, drawLayer);
+                SpriteEffects effect = SpriteEffects.None;
+                if (spriteFlippedX)
+                {
+                    effect = SpriteEffects.FlipHorizontally;
+                }
+                else if (spriteFlippedY)
+                {
+                    effect = SpriteEffects.FlipVertically;
+
+                }
+                spriteBatch.Draw(sprite, position, null, Color.White, MathHelper.ToRadians(rotation), origin, size, effect, drawLayer);
             }
         }
 
@@ -70,7 +109,7 @@ namespace EksamensSpil
         {
             if (sprite != null)
             {
-                return new Rectangle((int)position.X, (int)position.Y, sprite.Width, sprite.Height);
+                return new Rectangle((int)position.X - (int)origin.X, (int)position.Y - (int)origin.Y, sprite.Width, sprite.Height);
             }
             else
             {

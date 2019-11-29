@@ -12,7 +12,7 @@ namespace EksamensSpil
 {
     class Crosshair : GameObject
     {
-       
+
         public static Vector2 currentPosition;
         public Crosshair()
         {
@@ -22,7 +22,7 @@ namespace EksamensSpil
 
         public override void LoadContent(ContentManager content)
         {
-            
+
         }
 
         public override void Update(GameTime gameTime)
@@ -31,12 +31,17 @@ namespace EksamensSpil
             MouseState currentMouseState = Mouse.GetState();
             position = new Vector2(currentMouseState.X, currentMouseState.Y);
             currentPosition = new Vector2(currentMouseState.X, currentMouseState.Y);
+
+            //Flip the players selected weapon
+            if (GameWorld.player.SelectedWeapon != null)
+            {
+                GameWorld.player.SelectedWeapon.SpriteFlippedY = currentPosition.X < GameWorld.player.Position.X;
+            }
         }
 
         public override void OnCollision(GameObject otherObject)
         {
 
         }
-
-	}
+    }
 }
