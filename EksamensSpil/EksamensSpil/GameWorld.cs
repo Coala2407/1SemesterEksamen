@@ -85,15 +85,15 @@ namespace EksamensSpil
         /// </summary>
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
-            //Screen setup
-            graphics.PreferredBackBufferWidth = /*GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width*/ 1920;
-            graphics.PreferredBackBufferHeight = /*GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height*/ 1080;
-            graphics.ApplyChanges();
-            //graphics.ToggleFullScreen();
+			// TODO: Add your initialization logic here
+			//Screen setup
+			graphics.PreferredBackBufferWidth = /*GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width*/ 1920;
+			graphics.PreferredBackBufferHeight = /*GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height*/ 1080;
+			graphics.ApplyChanges();
+			//graphics.ToggleFullScreen();
 
-            //Make levels
-            Level = new Level();
+			//Make levels
+			Level = new Level();
 
             //Make rooms
             TheRoom = new Room(false, false, "The Room");
@@ -134,6 +134,7 @@ namespace EksamensSpil
             TheHall.Add(new Wall(new Vector2(280, 600), true, Wall.WallMode.Toggled));
             TheHall.Add(new Pistol(new Vector2(1000, 1000)));
             TheHall.Add(new Pistol(new Vector2(600, 100)));
+			TheHall.Add(new Chest(new Vector2(400, 400)));
             //Make walls random
             Level.RandomizeWalls();
 
