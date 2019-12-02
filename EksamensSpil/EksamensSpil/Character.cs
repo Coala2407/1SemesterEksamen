@@ -11,7 +11,7 @@ namespace EksamensSpil
     {
 
         protected float movementSpeed = 500;
-        protected int health;
+        protected int health = 1;
         protected Vector2 velocity;
 
 
@@ -47,7 +47,7 @@ namespace EksamensSpil
         // This can be used for Player and Enemy
         public override void OnCollision(GameObject otherObject)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
 
     }

@@ -25,7 +25,8 @@ namespace EksamensSpil
             this.position = position;
             sprite = Assets.EnemySprite;
             ChangeSprite(Assets.EnemySprite);
-            rotation = Helper.CalculateAngleBetweenPositions(position, GameWorld.player.Position);
+            rotation = Helper.CalculateAngleBetweenPositions(position, GameWorld.Player.Position);
+            initialize();
         }
 
         public Enemy(Vector2 position, bool isBoss)
@@ -41,7 +42,31 @@ namespace EksamensSpil
                 sprite = Assets.EnemySprite;
 
             }
+            initialize();
         }
+
+        private void initialize()
+        {
+            movementSpeed = 0.1f;
+            if (isBoss)
+            {
+                health = 10;
+            }
+        }
+
+        public int Health
+        {
+            get { return health; }
+            set
+            {
+                health = value;
+                if (health < 0)
+                {
+                    health = 0;
+                }
+            }
+        }
+
 
         //TODO Do we need this?
         public override void Attack()
@@ -51,7 +76,7 @@ namespace EksamensSpil
 
         public override void Die()
         {
-            throw new NotImplementedException();
+            GameWorld.RemoveGameObject(this);
         }
 
         public override void LoadContent(ContentManager content)
@@ -68,16 +93,31 @@ namespace EksamensSpil
         public override void Update(GameTime gameTime)
         {
             //throw new NotImplementedException();
-            direction = GameWorld.player.Position - position;
+            velocity = GameWorld.Player.Position - position;
             float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-            position += direction * movementSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
-           
+            position += velocity * movementSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+
         }
 
-        public override int UpdateHealth(int change)
+        public override int UpdateHealth(int damage)
         {
-            throw new NotImplementedException();
+            if (damage > 0)
+            {
+                Health -= damage;
+            }
+            else
+            {
+                Health += damage;
+            }
+
+            //HP 0, die
+            if (Health == 0)
+            {
+                Die();
+            }
+
+            return Health;
         }
     }
 }

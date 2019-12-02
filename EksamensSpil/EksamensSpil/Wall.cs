@@ -16,6 +16,11 @@ namespace EksamensSpil
         private bool canBeToggled;
         private bool isHidden;
 
+        public bool IsHidden
+        {
+            get { return isHidden; }
+        }
+
         public Wall(Vector2 position)
         {
             this.position = position;
@@ -102,7 +107,7 @@ namespace EksamensSpil
 
         public override void OnCollision(GameObject otherObject)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
 
         public override void Update(GameTime gameTime)

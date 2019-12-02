@@ -9,10 +9,10 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace EksamensSpil
 {
-	class Projectile : GameObject
-	{
+    class Projectile : GameObject
+    {
 
-		private float movementSpeed = 100;
+        private float movementSpeed = 100;
         private Vector2 movement;
 
         public Projectile(Pistol pistol)
@@ -26,17 +26,31 @@ namespace EksamensSpil
         }
 
         public override void LoadContent(ContentManager content)
-		{
-			throw new NotImplementedException();
-		}
+        {
+            throw new NotImplementedException();
+        }
 
         public override void OnCollision(GameObject otherObject)
-		{
-			throw new NotImplementedException();
-		}
+        {
+            Wall wall = otherObject as Wall;
+            Enemy enemy = otherObject as Enemy;
+            if (wall != null)
+            {
+                if (!wall.IsHidden)
+                {
+                    GameWorld.RemoveGameObject(this);
+                }
+            }
+            else if (enemy != null)
+            {
+                enemy.UpdateHealth(1);
+                GameWorld.RemoveGameObject(this);
+            }
 
-		public override void Update(GameTime gameTime)
-		{
+        }
+
+        public override void Update(GameTime gameTime)
+        {
             //Normalizes movement of the bullet, ensuring it moves in one direction
             if (movement != Vector2.Zero)
             {

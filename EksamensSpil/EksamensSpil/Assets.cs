@@ -28,6 +28,11 @@ namespace EksamensSpil
             CrosshairSprite = content.Load<Texture2D>("Corshair");
             BulletSprite = content.Load<Texture2D>("Bullet");
             PistolSprite = content.Load<Texture2D>("pistol");
+			ChestSprites = new Texture2D[2];
+			for (int i = 0; i < ChestSprites.Length; ++i)
+			{
+				ChestSprites[i] = content.Load<Texture2D>($"chest{i}");
+			}
             WallSprites = new Texture2D[1];
             for (int i = 0; i < WallSprites.Length; i++)
             {
