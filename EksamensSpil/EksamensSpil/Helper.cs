@@ -11,13 +11,13 @@ namespace EksamensSpil
 	{
 
 		// Borrowed from another projekt
-		public static float sin(float degrees)
+		public static float Sin(float degrees)
 		{
 			return (float)Math.Sin(degrees / 180f * Math.PI);
 		}
 
 		// Borrowed from another projekt
-		public static float cos(float degrees)
+		public static float Cos(float degrees)
 		{
 			return (float)Math.Cos(degrees / 180f * Math.PI);
 		}

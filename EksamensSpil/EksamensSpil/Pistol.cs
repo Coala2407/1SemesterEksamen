@@ -20,17 +20,17 @@ namespace EksamensSpil
         public Pistol(Vector2 position)
         {
             this.position = position;
-            initialize();
+            Initialize();
         }
 
         public Pistol(GameObject holder)
         {
             this.holder = holder;
             this.position = holder.Position;
-            initialize();
+            Initialize();
         }
 
-        private void initialize()
+        private void Initialize()
         {
             int randomAmmo = GameWorld.rng.Next(1, 11);
             this.ammo = randomAmmo;

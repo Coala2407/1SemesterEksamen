@@ -145,5 +145,17 @@ namespace EksamensSpil
                 this.origin = new Vector2(sprite.Width / 2, sprite.Height / 2);
             }
         }
-    }
+
+		// Borrowed from another projekt
+		public Vector2 ForwardVector
+		{
+			get
+			{
+				return new Vector2(
+					Helper.Cos(this.rotation),
+					Helper.Sin(this.rotation)
+				);
+			}
+		}
+	}
 }

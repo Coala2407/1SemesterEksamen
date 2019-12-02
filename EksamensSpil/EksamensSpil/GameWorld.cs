@@ -135,6 +135,7 @@ namespace EksamensSpil
             TheHall.Add(new Pistol(new Vector2(1000, 1000)));
             TheHall.Add(new Pistol(new Vector2(600, 100)));
 			TheHall.Add(new Chest(new Vector2(400, 400)));
+			TheHall.Add(new Sword(new Vector2(500, 500)));
             //Make walls random
             Level.RandomizeWalls();
 

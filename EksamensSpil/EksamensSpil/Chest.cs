@@ -113,7 +113,7 @@ namespace EksamensSpil
 			if(isOpen == true && didLootDrop == false && lootType <= 90)
 			{
 				Pistol pistol = new Pistol(new Vector2(this.position.X, this.position.Y - sprite.Height));
-				GameWorld.AddGameObject(pistol, GameWorld.TheHall);
+				GameWorld.AddGameObject(pistol, GameWorld.ActiveRoom);
 				didLootDrop = true;
 			}
 

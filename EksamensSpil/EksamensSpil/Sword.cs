@@ -10,19 +10,35 @@ namespace EksamensSpil
     class Sword : Weapon
     {
 
-		private float range;
+		public float Range;
+		public float SwingTime;
 
 		/// <summary>
 		/// Default Constructor
 		/// </summary>
 		public Sword(GameObject holder)
 		{
+			this.holder = holder;
+			this.position = holder.Position;
+			Initialize();
+		}
+
+		public Sword(Vector2 position)
+		{
+			this.position = position;
+			Initialize();
+		}
+
+		private void Initialize()
+		{
 			this.ammo = 1;
-			this.attackSpeed = 0;
+			this.attackSpeed = 1.20f;
 			this.clipSize = 1;
-			this.reloadSpeed = 1.20f;
-            drawLayer = 0.1f;
-        }
+			this.SwingTime = 0.30f;
+			this.Range = 100;
+			drawLayer = 0.1f;
+			ChangeSprite(Assets.SwordSprite);
+		}
 
 		public override ShootResult Attack()
 		{
@@ -31,7 +47,8 @@ namespace EksamensSpil
 
 			if(shootResult == ShootResult.Successfull)
 			{
-				--ammo;
+				cooldown = attackSpeed;
+				GameWorld.AddGameObject(new SwordSwing(this, Range), GameWorld.ActiveRoom);
 				Console.WriteLine("Swing sword");
 				return shootResult;
 			}
