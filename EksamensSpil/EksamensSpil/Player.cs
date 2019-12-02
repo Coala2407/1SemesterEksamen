@@ -19,6 +19,11 @@ namespace EksamensSpil
         private Room previousRoom;
         private bool hasJustClicked;
         private float detectionDistance = 60;
+        //For picking up weapons and items
+        private bool isTouchingWeapon;
+        private bool isTouchingItem;
+        private Weapon touchedWeapon;
+        private Item touchedItem;
 
 
         /// <summary>
@@ -64,12 +69,15 @@ namespace EksamensSpil
         /// <param name="weapon"></param>
         public void PickUpWeapon(Weapon weapon)
         {
-            if (!weapons.Contains(weapon))
+            if (weapon != null)
             {
-                weapons.Add(weapon);
+                if (!weapons.Contains(weapon))
+                {
+                    weapons.Add(weapon);
+                }
+                SelectedWeapon = weapon;
+                GameWorld.RemoveGameObject(weapon);
             }
-            SelectedWeapon = weapon;
-            GameWorld.RemoveGameObject(weapon);
         }
 
         /// <summary>
@@ -78,8 +86,8 @@ namespace EksamensSpil
         /// <param name="gameTime"></param>
         public void HandleInput()
         {
-			//Stop moving when you're not pressing a key
-			velocity = Vector2.Zero;
+            //Stop moving when you're not pressing a key
+            velocity = Vector2.Zero;
             KeyboardState keyState = Keyboard.GetState();
             MouseState mouse = Mouse.GetState();
 
@@ -98,6 +106,13 @@ namespace EksamensSpil
             if (keyState.IsKeyDown(Keys.D))
             {
                 velocity.X = +1;
+            }
+            if (keyState.IsKeyDown(Keys.E))
+            {
+                if (isTouchingWeapon)
+                {
+                    PickUpWeapon(touchedWeapon);
+                }
             }
             //Temp. To test random walls
             if (keyState.IsKeyDown(Keys.R))
@@ -153,7 +168,7 @@ namespace EksamensSpil
 
         public override void Update(GameTime gameTime)
         {
-			ItemDetectionRange();
+            ItemDetectionRange();
             Move(gameTime);
             HandleInput();
 
@@ -175,35 +190,44 @@ namespace EksamensSpil
             Weapon weapon = otherObject as Weapon;
             if (weapon != null)
             {
-                PickUpWeapon(weapon);
+                isTouchingWeapon = true;
+                touchedWeapon = weapon;
             }
         }
 
-		public bool ItemDetectionRange()
-		{
-			Vector2 directionVector = new Vector2(0, 0);
+        public bool ItemDetectionRange()
+        {
+            Vector2 directionVector = new Vector2(0, 0);
 
-			foreach (GameObject gameObject in GameWorld.TheHall.GameObjects)
-			{
-				if(gameObject is Weapon || gameObject is Item || gameObject is Chest)
-				{
-					directionVector = gameObject.Position - GameWorld.Player.position;
-				}
-			}
+            foreach (GameObject gameObject in GameWorld.TheHall.GameObjects)
+            {
+                if (gameObject is Weapon || gameObject is Item)
+                {
+                    directionVector = gameObject.Position - GameWorld.Player.position;
+                }
+            }
 
-			float distance = directionVector.Length();
+            float distance = directionVector.Length();
 
-			if (distance < detectionDistance)
-			{
-				Console.WriteLine($"Player within distance {distance}");
-				return true;
-			}
-			else
-			{
-				return false;
-			}
+            if (distance < detectionDistance)
+            {
+                Console.WriteLine($"Player within distance {distance}");
+                return true;
+            }
+            else
+            {
+                return false;
+            }
 
-		}
-	}
+        }
+
+        private void CycleWeapons()
+        {
+            if (weapons.Count > 0 && SelectedWeapon != null)
+            {
+                weapons.IndexOf(selectedWeapon);
+            }
+        }
+    }
 }
 
