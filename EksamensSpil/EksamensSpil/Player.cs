@@ -34,7 +34,7 @@ namespace EksamensSpil
             this.position = position;
             // Sets default Player sprite
             ChangeSprite(Assets.PlayerSprite);
-
+            drawLayer = 0.1f;
             //Just a pistol for now. Will be random later.
             //selectedWeapon = new Pistol(this);
         }
@@ -113,6 +113,10 @@ namespace EksamensSpil
                 {
                     PickUpWeapon(touchedWeapon);
                 }
+            }
+            if (keyState.IsKeyDown(Keys.Tab))
+            {
+                CycleWeapons();
             }
             //Temp. To test random walls
             if (keyState.IsKeyDown(Keys.R))
@@ -223,9 +227,18 @@ namespace EksamensSpil
 
         private void CycleWeapons()
         {
-            if (weapons.Count > 0 && SelectedWeapon != null)
+            if (weapons.Count > 0 && selectedWeapon != null)
             {
-                weapons.IndexOf(selectedWeapon);
+                selectedWeapon.Reload();
+                int selectedWeaponIndex = weapons.IndexOf(selectedWeapon);
+                if (selectedWeaponIndex + 1 == weapons.Count)
+                {
+                    selectedWeapon = weapons[0];
+                }
+                else
+                {
+                    selectedWeapon = weapons[selectedWeaponIndex + 1];
+                }
             }
         }
     }

@@ -38,6 +38,7 @@ namespace EksamensSpil
             this.clipSize = randomAmmo;
             this.reloadSpeed = (float)GameWorld.rng.Next(30, 81) / 100;
             this.projectileSpeed = GameWorld.rng.Next(250, 801);
+            drawLayer = 0.2f;
             ChangeSprite(Assets.PistolSprite);
         }
 

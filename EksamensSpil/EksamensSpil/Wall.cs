@@ -24,26 +24,22 @@ namespace EksamensSpil
         public Wall(Vector2 position)
         {
             this.position = position;
-            sprites = Assets.WallSprites;
-            sprite = sprites[0];
+            initialize();
         }
 
         public Wall(Vector2 position, bool isHidden)
         {
             this.position = position;
-            sprites = Assets.WallSprites;
-            sprite = sprites[0];
             if (isHidden)
             {
                 this.isHidden = true;
             }
+            initialize();
         }
 
         public Wall(Vector2 position, bool isHidden, WallMode mode = WallMode.Fixed)
         {
             this.position = position;
-            sprites = Assets.WallSprites;
-            sprite = sprites[0];
             if (isHidden)
             {
                 this.isHidden = true;
@@ -56,8 +52,15 @@ namespace EksamensSpil
             {
                 canBeToggled = true;
             }
+            initialize();
         }
 
+        private void initialize()
+        {
+            sprites = Assets.WallSprites;
+            sprite = sprites[0];
+            drawLayer = 0.9f;
+        }
 
         /// <summary>
         /// Randomizes tiles
