@@ -16,6 +16,8 @@ namespace EksamensSpil
         private bool isBoss;
         private float movementSpeed = 0.2f;
         Vector2 direction;
+        const float stopThreshold = 300f;
+        
 
         /// <summary>
         /// Default Constructor
@@ -98,6 +100,22 @@ namespace EksamensSpil
 
             position += velocity * movementSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
 
+            //Stops the enemy from moving once it reaches a certain threshold from the player
+
+            
+            float distance = Vector2.Distance(GameWorld.Player.Position, position);
+            if(distance <= stopThreshold)
+            {
+                movementSpeed = 0f;
+            }
+            else
+            {
+                movementSpeed = 0.2f;
+            }
+
+        }
+
+        public void Update(Player player) { 
         }
 
         public override int UpdateHealth(int damage)
