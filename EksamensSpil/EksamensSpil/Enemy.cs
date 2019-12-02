@@ -14,6 +14,8 @@ namespace EksamensSpil
         private Weapon weapon;
         private int lootDropChance;
         private bool isBoss;
+        private float movementSpeed = 0.2f;
+        Vector2 direction;
 
         /// <summary>
         /// Default Constructor

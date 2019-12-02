@@ -18,8 +18,8 @@ namespace EksamensSpil
         private Item selectedItem;
         private Room previousRoom;
         private bool hasJustClicked;
-        private float detectionDistance = 180;
-        //FOr picking up weapons and items
+        private float detectionDistance = 60;
+        //For picking up weapons and items
         private bool isTouchingWeapon;
         private bool isTouchingItem;
         private Weapon touchedWeapon;
