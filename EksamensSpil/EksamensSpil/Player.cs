@@ -18,7 +18,7 @@ namespace EksamensSpil
         private Item selectedItem;
         private Room previousRoom;
         private bool hasJustClicked;
-        private float detectionDistance = 180;
+        private float detectionDistance = 60;
 
 
         /// <summary>
@@ -185,7 +185,7 @@ namespace EksamensSpil
 
 			foreach (GameObject gameObject in GameWorld.TheHall.GameObjects)
 			{
-				if(gameObject is Weapon || gameObject is Item)
+				if(gameObject is Weapon || gameObject is Item || gameObject is Chest)
 				{
 					directionVector = gameObject.Position - GameWorld.Player.position;
 				}
