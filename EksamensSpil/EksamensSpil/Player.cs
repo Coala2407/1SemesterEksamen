@@ -199,9 +199,9 @@ namespace EksamensSpil
         {
             Vector2 directionVector = new Vector2(0, 0);
 
-            foreach (GameObject gameObject in GameWorld.TheHall.GameObjects)
+            foreach (GameObject gameObject in GameWorld.ActiveRoom.GameObjects)
             {
-                if (gameObject is Weapon || gameObject is Item)
+                if (gameObject is Weapon || gameObject is Item || gameObject is Chest)
                 {
                     directionVector = gameObject.Position - GameWorld.Player.position;
                 }

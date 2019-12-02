@@ -107,6 +107,7 @@ namespace EksamensSpil
 			}
 		}
 
+		// Makes a random GameObject from the Item Class spawn when opened. Has a slight chance of nothing happening
 		public void LootDrop()
 		{
 			if(isOpen == true && didLootDrop == false && lootType <= 90)
