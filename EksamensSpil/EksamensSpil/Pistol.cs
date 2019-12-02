@@ -10,6 +10,9 @@ namespace EksamensSpil
 {
     class Pistol : Weapon
     {
+
+        private float projectileSpeed;
+
         /// <summary>
         /// Default Constructor
         /// </summary>
@@ -29,10 +32,12 @@ namespace EksamensSpil
 
         private void initialize()
         {
-            this.ammo = 6;
-            this.attackSpeed = 0.20f;
-            this.clipSize = 6;
-            this.reloadSpeed = 0.70f;
+            int randomAmmo = GameWorld.rng.Next(1, 11);
+            this.ammo = randomAmmo;
+            this.attackSpeed = (float)GameWorld.rng.Next(30, 81) / 100;
+            this.clipSize = randomAmmo;
+            this.reloadSpeed = (float)GameWorld.rng.Next(30, 81) / 100;
+            this.projectileSpeed = GameWorld.rng.Next(250, 801);
             ChangeSprite(Assets.PistolSprite);
         }
 
@@ -46,7 +51,7 @@ namespace EksamensSpil
                 ammo--;
                 cooldown = attackSpeed;
                 Console.WriteLine($"Shoot pistol: {ammo}");
-                GameWorld.AddGameObject(new Projectile(this), GameWorld.ActiveRoom);
+                GameWorld.AddGameObject(new Projectile(this, projectileSpeed), GameWorld.ActiveRoom);
                 return shootResult;
             }
             return shootResult;

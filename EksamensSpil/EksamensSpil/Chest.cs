@@ -15,11 +15,16 @@ namespace EksamensSpil
 		private GameObject item;
 		private bool isOpen;
 		private bool isKeyDown;
+		private bool didLootDrop;
+		private Vector2 position;
+		private int lootType;
 
 
 		public Chest(Vector2 position) : base(position)
 		{
+			this.position = position;
 			//sprites = Assets.ChestSprites;
+			lootType = GameWorld.rng.Next(1, 101);
 		}
 
         public override void LoadContent(ContentManager content)
@@ -37,6 +42,8 @@ namespace EksamensSpil
 			ChestStateInput();
 
 			ChangeTheSprite();
+
+			LootDrop();
 		}
 
 		// Different methodes made to toggel between two sprites
@@ -45,12 +52,12 @@ namespace EksamensSpil
 		{
 			KeyboardState keyboard = Keyboard.GetState();
 
-			if (keyboard.IsKeyDown(Keys.B) && isKeyDown == false)
+			if(keyboard.IsKeyDown(Keys.B) && isKeyDown == false && GameWorld.Player.ItemDetectionRange() == true)
 			{
 				ToggelChest();
 				isKeyDown = true;
 			}
-			else if(keyboard.IsKeyUp(Keys.B) && isKeyDown == true)
+			else if(keyboard.IsKeyUp(Keys.B) && isKeyDown == true && GameWorld.Player.ItemDetectionRange() == true)
 			{
 				isKeyDown = false;
 			}
@@ -97,6 +104,21 @@ namespace EksamensSpil
 			{
 				//sprite = sprites[0];
 				ChangeSprite(Assets.ChestSprites[0]);
+			}
+		}
+
+		public void LootDrop()
+		{
+			if(isOpen == true && didLootDrop == false && lootType <= 90)
+			{
+				Pistol pistol = new Pistol(new Vector2(this.position.X, this.position.Y - sprite.Height));
+				GameWorld.AddGameObject(pistol, GameWorld.TheHall);
+				didLootDrop = true;
+			}
+
+			if (isOpen == true && didLootDrop == false && lootType > 90)
+			{
+
 			}
 		}
 	}
