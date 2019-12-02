@@ -12,12 +12,13 @@ namespace EksamensSpil
     class Projectile : GameObject
     {
 
-        private float movementSpeed = 100;
+        private float movementSpeed;
         private Vector2 movement;
 
-        public Projectile(Pistol pistol)
+        public Projectile(Pistol pistol, float movementSpeed)
         {
             this.position = pistol.Position;
+            this.movementSpeed = movementSpeed;
             movement = Crosshair.currentPosition - position;
             Console.WriteLine($"Spawn {position}");
             ChangeSprite(Assets.BulletSprite);
@@ -34,17 +35,21 @@ namespace EksamensSpil
         {
             Wall wall = otherObject as Wall;
             Enemy enemy = otherObject as Enemy;
+            //Projectile hit wall
             if (wall != null)
             {
                 if (!wall.IsHidden)
                 {
+                    //Wall is visible.
                     GameWorld.RemoveGameObject(this);
                 }
             }
-            else if (enemy != null)
+            //Projectile hit enemy
+            if (enemy != null)
             {
-                enemy.UpdateHealth(1);
                 GameWorld.RemoveGameObject(this);
+                //Damage enemy
+                enemy.UpdateHealth(1);
             }
 
         }
