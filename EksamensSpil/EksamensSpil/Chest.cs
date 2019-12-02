@@ -17,12 +17,14 @@ namespace EksamensSpil
 		private bool isKeyDown;
 		private bool didLootDrop;
 		private Vector2 position;
+		private int lootType;
 
 
 		public Chest(Vector2 position) : base(position)
 		{
 			this.position = position;
 			//sprites = Assets.ChestSprites;
+			lootType = GameWorld.rng.Next(1, 101);
 		}
 
         public override void LoadContent(ContentManager content)
@@ -107,11 +109,16 @@ namespace EksamensSpil
 
 		public void LootDrop()
 		{
-			if(isOpen == true && didLootDrop == false)
+			if(isOpen == true && didLootDrop == false && lootType <= 90)
 			{
 				Pistol pistol = new Pistol(new Vector2(this.position.X, this.position.Y - sprite.Height));
 				GameWorld.AddGameObject(pistol, GameWorld.TheHall);
 				didLootDrop = true;
+			}
+
+			if (isOpen == true && didLootDrop == false && lootType > 90)
+			{
+
 			}
 		}
 	}
