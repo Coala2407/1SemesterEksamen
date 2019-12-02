@@ -21,7 +21,8 @@ namespace EksamensSpil
 			this.attackSpeed = 0;
 			this.clipSize = 1;
 			this.reloadSpeed = 1.20f;
-		}
+            drawLayer = 0.1f;
+        }
 
 		public override ShootResult Attack()
 		{
