@@ -47,7 +47,7 @@ namespace EksamensSpil
 		public override void Update(GameTime gameTime)
 		{
 			//ChestStateInput();
-
+			LootDrop();
 			ChangeTheSprite();
 		}
 

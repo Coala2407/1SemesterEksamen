@@ -130,15 +130,11 @@ namespace EksamensSpil
             }
             if (Keyboard.HasBeenPressed(Keys.E))
             {
-                if (isTouchingWeapon)
-                {
-                    PickUpWeapon(touchedWeapon);
-                }
 
-				if (isTouchingChest == true)
-				{
-					OpenChest(touchedChest);
-				}
+                PickUpWeapon(touchedWeapon);
+                
+				OpenChest(touchedChest);
+				
             }
             if (Keyboard.HasBeenPressed(Keys.Tab))
             {
@@ -214,7 +210,9 @@ namespace EksamensSpil
                 //Is touching a weapon. Ready to pick it up in handle input
                 touchedWeapon = weapon;
             }
+
             Wall wall = otherObject as Wall;
+
             if (wall != null && !wall.IsHidden)
             {
                 //touchedWall = wall;
@@ -240,21 +238,11 @@ namespace EksamensSpil
                 //collideRight = thisBox.Right >= otherBox.Left && thisBox.Left < otherBox.Left;
 
             }
-            else
-			{
-				isTouchingWeapon = false;
-			}
 
 			if(chest != null && weapon == null)
 			{
 				isTouchingChest = true;
 				touchedChest = chest;
-			}
-
-			else
-			{
-				isTouchingChest = false;
-				touchedChest = null;
 			}
 
         }
@@ -272,6 +260,11 @@ namespace EksamensSpil
                 //Is no longer touching the weapon
                 touchedWeapon = null;
             }
+
+			else if(touchedChest != null && touchedChest == otherObject)
+			{
+				touchedChest = null;
+			}
             //else if (touchedWall != null && touchedWall == otherObject)
             //{
             //    //Is no longer touching the weapon
