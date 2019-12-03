@@ -25,8 +25,13 @@ namespace EksamensSpil
         private bool collideTop;
         private bool collideLeft;
         private bool collideRight;
+        //For picking up weapons and items
+        private bool isTouchingWeapon;
+        private bool isTouchingItem;
+		private bool isTouchingChest;
         private Weapon touchedWeapon;
         private Item touchedItem;
+		private Chest touchedChest;
         private Wall touchedWall;
 
 
@@ -85,6 +90,18 @@ namespace EksamensSpil
             }
         }
 
+		/// <summary>
+		/// Methode to open chests
+		/// </summary>
+		/// <param name="chest"></param>
+		public void OpenChest(Chest chest)
+		{
+			if(chest != null)
+			{
+				chest.ToggleChest();
+			}
+		}
+
         /// <summary>
         /// User input to Player
         /// </summary>
@@ -113,7 +130,15 @@ namespace EksamensSpil
             }
             if (Keyboard.HasBeenPressed(Keys.E))
             {
-                PickUpWeapon(touchedWeapon);
+                if (isTouchingWeapon)
+                {
+                    PickUpWeapon(touchedWeapon);
+                }
+
+				if (isTouchingChest == true)
+				{
+					OpenChest(touchedChest);
+				}
             }
             if (Keyboard.HasBeenPressed(Keys.Tab))
             {
@@ -178,7 +203,12 @@ namespace EksamensSpil
 
         public override void OnCollision(GameObject otherObject)
         {
-            Weapon weapon = otherObject as Weapon;
+
+			Weapon weapon = otherObject as Weapon;
+			Chest chest = otherObject as Chest;
+			
+
+            
             if (weapon != null)
             {
                 //Is touching a weapon. Ready to pick it up in handle input
@@ -210,6 +240,22 @@ namespace EksamensSpil
                 //collideRight = thisBox.Right >= otherBox.Left && thisBox.Left < otherBox.Left;
 
             }
+            else
+			{
+				isTouchingWeapon = false;
+			}
+
+			if(chest != null && weapon == null)
+			{
+				isTouchingChest = true;
+				touchedChest = chest;
+			}
+
+			else
+			{
+				isTouchingChest = false;
+				touchedChest = null;
+			}
 
         }
 
@@ -231,6 +277,7 @@ namespace EksamensSpil
             //    //Is no longer touching the weapon
             //    touchedWall = null;
             //}
+
         }
 
         public bool ItemDetectionRange()

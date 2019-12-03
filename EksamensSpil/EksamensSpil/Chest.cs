@@ -9,12 +9,15 @@ using Microsoft.Xna.Framework.Input;
 
 namespace EksamensSpil
 {
-	class Chest : GameObject
+	public class Chest : GameObject
 	{
 
 		private GameObject item;
 		private bool isOpen;
 		private bool isKeyDown;
+		private bool didLootDrop;
+		private int lootType;
+		private int lootItem;
 
 
 		public Chest(Vector2 position)
@@ -26,21 +29,9 @@ namespace EksamensSpil
         private void initialize()
         {
             ChangeSprite(Assets.ChestSprites[0]);
-            int rng = GameWorld.rng.Next(1, 101);
-            if (rng <= 90)
-            {
-                int rng2 = GameWorld.rng.Next(0, 2);
-                if (rng2 == 0)
-                {
-                    item = new Pistol(this);
-                    item.PositionY -= sprite.Height;
-                }
-                else
-                {
-                    item = new Sword(this);
-                    item.PositionY -= sprite.Height;
-                }
-            }
+            lootType = GameWorld.rng.Next(1, 101);
+			lootItem = GameWorld.rng.Next(1, 101);
+            
         }
 
         public override void LoadContent(ContentManager content)
@@ -55,27 +46,27 @@ namespace EksamensSpil
 
 		public override void Update(GameTime gameTime)
 		{
-			ChestStateInput();
+			//ChestStateInput();
+
 			ChangeTheSprite();
 		}
 
 		// Different methodes made to toggel between two sprites
 
-		public void ChestStateInput()
-		{
-			//KeyboardState keyboard = Microsoft.Xna.Framework.Input.Keyboard.GetState();
+		//public void ChestStateInput()
+		//{
+		//	//KeyboardState keyboard = Microsoft.Xna.Framework.Input.Keyboard.GetState();
 
-			if(Keyboard.IsPressed(Keys.B) && isKeyDown == false && GameWorld.Player.ItemDetectionRange() == true)
-			{
-				ToggleChest();
-                LootDrop();
-				isKeyDown = true;
-			}
-            else if (!Keyboard.IsPressed(Keys.B) && isKeyDown == true && GameWorld.Player.ItemDetectionRange() == true)
-            {
-                isKeyDown = false;
-            }
-        }
+		//	if(Keyboard.IsPressed(Keys.B) && isKeyDown == false && GameWorld.Player.ItemDetectionRange() == true)
+		//	{
+		//		ToggleChest();
+		//		isKeyDown = true;
+		//	}
+  //          else if (!Keyboard.IsPressed(Keys.B) && isKeyDown == true && GameWorld.Player.ItemDetectionRange() == true)
+  //          {
+  //              isKeyDown = false;
+  //          }
+  //      }
 
 		public void ToggleChest()
 		{
@@ -124,9 +115,32 @@ namespace EksamensSpil
 		// Makes a random GameObject from the Item Class spawn when opened. Has a slight chance of nothing happening
 		public void LootDrop()
 		{
-			if(isOpen == true && item != null)
+			ItemAddList();
+
+			if(isOpen == true && item != null && didLootDrop == false)
 			{
 				GameWorld.AddGameObject(item, GameWorld.ActiveRoom);
+				didLootDrop = true;
+			}
+		}
+
+		// All the items that can spawn and their spawn chance
+		public void ItemAddList()
+		{
+			if (lootType <= 90)
+			{
+
+				if (lootItem <= 50)
+				{
+					item = new Pistol(this);
+					item.PositionY -= sprite.Height;
+				}
+				else if (lootItem > 50)
+				{
+					item = new Sword(this);
+					item.PositionY -= sprite.Height;
+				}
+
 			}
 		}
 	}
