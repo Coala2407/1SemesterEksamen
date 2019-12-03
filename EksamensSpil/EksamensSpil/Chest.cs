@@ -19,17 +19,21 @@ namespace EksamensSpil
 		private Vector2 position;
 		private int lootType;
 		private int lootItem;
-		List<GameObject> itemList = new List<GameObject>();
 
 
-		public Chest(Vector2 position) : base(position)
+		public Chest(Vector2 position)
 		{
 			this.position = position;
-			//sprites = Assets.ChestSprites;
-			lootType = GameWorld.rng.Next(1, 101);
-			lootItem = GameWorld.rng.Next(0, itemList.Capacity);
-
+            initialize();
 		}
+
+        private void initialize()
+        {
+            ChangeSprite(Assets.ChestSprites[0]);
+            lootType = GameWorld.rng.Next(1, 101);
+			lootItem = GameWorld.rng.Next(1, 101);
+            
+        }
 
         public override void LoadContent(ContentManager content)
         {
@@ -54,20 +58,20 @@ namespace EksamensSpil
 
 		public void ChestStateInput()
 		{
-			KeyboardState keyboard = Keyboard.GetState();
+			//KeyboardState keyboard = Microsoft.Xna.Framework.Input.Keyboard.GetState();
 
-			if(keyboard.IsKeyDown(Keys.B) && isKeyDown == false && GameWorld.Player.ItemDetectionRange() == true)
+			if(Keyboard.IsPressed(Keys.B) && isKeyDown == false && GameWorld.Player.ItemDetectionRange() == true)
 			{
-				ToggelChest();
+				ToggleChest();
 				isKeyDown = true;
 			}
-			else if(keyboard.IsKeyUp(Keys.B) && isKeyDown == true && GameWorld.Player.ItemDetectionRange() == true)
-			{
-				isKeyDown = false;
-			}
-		}
+            else if (!Keyboard.IsPressed(Keys.B) && isKeyDown == true && GameWorld.Player.ItemDetectionRange() == true)
+            {
+                isKeyDown = false;
+            }
+        }
 
-		public void ToggelChest()
+		public void ToggleChest()
 		{
 
 			if(IsChestOpen() == false)
@@ -114,15 +118,9 @@ namespace EksamensSpil
 		// Makes a random GameObject from the Item Class spawn when opened. Has a slight chance of nothing happening
 		public void LootDrop()
 		{
-			if(isOpen == true && didLootDrop == false && lootType <= 90)
+			if(isOpen == true && item != null)
 			{
-				ItemAddList();
-				didLootDrop = true;
-			}
-
-			if (isOpen == true && didLootDrop == false && lootType > 90)
-			{
-
+				GameWorld.AddGameObject(item, GameWorld.ActiveRoom);
 			}
 		}
 
@@ -137,6 +135,21 @@ namespace EksamensSpil
 			{
 				GameWorld.AddGameObject(new Sword(new Vector2(this.position.X, this.position.Y - sprite.Height)), GameWorld.ActiveRoom);
 			}
+
+			if (rng <= 90)
+            {
+                int rng2 = GameWorld.rng.Next(0, 2);
+                if (rng2 == 0)
+                {
+                    item = new Pistol(this);
+                    item.PositionY -= sprite.Height;
+                }
+                else
+                {
+                    item = new Sword(this);
+                    item.PositionY -= sprite.Height;
+                }
+            }
 		}
 	}
 }

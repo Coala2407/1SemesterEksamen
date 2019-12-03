@@ -36,7 +36,7 @@ namespace EksamensSpil
 			this.clipSize = 1;
 			this.SwingTime = 0.30f;
 			this.Range = 100;
-			drawLayer = 0.1f;
+			drawLayer = 0.2f;
 			ChangeSprite(Assets.SwordSprite);
 		}
 

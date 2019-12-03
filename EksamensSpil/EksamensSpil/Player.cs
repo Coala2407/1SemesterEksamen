@@ -76,6 +76,7 @@ namespace EksamensSpil
                     weapons.Add(weapon);
                 }
                 SelectedWeapon = weapon;
+                weapon.Holder = this;
                 GameWorld.RemoveGameObject(weapon);
             }
         }
@@ -88,50 +89,35 @@ namespace EksamensSpil
         {
             //Stop moving when you're not pressing a key
             velocity = Vector2.Zero;
-            KeyboardState keyState = Keyboard.GetState();
             MouseState mouse = Mouse.GetState();
 
-            if (keyState.IsKeyDown(Keys.W))
+            if (Keyboard.IsPressed(Keys.W))
             {
                 velocity.Y = -1;
             }
-            if (keyState.IsKeyDown(Keys.S))
+            if (Keyboard.IsPressed(Keys.S))
             {
                 velocity.Y = +1;
             }
-            if (keyState.IsKeyDown(Keys.A))
+            if (Keyboard.IsPressed(Keys.A))
             {
                 velocity.X = -1;
             }
-            if (keyState.IsKeyDown(Keys.D))
+            if (Keyboard.IsPressed(Keys.D))
             {
                 velocity.X = +1;
             }
-            if (keyState.IsKeyDown(Keys.E))
+            if (Keyboard.HasBeenPressed(Keys.E))
             {
                 if (isTouchingWeapon)
                 {
                     PickUpWeapon(touchedWeapon);
                 }
             }
-            if (keyState.IsKeyDown(Keys.Tab))
+            if (Keyboard.HasBeenPressed(Keys.Tab))
             {
                 CycleWeapons();
             }
-            //Temp. To test random walls
-            if (keyState.IsKeyDown(Keys.R))
-            {
-                if (!hasJustClicked)
-                {
-                    GameWorld.Level.RandomizeWalls();
-                    hasJustClicked = true;
-                }
-            }
-            else
-            {
-                hasJustClicked = false;
-            }
-            //End of test
             if (mouse.LeftButton == ButtonState.Pressed)
             {
                 Attack();
@@ -172,9 +158,9 @@ namespace EksamensSpil
 
         public override void Update(GameTime gameTime)
         {
-            ItemDetectionRange();
             Move(gameTime);
             HandleInput();
+            ItemDetectionRange();
 
             if (selectedWeapon != null)
             {
