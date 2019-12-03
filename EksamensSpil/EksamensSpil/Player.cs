@@ -22,8 +22,10 @@ namespace EksamensSpil
         //For picking up weapons and items
         private bool isTouchingWeapon;
         private bool isTouchingItem;
+		private bool isTouchingChest;
         private Weapon touchedWeapon;
         private Item touchedItem;
+		private Chest touchedChest;
 
 
         /// <summary>
@@ -81,6 +83,18 @@ namespace EksamensSpil
             }
         }
 
+		/// <summary>
+		/// Methode to open chests
+		/// </summary>
+		/// <param name="chest"></param>
+		public void OpenChest(Chest chest)
+		{
+			if(chest != null)
+			{
+				chest.ToggleChest();
+			}
+		}
+
         /// <summary>
         /// User input to Player
         /// </summary>
@@ -113,6 +127,11 @@ namespace EksamensSpil
                 {
                     PickUpWeapon(touchedWeapon);
                 }
+
+				if (isTouchingChest == true)
+				{
+					OpenChest(touchedChest);
+				}
             }
             if (Keyboard.HasBeenPressed(Keys.Tab))
             {
@@ -177,13 +196,34 @@ namespace EksamensSpil
 
         public override void OnCollision(GameObject otherObject)
         {
-            Weapon weapon = otherObject as Weapon;
+
+			Weapon weapon = otherObject as Weapon;
 			Chest chest = otherObject as Chest;
+			
+
+            
             if (weapon != null)
             {
                 isTouchingWeapon = true;
                 touchedWeapon = weapon;
             }
+
+			else
+			{
+				isTouchingWeapon = false;
+			}
+
+			if(chest != null && weapon == null)
+			{
+				isTouchingChest = true;
+				touchedChest = chest;
+			}
+
+			else
+			{
+				isTouchingChest = false;
+				touchedChest = null;
+			}
 
         }
 
