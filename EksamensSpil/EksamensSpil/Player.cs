@@ -19,11 +19,15 @@ namespace EksamensSpil
         private Room previousRoom;
         private bool hasJustClicked;
         private float detectionDistance = 60;
-        //For picking up weapons and items
-        private bool isTouchingWeapon;
-        private bool isTouchingItem;
+
+        //Collisions
+        private bool collideBottom;
+        private bool collideTop;
+        private bool collideLeft;
+        private bool collideRight;
         private Weapon touchedWeapon;
         private Item touchedItem;
+        private Wall touchedWall;
 
 
         /// <summary>
@@ -109,10 +113,7 @@ namespace EksamensSpil
             }
             if (Keyboard.HasBeenPressed(Keys.E))
             {
-                if (isTouchingWeapon)
-                {
-                    PickUpWeapon(touchedWeapon);
-                }
+                PickUpWeapon(touchedWeapon);
             }
             if (Keyboard.HasBeenPressed(Keys.Tab))
             {
@@ -180,9 +181,56 @@ namespace EksamensSpil
             Weapon weapon = otherObject as Weapon;
             if (weapon != null)
             {
-                isTouchingWeapon = true;
+                //Is touching a weapon. Ready to pick it up in handle input
                 touchedWeapon = weapon;
             }
+            Wall wall = otherObject as Wall;
+            if (wall != null && !wall.IsHidden)
+            {
+                //touchedWall = wall;
+                Rectangle otherBox = wall.GetCollisionBox();
+                Rectangle thisBox = GetCollisionBox();
+                if (thisBox.Bottom >= otherBox.Top && thisBox.Top < otherBox.Top)
+                {
+                    if (velocity.Y > 0)
+                    {
+                        velocity.Y = 0;
+                    }
+                }
+                if (thisBox.Left <= otherBox.Right && thisBox.Right > otherBox.Right)
+                {
+                    if (velocity.X < 0)
+                    {
+                        velocity.X = 0;
+                    }
+                }
+                //collideBottom = thisBox.Bottom >= otherBox.Top && thisBox.Top < otherBox.Top;
+                //collideTop = thisBox.Top <= otherBox.Bottom && thisBox.Bottom > otherBox.Bottom;
+                //collideLeft = thisBox.Left <= otherBox.Right && thisBox.Right > otherBox.Right;
+                //collideRight = thisBox.Right >= otherBox.Left && thisBox.Left < otherBox.Left;
+
+            }
+
+        }
+
+        public override void CheckCollision(GameObject otherObject)
+        {
+            //Regular collision with objects
+            if (GetCollisionBox().Intersects(otherObject.GetCollisionBox()))
+            {
+                OnCollision(otherObject);
+            }
+            //Collision with weapons
+            else if (touchedWeapon != null && touchedWeapon == otherObject)
+            {
+                //Is no longer touching the weapon
+                touchedWeapon = null;
+            }
+            //else if (touchedWall != null && touchedWall == otherObject)
+            //{
+            //    //Is no longer touching the weapon
+            //    touchedWall = null;
+            //}
         }
 
         public bool ItemDetectionRange()

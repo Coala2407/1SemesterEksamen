@@ -56,10 +56,7 @@ namespace EksamensSpil
 		public override void Update(GameTime gameTime)
 		{
 			ChestStateInput();
-
 			ChangeTheSprite();
-
-			LootDrop();
 		}
 
 		// Different methodes made to toggel between two sprites
@@ -71,6 +68,7 @@ namespace EksamensSpil
 			if(Keyboard.IsPressed(Keys.B) && isKeyDown == false && GameWorld.Player.ItemDetectionRange() == true)
 			{
 				ToggleChest();
+                LootDrop();
 				isKeyDown = true;
 			}
             else if (!Keyboard.IsPressed(Keys.B) && isKeyDown == true && GameWorld.Player.ItemDetectionRange() == true)

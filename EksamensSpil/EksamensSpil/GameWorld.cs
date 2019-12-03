@@ -131,7 +131,7 @@ namespace EksamensSpil
                 TheHall.Add(new Wall(new Vector2(0, i * 64), false, Wall.WallMode.Randomized));
             }
             TheHall.Add(new Wall(new Vector2(200, 600)));
-            TheHall.Add(new Wall(new Vector2(280, 600), true, Wall.WallMode.Toggled));
+            TheHall.Add(new Wall(new Vector2(280, 600), false, Wall.WallMode.Toggled));
             TheHall.Add(new Pistol(new Vector2(1000, 1000)));
             TheHall.Add(new Pistol(new Vector2(600, 100)));
 			TheHall.Add(new Chest(new Vector2(400, 400)));
