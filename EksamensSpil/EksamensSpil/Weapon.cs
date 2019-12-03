@@ -24,6 +24,12 @@ namespace EksamensSpil
         protected bool canGunReload;
         protected GameObject holder;
 
+        public GameObject Holder
+        {
+            get { return holder; }
+            set { holder = value; }
+        }
+
         public virtual ShootResult Attack()
         {
 

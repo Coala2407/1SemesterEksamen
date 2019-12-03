@@ -48,6 +48,7 @@
     <Compile Include="Character.cs" />
     <Compile Include="GameObject.cs" />
     <Compile Include="Helper.cs" />
+    <Compile Include="Keyboard.cs" />
     <Compile Include="SwordSwing.cs" />
     <Compile Include="Weapon.cs" />
     <Compile Include="GameWorld.cs" />
