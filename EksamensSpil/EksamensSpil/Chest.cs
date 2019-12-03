@@ -18,6 +18,8 @@ namespace EksamensSpil
 		private bool didLootDrop;
 		private Vector2 position;
 		private int lootType;
+		private int lootItem;
+		List<GameObject> itemList = new List<GameObject>();
 
 
 		public Chest(Vector2 position) : base(position)
@@ -25,6 +27,8 @@ namespace EksamensSpil
 			this.position = position;
 			//sprites = Assets.ChestSprites;
 			lootType = GameWorld.rng.Next(1, 101);
+			lootItem = GameWorld.rng.Next(0, itemList.Capacity);
+
 		}
 
         public override void LoadContent(ContentManager content)
@@ -112,14 +116,26 @@ namespace EksamensSpil
 		{
 			if(isOpen == true && didLootDrop == false && lootType <= 90)
 			{
-				Pistol pistol = new Pistol(new Vector2(this.position.X, this.position.Y - sprite.Height));
-				GameWorld.AddGameObject(pistol, GameWorld.ActiveRoom);
+				ItemAddList();
 				didLootDrop = true;
 			}
 
 			if (isOpen == true && didLootDrop == false && lootType > 90)
 			{
 
+			}
+		}
+
+		// All the items that can spawn and their spawn chance
+		public void ItemAddList()
+		{
+			if(lootItem <= 50)
+			{
+				GameWorld.AddGameObject(new Pistol(new Vector2(this.position.X, this.position.Y - sprite.Height)), GameWorld.ActiveRoom);
+			}
+			else if(lootItem > 50)
+			{
+				GameWorld.AddGameObject(new Sword(new Vector2(this.position.X, this.position.Y - sprite.Height)), GameWorld.ActiveRoom);
 			}
 		}
 	}

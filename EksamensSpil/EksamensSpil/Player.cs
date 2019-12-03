@@ -192,11 +192,13 @@ namespace EksamensSpil
         public override void OnCollision(GameObject otherObject)
         {
             Weapon weapon = otherObject as Weapon;
+			Chest chest = otherObject as Chest;
             if (weapon != null)
             {
                 isTouchingWeapon = true;
                 touchedWeapon = weapon;
             }
+
         }
 
         public bool ItemDetectionRange()
