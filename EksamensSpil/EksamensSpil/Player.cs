@@ -90,17 +90,30 @@ namespace EksamensSpil
             }
         }
 
-        /// <summary>
-        /// Methode to open chests
-        /// </summary>
-        /// <param name="chest"></param>
-        public void OpenChest(Chest chest)
-        {
-            if (chest != null)
-            {
-                chest.ToggleChest();
-            }
-        }
+		// TODO: need to add a position for where the weapons spawn
+		public void DropWeapon(Weapon weapon)
+		{
+			if(weapon != null)
+			{
+				GameWorld.AddGameObject(weapon, GameWorld.ActiveRoom);
+			}
+			SelectedWeapon = null;
+			weapon.Holder = null;
+
+			GameWorld.RemoveGameObject(weapon);
+		}
+
+		/// <summary>
+		/// Methode to open chests
+		/// </summary>
+		/// <param name="chest"></param>
+		public void OpenChest(Chest chest)
+		{
+			if(chest != null)
+			{
+				chest.ToggleChest();
+			}
+		}
 
         /// <summary>
         /// User input to Player
@@ -144,6 +157,11 @@ namespace EksamensSpil
             {
                 Attack();
             }
+			if(Keyboard.HasBeenPressed(Keys.Back))
+			{
+				Console.WriteLine("BACKSPACE");
+				DropWeapon(selectedWeapon);
+			}
             if (velocity != Vector2.Zero)
             {
                 velocity.Normalize();
