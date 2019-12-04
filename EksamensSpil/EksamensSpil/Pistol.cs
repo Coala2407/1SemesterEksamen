@@ -26,7 +26,6 @@ namespace EksamensSpil
         public Pistol(GameObject holder)
         {
             this.holder = holder;
-            this.position = holder.Position;
             initialize();
         }
 
@@ -39,6 +38,10 @@ namespace EksamensSpil
             this.reloadSpeed = (float)GameWorld.rng.Next(30, 81) / 100;
             this.projectileSpeed = GameWorld.rng.Next(250, 801);
             drawLayer = 0.2f;
+            if (holder != null)
+            {
+                position = holder.Position;
+            }
             ChangeSprite(Assets.PistolSprite);
         }
 

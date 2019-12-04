@@ -94,7 +94,7 @@ namespace EksamensSpil
 
         public override void Update(GameTime gameTime)
         {
-            //throw new NotImplementedException();
+            positionPreMove = position;
             velocity = GameWorld.Player.Position - position;
             float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
 

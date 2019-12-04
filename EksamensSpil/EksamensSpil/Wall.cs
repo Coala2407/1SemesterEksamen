@@ -57,8 +57,7 @@ namespace EksamensSpil
 
         private void initialize()
         {
-            sprites = Assets.WallSprites;
-            sprite = sprites[0];
+            sprite = Assets.WallSprites[0];
             drawLayer = 0.9f;
         }
 
