@@ -28,10 +28,10 @@ namespace EksamensSpil
         //For picking up weapons and items
         private bool isTouchingWeapon;
         private bool isTouchingItem;
-		private bool isTouchingChest;
+        private bool isTouchingChest;
         private Weapon touchedWeapon;
         private Item touchedItem;
-		private Chest touchedChest;
+        private Chest touchedChest;
         private Wall touchedWall;
 
 
@@ -80,27 +80,27 @@ namespace EksamensSpil
         {
             if (weapon != null)
             {
-                if (!weapons.Contains(weapon))
+                if (!weapons.Contains(weapon) && weapons.Count < 3)
                 {
                     weapons.Add(weapon);
+                    SelectedWeapon = weapon;
+                    weapon.Holder = this;
+                    GameWorld.RemoveGameObject(weapon);
                 }
-                SelectedWeapon = weapon;
-                weapon.Holder = this;
-                GameWorld.RemoveGameObject(weapon);
             }
         }
 
-		/// <summary>
-		/// Methode to open chests
-		/// </summary>
-		/// <param name="chest"></param>
-		public void OpenChest(Chest chest)
-		{
-			if(chest != null)
-			{
-				chest.ToggleChest();
-			}
-		}
+        /// <summary>
+        /// Methode to open chests
+        /// </summary>
+        /// <param name="chest"></param>
+        public void OpenChest(Chest chest)
+        {
+            if (chest != null)
+            {
+                chest.ToggleChest();
+            }
+        }
 
         /// <summary>
         /// User input to Player
@@ -132,9 +132,9 @@ namespace EksamensSpil
             {
 
                 PickUpWeapon(touchedWeapon);
-                
-				OpenChest(touchedChest);
-				
+
+                OpenChest(touchedChest);
+
             }
             if (Keyboard.HasBeenPressed(Keys.Tab))
             {
@@ -180,6 +180,8 @@ namespace EksamensSpil
 
         public override void Update(GameTime gameTime)
         {
+            //Cache position in case of collisions
+            positionPreMove = position;
             Move(gameTime);
             HandleInput();
             ItemDetectionRange();
@@ -199,52 +201,22 @@ namespace EksamensSpil
 
         public override void OnCollision(GameObject otherObject)
         {
+            //Get wall collisions from superclass
+            base.OnCollision(otherObject);
 
-			Weapon weapon = otherObject as Weapon;
-			Chest chest = otherObject as Chest;
-			
-
-            
+            //Extra collisions:
+            Weapon weapon = otherObject as Weapon;
+            Chest chest = otherObject as Chest;
             if (weapon != null)
             {
                 //Is touching a weapon. Ready to pick it up in handle input
                 touchedWeapon = weapon;
             }
-
-            Wall wall = otherObject as Wall;
-
-            if (wall != null && !wall.IsHidden)
+            if (chest != null && weapon == null)
             {
-                //touchedWall = wall;
-                Rectangle otherBox = wall.GetCollisionBox();
-                Rectangle thisBox = GetCollisionBox();
-                if (thisBox.Bottom >= otherBox.Top && thisBox.Top < otherBox.Top)
-                {
-                    if (velocity.Y > 0)
-                    {
-                        velocity.Y = 0;
-                    }
-                }
-                if (thisBox.Left <= otherBox.Right && thisBox.Right > otherBox.Right)
-                {
-                    if (velocity.X < 0)
-                    {
-                        velocity.X = 0;
-                    }
-                }
-                //collideBottom = thisBox.Bottom >= otherBox.Top && thisBox.Top < otherBox.Top;
-                //collideTop = thisBox.Top <= otherBox.Bottom && thisBox.Bottom > otherBox.Bottom;
-                //collideLeft = thisBox.Left <= otherBox.Right && thisBox.Right > otherBox.Right;
-                //collideRight = thisBox.Right >= otherBox.Left && thisBox.Left < otherBox.Left;
-
+                //Is touching a chest. Ready to pick it up in handle input
+                touchedChest = chest;
             }
-
-			if(chest != null && weapon == null)
-			{
-				isTouchingChest = true;
-				touchedChest = chest;
-			}
-
         }
 
         public override void CheckCollision(GameObject otherObject)
@@ -261,16 +233,10 @@ namespace EksamensSpil
                 touchedWeapon = null;
             }
 
-			else if(touchedChest != null && touchedChest == otherObject)
-			{
-				touchedChest = null;
-			}
-            //else if (touchedWall != null && touchedWall == otherObject)
-            //{
-            //    //Is no longer touching the weapon
-            //    touchedWall = null;
-            //}
-
+            else if (touchedChest != null && touchedChest == otherObject)
+            {
+                touchedChest = null;
+            }
         }
 
         public bool ItemDetectionRange()
@@ -303,7 +269,6 @@ namespace EksamensSpil
         {
             if (weapons.Count > 0 && selectedWeapon != null)
             {
-                selectedWeapon.Reload();
                 int selectedWeaponIndex = weapons.IndexOf(selectedWeapon);
                 if (selectedWeaponIndex + 1 == weapons.Count)
                 {

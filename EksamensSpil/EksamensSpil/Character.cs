@@ -13,9 +13,11 @@ namespace EksamensSpil
         protected float movementSpeed = 500;
         protected int health = 1;
         protected Vector2 velocity;
+        //Used for collisions on walls
+        protected Vector2 positionPreMove;
 
 
-		public Character()
+        public Character()
 		{
 
 		}
@@ -47,8 +49,12 @@ namespace EksamensSpil
         // This can be used for Player and Enemy
         public override void OnCollision(GameObject otherObject)
         {
-            //throw new NotImplementedException();
+            Wall wall = otherObject as Wall;
+            if (wall != null && !wall.IsHidden)
+            {
+                //Touched wall. Move to previous position before collision
+                position = positionPreMove;
+            }
         }
-
     }
 }

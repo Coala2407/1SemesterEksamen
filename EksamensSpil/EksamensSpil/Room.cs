@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -27,11 +28,6 @@ namespace EksamensSpil
         }
 
         /// <summary>
-        /// Default constructor
-        /// </summary>
-        //public Room(){}
-
-        /// <summary>
         /// Constructor. Most used. 
         /// </summary>
         /// <param name="gameObjects">Objects inside the room</param>
@@ -43,6 +39,7 @@ namespace EksamensSpil
             this.isSpawnable = isSpawnable;
             this.isBossRoom = isBossRoom;
             this.name = name;
+            initialize();
         }
 
         /// <summary>
@@ -55,6 +52,7 @@ namespace EksamensSpil
             this.isSpawnable = isSpawnable;
             this.isBossRoom = isBossRoom;
             this.name = name;
+            initialize();
         }
 
         /// <summary>
@@ -64,6 +62,31 @@ namespace EksamensSpil
         public Room(bool isExit)
         {
             this.isExit = isExit;
+        }
+
+        //Fix this shit
+        private void initialize()
+        {
+            //Left wall
+            for (int i = 0; i < Math.Ceiling((double)GameWorld.displayHeight / 64); i++)
+            {
+                Add(new Wall(new Vector2(0, i * 64), false, Wall.WallMode.Fixed));
+            }
+            //Right wall
+            for (int i = 0; i < Math.Ceiling((double)GameWorld.displayHeight / 64); i++)
+            {
+                Add(new Wall(new Vector2(GameWorld.displayWidth - 56, i * 64), false, Wall.WallMode.Fixed));
+            }
+            //Top
+            for (int i = 1; i < Math.Ceiling((double)GameWorld.displayWidth / 64); i++)
+            {
+                Add(new Wall(new Vector2(i * 64, 0), false, Wall.WallMode.Fixed));
+            }
+            //Bottom
+            for (int i = 1; i < Math.Ceiling((double)GameWorld.displayWidth / 64); i++)
+            {
+                Add(new Wall(new Vector2(i * 64, GameWorld.displayHeight - 56), false, Wall.WallMode.Fixed));
+            }
         }
 
         /// <summary>
