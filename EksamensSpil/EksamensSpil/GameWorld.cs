@@ -203,7 +203,7 @@ namespace EksamensSpil
                     ActiveRoom.Remove(go);
                 }
             }
-
+            RemoveGameObjects.Clear();
 
             // TODO: Add your update logic here
             base.Update(gameTime);

@@ -19,17 +19,16 @@ namespace EksamensSpil
 		public Sword(GameObject holder)
 		{
 			this.holder = holder;
-			this.position = holder.Position;
-			Initialize();
+			initialize();
 		}
 
 		public Sword(Vector2 position)
 		{
 			this.position = position;
-			Initialize();
+			initialize();
 		}
 
-		private void Initialize()
+		private void initialize()
 		{
 			this.ammo = 1;
 			this.attackSpeed = (float)GameWorld.rng.Next(80, 151) / 100;
@@ -37,6 +36,10 @@ namespace EksamensSpil
 			this.SwingTime = (float)GameWorld.rng.Next(15, 51) / 100;
 			this.Range = (float)GameWorld.rng.Next(80, 151);
 			drawLayer = 0.2f;
+            if (holder != null)
+            {
+                position = holder.Position;
+            }
 			ChangeSprite(Assets.SwordSprite);
 		}
 
