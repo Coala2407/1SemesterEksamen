@@ -96,11 +96,16 @@ namespace EksamensSpil
 			if(weapon != null)
 			{
 				GameWorld.AddGameObject(weapon, GameWorld.ActiveRoom);
+				weapon.PositionX = this.PositionX;
+				weapon.PositionY = this.PositionY - this.sprite.Height;
 			}
-			SelectedWeapon = null;
 			weapon.Holder = null;
+			CycleWeapons();
 
-			GameWorld.RemoveGameObject(weapon);
+			if(weapons.Contains(weapon))
+			{
+				weapons.Remove(weapon);
+			}
 		}
 
 		/// <summary>
@@ -159,7 +164,6 @@ namespace EksamensSpil
             }
 			if(Keyboard.HasBeenPressed(Keys.Back))
 			{
-				Console.WriteLine("BACKSPACE");
 				DropWeapon(selectedWeapon);
 			}
             if (velocity != Vector2.Zero)
