@@ -99,6 +99,7 @@ namespace EksamensSpil
                 SelectedWeapon = null;
                 weapon.Holder = null;
                 GameWorld.AddGameObject(weapon, GameWorld.ActiveRoom);
+                CycleWeapons();
             }
         }
 
@@ -142,11 +143,8 @@ namespace EksamensSpil
             }
             if (Keyboard.HasBeenPressed(Keys.E))
             {
-
                 PickUpWeapon(touchedWeapon);
-
                 OpenChest(touchedChest);
-
             }
             if (Keyboard.HasBeenPressed(Keys.Tab))
             {
@@ -252,6 +250,7 @@ namespace EksamensSpil
 
             else if (touchedChest != null && touchedChest == otherObject)
             {
+                //Is no longer touching the chest
                 touchedChest = null;
             }
         }
@@ -295,6 +294,10 @@ namespace EksamensSpil
                 {
                     selectedWeapon = weapons[selectedWeaponIndex + 1];
                 }
+            }
+            else if (weapons.Count > 0)
+            {
+                selectedWeapon = weapons[0];
             }
         }
     }

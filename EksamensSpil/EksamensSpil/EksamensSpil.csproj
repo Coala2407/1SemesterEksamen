@@ -50,6 +50,7 @@
     <Compile Include="Helper.cs" />
     <Compile Include="Keyboard.cs" />
     <Compile Include="SwordSwing.cs" />
+    <Compile Include="UI.cs" />
     <Compile Include="Weapon.cs" />
     <Compile Include="GameWorld.cs" />
     <Compile Include="Enemy.cs" />

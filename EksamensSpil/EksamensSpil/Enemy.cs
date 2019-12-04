@@ -17,17 +17,14 @@ namespace EksamensSpil
         private float movementSpeed = 0.2f;
         Vector2 direction;
         const float stopThreshold = 300f;
-        
+
 
         /// <summary>
         /// Default Constructor
         /// </summary>
         public Enemy(Vector2 position)
         {
-            this.position = position;
-            sprite = Assets.EnemySprite;
-            ChangeSprite(Assets.EnemySprite);
-            rotation = Helper.CalculateAngleBetweenPositions(position, GameWorld.Player.Position);
+            this.position = position;         
             initialize();
         }
 
@@ -35,15 +32,6 @@ namespace EksamensSpil
         {
             this.position = position;
             this.isBoss = isBoss;
-            if (isBoss)
-            {
-                sprite = Assets.BossSprite;
-            }
-            else
-            {
-                sprite = Assets.EnemySprite;
-
-            }
             initialize();
         }
 
@@ -53,7 +41,14 @@ namespace EksamensSpil
             if (isBoss)
             {
                 health = 10;
+                ChangeSprite(Assets.BossSprite);
             }
+            else
+            {
+                health = 2;
+                ChangeSprite(Assets.EnemySprite);
+            }
+            //rotation = Helper.CalculateAngleBetweenPositions(position, GameWorld.Player.Position);
         }
 
         public int Health
@@ -102,9 +97,9 @@ namespace EksamensSpil
 
             //Stops the enemy from moving once it reaches a certain threshold from the player
 
-            
+
             float distance = Vector2.Distance(GameWorld.Player.Position, position);
-            if(distance <= stopThreshold)
+            if (distance <= stopThreshold)
             {
                 movementSpeed = 0f;
             }
@@ -113,9 +108,11 @@ namespace EksamensSpil
                 movementSpeed = 0.2f;
             }
 
+            spriteFlippedY = GameWorld.Player.PositionX < position.X;
         }
 
-        public void Update(Player player) { 
+        public void Update(Player player)
+        {
         }
 
         public override int UpdateHealth(int damage)
@@ -136,6 +133,17 @@ namespace EksamensSpil
             }
 
             return Health;
+        }
+
+        public override void OnCollision(GameObject otherObject)
+        {
+            base.OnCollision(otherObject);  
+
+            //Enemy enemy = otherObject as Enemy;
+            //if (enemy != null && enemy != this)
+            //{
+            //    position = positionPreMove;
+            //}
         }
     }
 }
