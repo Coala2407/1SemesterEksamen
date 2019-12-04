@@ -154,11 +154,10 @@ namespace EksamensSpil
             {
                 Attack();
             }
-            if (Keyboard.HasBeenPressed(Keys.Back))
-            {
-                Console.WriteLine("BACKSPACE");
-                DropWeapon(selectedWeapon);
-            }
+			if(Keyboard.HasBeenPressed(Keys.Back))
+			{
+				DropWeapon(selectedWeapon);
+			}
             if (velocity != Vector2.Zero)
             {
                 velocity.Normalize();
