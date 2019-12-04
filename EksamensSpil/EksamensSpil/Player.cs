@@ -44,6 +44,7 @@ namespace EksamensSpil
             // Sets default Player sprite
             ChangeSprite(Assets.PlayerSprite);
             drawLayer = 0.1f;
+            health = 3;
             //Just a pistol for now. Will be random later.
             //selectedWeapon = new Pistol(this);
         }
@@ -293,6 +294,7 @@ namespace EksamensSpil
                 {
                     selectedWeapon = weapons[selectedWeaponIndex + 1];
                 }
+                selectedWeapon.Position = position;
             }
             else if (weapons.Count > 0)
             {

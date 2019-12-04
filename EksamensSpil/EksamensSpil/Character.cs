@@ -16,16 +16,18 @@ namespace EksamensSpil
         //Used for collisions on walls
         protected Vector2 positionPreMove;
 
-
-        public Character()
-		{
-
-		}
-
-		public Character(Vector2 position) : base(position)
-		{
-
-		}
+        public int Health
+        {
+            get { return health; }
+            set
+            {
+                health = value;
+                if (health < 0)
+                {
+                    health = 0;
+                }
+            }
+        }
 
         public abstract void Die();
 

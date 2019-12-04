@@ -246,6 +246,7 @@ namespace EksamensSpil
 
             //Draw UI elements
             UI.AmmoAndClip(spriteBatch);
+            UI.Health(spriteBatch);
 
             base.Draw(gameTime);
             spriteBatch.End();
