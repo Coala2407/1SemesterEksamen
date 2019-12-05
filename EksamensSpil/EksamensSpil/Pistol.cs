@@ -31,9 +31,9 @@ namespace EksamensSpil
 
         private void initialize()
         {
-            int randomAmmo = GameWorld.rng.Next(1, 11);
+            int randomAmmo = GameWorld.rng.Next(4, 8);
             this.ammo = randomAmmo;
-            this.attackSpeed = (float)GameWorld.rng.Next(30, 81) / 100;
+            this.attackSpeed = (float)GameWorld.rng.Next(50, 81) / 100;
             this.clipSize = randomAmmo;
             this.reloadSpeed = (float)GameWorld.rng.Next(30, 81) / 100;
             this.projectileSpeed = GameWorld.rng.Next(250, 801);

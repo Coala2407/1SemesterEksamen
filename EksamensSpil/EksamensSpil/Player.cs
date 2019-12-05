@@ -178,11 +178,6 @@ namespace EksamensSpil
             }
         }
 
-        public override int UpdateHealth(int change)
-        {
-            throw new NotImplementedException();
-        }
-
         public override void Reload()
         {
             throw new NotImplementedException();
@@ -195,8 +190,8 @@ namespace EksamensSpil
 
         public override void Update(GameTime gameTime)
         {
-            //Cache position in case of collisions
-            positionPreMove = position;
+            //Get from superclass
+            base.Update(gameTime);
             Move(gameTime);
             HandleInput();
             ItemDetectionRange();

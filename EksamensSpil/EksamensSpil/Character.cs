@@ -15,6 +15,9 @@ namespace EksamensSpil
         protected Vector2 velocity;
         //Used for collisions on walls
         protected Vector2 positionPreMove;
+        //Invinsibility frames
+        protected float invisibilityTimer;
+        protected const float invisibilityTimeAfterDamage = 1f;
 
         public int Health
         {
@@ -35,7 +38,36 @@ namespace EksamensSpil
         public abstract void Attack();
 
         //TODO get & set metode?
-        public abstract int UpdateHealth(int change);
+        public virtual int UpdateHealth(int damage)
+        {
+            if (invisibilityTimer > invisibilityTimeAfterDamage)
+            {
+                if (damage > 0)
+                {
+                    Health -= damage;
+                }
+                else
+                {
+                    Health += damage;
+                }
+
+                //Reset timer, so they cant take damage again
+                invisibilityTimer = 0;
+
+                //HP 0, die
+                if (Health == 0)
+                {
+                    Die();
+                }
+            }
+            return Health;
+        }
+
+        public override void Update(GameTime gameTime)
+        {
+            positionPreMove = position;
+            invisibilityTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
+        }
 
         public virtual void Move(GameTime gameTime)
         {

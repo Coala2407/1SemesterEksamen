@@ -14,6 +14,7 @@ namespace EksamensSpil
 
         private float movementSpeed;
         private Vector2 movement;
+        private GameObject shooter;
 
         public Projectile(Pistol pistol, float movementSpeed)
         {
@@ -24,6 +25,7 @@ namespace EksamensSpil
             ChangeSprite(Assets.BulletSprite);
             rotation = Helper.CalculateAngleBetweenPositions(position, Crosshair.currentPosition);
             drawLayer = 0.8f;
+            shooter = pistol.Holder;
         }
 
         public override void LoadContent(ContentManager content)

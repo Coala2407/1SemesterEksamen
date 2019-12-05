@@ -75,7 +75,8 @@ namespace EksamensSpil
 
         public override void Update(GameTime gameTime)
         {
-            positionPreMove = position;
+            //Get from superclass
+            base.Update(gameTime);
             velocity = GameWorld.Player.Position - position;
             float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
@@ -101,25 +102,6 @@ namespace EksamensSpil
         {
         }
 
-        public override int UpdateHealth(int damage)
-        {
-            if (damage > 0)
-            {
-                Health -= damage;
-            }
-            else
-            {
-                Health += damage;
-            }
-
-            //HP 0, die
-            if (Health == 0)
-            {
-                Die();
-            }
-
-            return Health;
-        }
 
         public override void OnCollision(GameObject otherObject)
         {
