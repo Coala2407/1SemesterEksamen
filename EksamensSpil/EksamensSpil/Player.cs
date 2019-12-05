@@ -14,7 +14,6 @@ namespace EksamensSpil
 
         private List<Weapon> weapons = new List<Weapon>();
         private List<Item> items = new List<Item>();
-        private Weapon selectedWeapon;
         private Item selectedItem;
         private Room previousRoom;
         private bool hasJustClicked;
@@ -45,15 +44,9 @@ namespace EksamensSpil
             ChangeSprite(Assets.PlayerSprite);
             drawLayer = 0.1f;
             health = 3;
-            //Just a pistol for now. Will be random later.
-            //selectedWeapon = new Pistol(this);
-        }
 
-
-        public Weapon SelectedWeapon
-        {
-            get { return selectedWeapon; }
-            set { selectedWeapon = value; }
+            //Invinsibility for testing
+            invisibilityTimeAfterDamage = 99999999f;
         }
 
         /// <summary>
@@ -168,14 +161,14 @@ namespace EksamensSpil
 
         public override void Die()
         {
-            throw new NotImplementedException();
+            GameWorld.RemoveGameObject(this);
         }
 
         public override void Attack()
         {
             if (this.selectedWeapon != null)
             {
-                selectedWeapon.Attack();
+                selectedWeapon.Attack(GameWorld.Crosshair.Position);
             }
         }
 

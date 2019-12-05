@@ -45,17 +45,17 @@ namespace EksamensSpil
             ChangeSprite(Assets.PistolSprite);
         }
 
-        public override ShootResult Attack()
+        public override ShootResult Attack(Vector2 targetCords)
         {
 
-            ShootResult shootResult = base.Attack();
+            ShootResult shootResult = base.Attack(targetCords);
 
             if (shootResult == ShootResult.Successfull)
             {
                 ammo--;
                 cooldown = attackSpeed;
                 Console.WriteLine($"Shoot pistol: {ammo}");
-                GameWorld.AddGameObject(new Projectile(this, projectileSpeed), GameWorld.ActiveRoom);
+                GameWorld.AddGameObject(new Projectile(this, projectileSpeed, targetCords), GameWorld.ActiveRoom);
                 return shootResult;
             }
             return shootResult;

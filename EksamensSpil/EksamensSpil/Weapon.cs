@@ -30,7 +30,7 @@ namespace EksamensSpil
             set { holder = value; }
         }
 
-        public virtual ShootResult Attack()
+        public virtual ShootResult Attack(Vector2 targetCords)
         {
 
             if (ammo != 0 && cooldown <= 0)

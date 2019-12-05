@@ -43,10 +43,10 @@ namespace EksamensSpil
 			ChangeSprite(Assets.SwordSprite);
 		}
 
-		public override ShootResult Attack()
+		public override ShootResult Attack(Vector2 targetCords)
 		{
 
-			ShootResult shootResult = base.Attack();
+			ShootResult shootResult = base.Attack(targetCords);
 
 			if(shootResult == ShootResult.Successfull)
 			{
