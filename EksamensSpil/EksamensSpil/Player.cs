@@ -79,7 +79,7 @@ namespace EksamensSpil
         /// <param name="weapon"></param>
         public void PickUpWeapon(Weapon weapon)
         {
-            if (weapon != null)
+            if (weapon != null && weapon.Holder == null)
             {
                 if (!weapons.Contains(weapon) && weapons.Count < 3)
                 {
@@ -87,6 +87,7 @@ namespace EksamensSpil
                     SelectedWeapon = weapon;
                     weapon.Holder = this;
                     GameWorld.RemoveGameObject(weapon);
+
                 }
             }
         }
