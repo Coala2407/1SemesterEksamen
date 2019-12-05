@@ -79,8 +79,6 @@ namespace EksamensSpil
                     weapons.Add(weapon);
                     SelectedWeapon = weapon;
                     weapon.Holder = this;
-                    GameWorld.RemoveGameObject(weapon);
-
                 }
             }
         }
@@ -93,7 +91,6 @@ namespace EksamensSpil
                 weapons.Remove(weapon);
                 SelectedWeapon = null;
                 weapon.Holder = null;
-                GameWorld.AddGameObject(weapon, GameWorld.ActiveRoom);
                 CycleWeapons();
             }
         }

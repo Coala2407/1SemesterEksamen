@@ -13,8 +13,8 @@ namespace EksamensSpil
     {
         GraphicsDeviceManager graphics;
 
-        public static int displayWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
-        public static int displayHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
+        public static int displayWidth = 1920;
+        public static int displayHeight = 1080;
 
         SpriteBatch spriteBatch;
         //To get random numbers

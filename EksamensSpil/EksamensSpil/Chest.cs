@@ -119,7 +119,7 @@ namespace EksamensSpil
 
 			if(isOpen == true && item != null && didLootDrop == false)
 			{
-				GameWorld.AddGameObject(item, GameWorld.ActiveRoom);
+                GameWorld.AddGameObject(item, GameWorld.ActiveRoom);
 				didLootDrop = true;
 			}
 		}
@@ -132,12 +132,12 @@ namespace EksamensSpil
 
 				if (lootItem <= 50)
 				{
-					item = new Pistol(this);
+					item = new Pistol(position);
 					item.PositionY -= sprite.Height;
 				}
 				else if (lootItem > 50)
 				{
-					item = new Sword(this);
+					item = new Sword(position);
 					item.PositionY -= sprite.Height;
 				}
 

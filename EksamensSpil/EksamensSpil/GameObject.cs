@@ -17,7 +17,7 @@ namespace EksamensSpil
 
         protected float rotation;
 
-        protected float size = 1;
+        private float size = 1;
 
         //TODO: Placed name here to avoid repeating the same variable. 
         protected string name;
@@ -83,6 +83,8 @@ namespace EksamensSpil
         {
             get { return sprite; }
         }
+
+        public float Size { get => size; set => size = value; }
 
 
         //Not really needed anymore.
@@ -157,5 +159,5 @@ namespace EksamensSpil
 				);
 			}
 		}
-	}
+    }
 }
