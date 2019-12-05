@@ -130,12 +130,13 @@ namespace EksamensSpil
             throw new NotImplementedException();
         }
 
-        public void ReloadCooldown(GameTime gameTime)
+        public void ReloadCooldown(GameTime gameTime, GameObject otherObject)
         {
-            KeyboardState keyboard = Keyboard.GetState();
 
+			Character character = otherObject as Character;
+			Enemy enemy = otherObject as Enemy;
 
-            if (keyboard.IsKeyDown(Keys.F))
+            if (character.takeDamage == true && holder != enemy)
             {
                 canGunReload = false;
                 Console.WriteLine("Reload Canceled");
@@ -144,7 +145,6 @@ namespace EksamensSpil
             if (canGunReload == true && ammo < clipSize && cooldown <= 0)
             {
                 Reload();
-                Console.WriteLine($"reloading in {cooldown}");
             }
 
             cooldown -= (float)gameTime.ElapsedGameTime.TotalSeconds;

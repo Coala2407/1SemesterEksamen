@@ -43,10 +43,10 @@ namespace EksamensSpil
             // Sets default Player sprite
             ChangeSprite(Assets.PlayerSprite);
             drawLayer = 0.1f;
-            health = 3;
+            health = 999;
 
             //Invinsibility for testing
-            invinsibilityTimeAfterDamage = 99999999f;
+            invinsibilityTimeAfterDamage = 1f;
         }
 
         /// <summary>
@@ -192,7 +192,7 @@ namespace EksamensSpil
 
             if (selectedWeapon != null)
             {
-                selectedWeapon.ReloadCooldown(gameTime);
+                selectedWeapon.ReloadCooldown(gameTime, this);
                 selectedWeapon.PositionY = position.Y + 20;
                 selectedWeapon.PositionX = position.X;
                 // rotation (Look at mouse)
