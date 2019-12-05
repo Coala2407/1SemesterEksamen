@@ -46,7 +46,7 @@ namespace EksamensSpil
             health = 3;
 
             //Invinsibility for testing
-            invisibilityTimeAfterDamage = 99999999f;
+            invinsibilityTimeAfterDamage = 99999999f;
         }
 
         /// <summary>

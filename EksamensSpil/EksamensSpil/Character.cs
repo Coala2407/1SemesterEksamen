@@ -17,8 +17,8 @@ namespace EksamensSpil
         //Used for collisions on walls
         protected Vector2 positionPreMove;
         //Invinsibility frames
-        protected float invisibilityTimer;
-        protected float invisibilityTimeAfterDamage = 1f;
+        protected float invinsibilityTimeAfterDamage = 1f;
+        protected float invinsibilityTimer;
 
         public int Health
         {
@@ -47,7 +47,7 @@ namespace EksamensSpil
         //TODO get & set metode?
         public virtual int UpdateHealth(int damage)
         {
-            if (invisibilityTimer > invisibilityTimeAfterDamage)
+            if (invinsibilityTimer > invinsibilityTimeAfterDamage)
             {
                 if (damage > 0)
                 {
@@ -59,7 +59,7 @@ namespace EksamensSpil
                 }
 
                 //Reset timer, so they cant take damage again
-                invisibilityTimer = 0;
+                invinsibilityTimer = 0;
 
                 //HP 0, die
                 if (Health == 0)
@@ -73,7 +73,7 @@ namespace EksamensSpil
         public override void Update(GameTime gameTime)
         {
             positionPreMove = position;
-            invisibilityTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
+            invinsibilityTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
         }
 
         public virtual void Move(GameTime gameTime)

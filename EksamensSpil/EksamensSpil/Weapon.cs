@@ -30,6 +30,18 @@ namespace EksamensSpil
             set { holder = value; }
         }
 
+        public float ReloadSpeed
+        {
+            get { return reloadSpeed; }
+            set { reloadSpeed = value; }
+        }
+
+        public float AttackSpeed
+        {
+            get { return attackSpeed; }
+            set { attackSpeed = value; }
+        }
+
         public virtual ShootResult Attack(Vector2 targetCords)
         {
 

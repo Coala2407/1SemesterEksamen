@@ -132,8 +132,9 @@ namespace EksamensSpil
             TheHall.Add(Player);
             TheHall.Add(new Enemy(new Vector2(600, 200)));
             TheHall.Add(new Enemy(new Vector2(1200, 400)));
-            TheHall.Add(new Enemy(new Vector2(1600, 600)));
+            TheHall.Add(new Enemy(new Vector2(1600, 900)));
             TheHall.Add(new Enemy(new Vector2(900, 500)));
+            TheHall.Add(new Enemy(new Vector2(1600, 500), true));
             TheHall.Add(new Wall(new Vector2(200, 600)));
             TheHall.Add(new Wall(new Vector2(280, 600), false, Wall.WallMode.Toggled));
             TheHall.Add(new Pistol(new Vector2(1000, 1000)));
