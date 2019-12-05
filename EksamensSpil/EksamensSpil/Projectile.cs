@@ -14,18 +14,51 @@ namespace EksamensSpil
 
         private float movementSpeed;
         private Vector2 movement;
+        Weapon weapon;
+        Enemy enemy;
+        private GameObject shooter;
 
         public Projectile(Pistol pistol, float movementSpeed)
         {
-            this.position = pistol.Position;
-            this.movementSpeed = movementSpeed;
-            movement = Crosshair.currentPosition - position;
-            Console.WriteLine($"Spawn {position}");
-            ChangeSprite(Assets.BulletSprite);
-            rotation = Helper.CalculateAngleBetweenPositions(position, Crosshair.currentPosition);
-            drawLayer = 0.8f;
+            shooter = pistol.Holder;
+
+            foreach (GameObject gameObject in GameWorld.ActiveRoom.GameObjects)
+            {
+                if (GameWorld.Player.SelectedWeapon != null)
+                {
+                    if (GameWorld.Player.SelectedWeapon.Holder != null)
+                    {
+                        this.position = pistol.Position;
+                        this.movementSpeed = movementSpeed;
+                        movement = Crosshair.currentPosition - GameWorld.Player.Position;
+                        Console.WriteLine($"Spawn {position}");
+                        ChangeSprite(Assets.BulletSprite);
+                        rotation = Helper.CalculateAngleBetweenPositions(position, Crosshair.currentPosition);
+                        drawLayer = 0.8f;
+                    }
+                }
+
+                Enemy enemy = gameObject as Enemy;
+                if (enemy != null)
+                {
+
+                    if (enemy.SelectedEnemyWeapon.Holder != null)
+                    {
+                        this.position = pistol.Position;
+                        this.movementSpeed = movementSpeed;
+                        movement = GameWorld.Player.Position - pistol.Position;
+                        Console.WriteLine($"Spawn {position}");
+                        ChangeSprite(Assets.BulletSprite);
+                        rotation = Helper.CalculateAngleBetweenPositions(position, GameWorld.Player.Position);
+                        drawLayer = 0.82f;
+                    }
+                }
+            }
+
+
         }
 
+        
         public override void LoadContent(ContentManager content)
         {
             throw new NotImplementedException();
@@ -35,6 +68,11 @@ namespace EksamensSpil
         {
             Wall wall = otherObject as Wall;
             Enemy enemy = otherObject as Enemy;
+            Enemy shooterEnemy = otherObject as Enemy;
+            if(shooterEnemy != null && shooterEnemy == this.shooter)
+            {
+                return;
+            }
             //Projectile hit wall
             if (wall != null)
             {
@@ -45,12 +83,27 @@ namespace EksamensSpil
                 }
             }
             //Projectile hit enemy
-            if (enemy != null)
+            /*if(GameWorld.Player.SelectedWeapon != null)
             {
+
+              if (enemy != null && GameWorld.Player.SelectedWeapon.Holder == GameWorld.Player)
+              {
                 GameWorld.RemoveGameObject(this);
                 //Damage enemy
                 enemy.UpdateHealth(1);
-            }
+              }
+
+              if(enemy != null)
+              {
+                    if (GameWorld.Player != null && enemy.SelectedEnemyWeapon.Holder == enemy)
+                    {
+                        GameWorld.RemoveGameObject(this);
+                        //Damage player
+                        //GameWorld.Player.UpdateHealth(1);
+                    }
+              }
+            
+            }*/
 
         }
 

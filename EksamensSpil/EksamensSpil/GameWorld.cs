@@ -50,7 +50,7 @@ namespace EksamensSpil
         public static Crosshair Crosshair;
 
         //Enemy
-        Enemy enemy;
+        public static Enemy Enemy;
 
         //Debug hitboxes
 #if DEBUG

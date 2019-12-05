@@ -69,11 +69,12 @@ namespace EksamensSpil
         /// <param name="weapon"></param>
         public void PickUpWeapon(Weapon weapon)
         {
-            if (weapon != null)
+            if (weapon != null && weapon.Holder == null)
             {
                 if (!weapons.Contains(weapon))
                 {
                     weapons.Add(weapon);
+
                 }
                 SelectedWeapon = weapon;
                 weapon.Holder = this;

@@ -8,16 +8,16 @@ using Microsoft.Xna.Framework.Content;
 
 namespace EksamensSpil
 {
-    class Enemy : Character
+    public class Enemy : Character
     {
-
         private Weapon weapon;
         private int lootDropChance;
         private bool isBoss;
         private float movementSpeed = 0.2f;
         Vector2 direction;
         const float stopThreshold = 300f;
-        
+        public Weapon SelectedEnemyWeapon;
+
 
         /// <summary>
         /// Default Constructor
@@ -28,6 +28,7 @@ namespace EksamensSpil
             sprite = Assets.EnemySprite;
             ChangeSprite(Assets.EnemySprite);
             rotation = Helper.CalculateAngleBetweenPositions(position, GameWorld.Player.Position);
+            
             initialize();
         }
 
@@ -54,6 +55,10 @@ namespace EksamensSpil
             {
                 health = 10;
             }
+            SelectedEnemyWeapon = new Pistol(this);
+            SelectedEnemyWeapon.Holder = this;
+            GameWorld.AddGameObject(SelectedEnemyWeapon, GameWorld.ActiveRoom);
+
         }
 
         public int Health
@@ -70,11 +75,8 @@ namespace EksamensSpil
         }
 
 
-        //TODO Do we need this?
-        public override void Attack()
-        {
-
-        }
+       
+     
 
         public override void Die()
         {
@@ -91,6 +93,10 @@ namespace EksamensSpil
         {
 
         }
+        
+       
+
+      
 
         public override void Update(GameTime gameTime)
         {
@@ -113,6 +119,25 @@ namespace EksamensSpil
                 movementSpeed = 0.2f;
             }
 
+            if (SelectedEnemyWeapon != null)
+            {
+                SelectedEnemyWeapon.ReloadCooldown(gameTime);
+                SelectedEnemyWeapon.PositionY = position.Y + 20;
+                SelectedEnemyWeapon.PositionX = position.X;
+                // rotation (Look at player)
+                SelectedEnemyWeapon.LookAt(GameWorld.Player.Position);
+              
+            }
+
+            Attack();
+
+        }
+        public override void Attack()
+        {
+            if (movementSpeed == 0f)
+            {
+                SelectedEnemyWeapon.Attack();
+            }
         }
 
         public void Update(Player player) { 
