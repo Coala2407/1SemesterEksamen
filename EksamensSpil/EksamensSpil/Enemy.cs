@@ -10,13 +10,9 @@ namespace EksamensSpil
 {
     public class Enemy : Character
     {
-        private Weapon weapon;
         private int lootDropChance;
         private bool isBoss;
-        private float movementSpeed = 0.2f;
-        Vector2 direction;
         const float stopThreshold = 300f;
-        public Weapon SelectedEnemyWeapon;
 
 
 
@@ -27,9 +23,7 @@ namespace EksamensSpil
         {
             this.position = position;
             sprite = Assets.EnemySprite;
-            ChangeSprite(Assets.EnemySprite);
-            rotation = Helper.CalculateAngleBetweenPositions(position, GameWorld.Player.Position);
-          
+            ChangeSprite(Assets.EnemySprite);        
             initialize();
         }
 
@@ -48,11 +42,12 @@ namespace EksamensSpil
                 health = 100;
                 ChangeSprite(Assets.BossSprite);
             }
-
-            SelectedEnemyWeapon = new Pistol(this);
-            SelectedEnemyWeapon.Holder = this;
-            GameWorld.AddGameObject(SelectedEnemyWeapon, GameWorld.ActiveRoom);
-
+            else
+            {
+                health = 2;
+            }
+            selectedWeapon = new Pistol(this);
+            GameWorld.AddGameObject(selectedWeapon, GameWorld.ActiveRoom);
         }
 
     
@@ -91,8 +86,6 @@ namespace EksamensSpil
             position += velocity * movementSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
 
             //Stops the enemy from moving once it reaches a certain threshold from the player
-
-
             float distance = Vector2.Distance(GameWorld.Player.Position, position);
             if (distance <= stopThreshold)
             {
@@ -104,27 +97,29 @@ namespace EksamensSpil
             }
 
 
-            if (SelectedEnemyWeapon != null)
+            if (selectedWeapon != null)
             {
-                SelectedEnemyWeapon.ReloadCooldown(gameTime);
-                SelectedEnemyWeapon.PositionY = position.Y + 20;
-                SelectedEnemyWeapon.PositionX = position.X;
+                selectedWeapon.ReloadCooldown(gameTime);
+                selectedWeapon.PositionY = position.Y + 20;
+                selectedWeapon.PositionX = position.X;
                 // rotation (Look at player)
-                SelectedEnemyWeapon.LookAt(GameWorld.Player.Position);
-              
-            }
+                // rotation (Look at mouse)
+                selectedWeapon.LookAt(GameWorld.Player.Position);
+                //Flip the weapon depending on crosshair weapon
+                selectedWeapon.SpriteFlippedX = GameWorld.Player.PositionX < position.X;
 
+            }
             Attack();
+            spriteFlippedY = GameWorld.Player.PositionX < position.X;
 
         }
         public override void Attack()
         {
             if (movementSpeed == 0f)
             {
-                SelectedEnemyWeapon.Attack();
+                selectedWeapon.Attack(GameWorld.Player.Position);
             }
 
-            spriteFlippedY = GameWorld.Player.PositionX < position.X;
 
         }
 

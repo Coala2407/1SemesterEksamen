@@ -13,11 +13,12 @@ namespace EksamensSpil
         protected float movementSpeed = 500;
         protected int health = 1;
         protected Vector2 velocity;
+        protected Weapon selectedWeapon;
         //Used for collisions on walls
         protected Vector2 positionPreMove;
         //Invinsibility frames
         protected float invisibilityTimer;
-        protected const float invisibilityTimeAfterDamage = 1f;
+        protected float invisibilityTimeAfterDamage = 1f;
 
         public int Health
         {
@@ -30,6 +31,12 @@ namespace EksamensSpil
                     health = 0;
                 }
             }
+        }
+
+        public Weapon SelectedWeapon
+        {
+            get { return selectedWeapon; }
+            set { selectedWeapon = value; }
         }
 
         public abstract void Die();

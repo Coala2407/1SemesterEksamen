@@ -110,7 +110,7 @@ namespace EksamensSpil
             Assets.LoadAssets(Content);
             //Assets loaded. All sprites etc. are accessable from this point:
 
-            //Make Player and Crosshair
+            //Make Crosshair
             Crosshair = new Crosshair();
             Player = new Player(new Vector2(200, 400));
 
@@ -125,8 +125,11 @@ namespace EksamensSpil
             Level.Add(TheRoom);
             Level.Add(TheHall);
 
+            //Set active room
+            ActiveRoom = TheHall;
 
             //Add object to room
+            TheHall.Add(Player);
             TheHall.Add(new Enemy(new Vector2(600, 200)));
             TheHall.Add(new Enemy(new Vector2(1200, 400)));
             TheHall.Add(new Enemy(new Vector2(1600, 600)));
@@ -142,8 +145,6 @@ namespace EksamensSpil
             //Make walls random
             Level.RandomizeWalls();
 
-            //Set active room
-            ActiveRoom = TheHall;
 
             //Load Debug hitbox
 #if DEBUG
@@ -171,8 +172,7 @@ namespace EksamensSpil
                 Exit();
 
 
-            //Update Player and Crosshair
-            Player.Update(gameTime);
+            //Crosshair
             Crosshair.Update(gameTime);
 
             foreach (GameObject go in ActiveRoom.GameObjects)
@@ -224,10 +224,6 @@ namespace EksamensSpil
             spriteBatch.Begin(SpriteSortMode.FrontToBack);
 
             //Draw Player, Player selected weapon, and croshair
-            Player.Draw(spriteBatch);
-#if DEBUG
-            DrawCollisionBox(Player);
-#endif
             if (Player.SelectedWeapon != null)
             {
                 Player.SelectedWeapon.Draw(spriteBatch);
