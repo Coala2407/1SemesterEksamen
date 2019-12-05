@@ -78,7 +78,9 @@ namespace EksamensSpil
         {
             positionPreMove = position;
             invinsibilityTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
-			if(takeDamage == true && invinsibilityTimer >= invinsibilityTimeAfterDamage)
+
+			// Makes the player able to reload once the invinsibilityTimer runs out
+			if (takeDamage == true && invinsibilityTimer >= invinsibilityTimeAfterDamage)
 			{
 				takeDamage = false;
 			}

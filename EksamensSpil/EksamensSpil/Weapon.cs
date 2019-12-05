@@ -130,6 +130,11 @@ namespace EksamensSpil
             throw new NotImplementedException();
         }
 
+		/// <summary>
+		/// Adds a timer before the weapon reloads. The timer can be cancelled if gameObject(player) takes damage 
+		/// </summary>
+		/// <param name="gameTime"></param>
+		/// <param name="otherObject"></param>
         public void ReloadCooldown(GameTime gameTime, GameObject otherObject)
         {
 
