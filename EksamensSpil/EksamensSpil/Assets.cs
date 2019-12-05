@@ -22,6 +22,9 @@ namespace EksamensSpil
         public static Texture2D PistolSprite;
 		public static Texture2D SwordSprite;
 		public static Texture2D SwingEffectSprite;
+        //UI Elements
+		public static SpriteFont UIDefault;
+
 
         public static void LoadAssets(ContentManager content)
         {
@@ -44,8 +47,9 @@ namespace EksamensSpil
             {
                 WallSprites[i] = content.Load<Texture2D>($"wall{i}");
             }
-            //EnemySprite = content.Load<Texture2D>("example2");
-            //BossSprite = content.Load<Texture2D>("example3");
+
+            //UI Elements
+			UIDefault = content.Load<SpriteFont>("UIDefault");
         }
     }
 }

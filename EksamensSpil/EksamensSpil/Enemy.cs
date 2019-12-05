@@ -19,6 +19,7 @@ namespace EksamensSpil
         public Weapon SelectedEnemyWeapon;
 
 
+
         /// <summary>
         /// Default Constructor
         /// </summary>
@@ -28,7 +29,7 @@ namespace EksamensSpil
             sprite = Assets.EnemySprite;
             ChangeSprite(Assets.EnemySprite);
             rotation = Helper.CalculateAngleBetweenPositions(position, GameWorld.Player.Position);
-            
+          
             initialize();
         }
 
@@ -36,15 +37,6 @@ namespace EksamensSpil
         {
             this.position = position;
             this.isBoss = isBoss;
-            if (isBoss)
-            {
-                sprite = Assets.BossSprite;
-            }
-            else
-            {
-                sprite = Assets.EnemySprite;
-
-            }
             initialize();
         }
 
@@ -53,26 +45,17 @@ namespace EksamensSpil
             movementSpeed = 0.1f;
             if (isBoss)
             {
-                health = 10;
+                health = 100;
+                ChangeSprite(Assets.BossSprite);
             }
+
             SelectedEnemyWeapon = new Pistol(this);
             SelectedEnemyWeapon.Holder = this;
             GameWorld.AddGameObject(SelectedEnemyWeapon, GameWorld.ActiveRoom);
 
         }
 
-        public int Health
-        {
-            get { return health; }
-            set
-            {
-                health = value;
-                if (health < 0)
-                {
-                    health = 0;
-                }
-            }
-        }
+    
 
 
        
@@ -100,7 +83,7 @@ namespace EksamensSpil
 
         public override void Update(GameTime gameTime)
         {
-            //throw new NotImplementedException();
+            positionPreMove = position;
             velocity = GameWorld.Player.Position - position;
             float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
@@ -108,9 +91,9 @@ namespace EksamensSpil
 
             //Stops the enemy from moving once it reaches a certain threshold from the player
 
-            
+
             float distance = Vector2.Distance(GameWorld.Player.Position, position);
-            if(distance <= stopThreshold)
+            if (distance <= stopThreshold)
             {
                 movementSpeed = 0f;
             }
@@ -118,6 +101,7 @@ namespace EksamensSpil
             {
                 movementSpeed = 0.2f;
             }
+
 
             if (SelectedEnemyWeapon != null)
             {
@@ -138,9 +122,13 @@ namespace EksamensSpil
             {
                 SelectedEnemyWeapon.Attack();
             }
+
+            spriteFlippedY = GameWorld.Player.PositionX < position.X;
+
         }
 
-        public void Update(Player player) { 
+        public void Update(Player player)
+        {
         }
 
         public override int UpdateHealth(int damage)
@@ -161,6 +149,17 @@ namespace EksamensSpil
             }
 
             return Health;
+        }
+
+        public override void OnCollision(GameObject otherObject)
+        {
+            base.OnCollision(otherObject);
+
+            Enemy enemy = otherObject as Enemy;
+            if (enemy != null && enemy != this)
+            {
+                position = positionPreMove;
+            }
         }
     }
 }

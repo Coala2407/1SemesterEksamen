@@ -13,6 +13,8 @@ namespace EksamensSpil
     {
         GraphicsDeviceManager graphics;
 
+        public static int displayWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
+        public static int displayHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
 
         SpriteBatch spriteBatch;
         //To get random numbers
@@ -85,25 +87,14 @@ namespace EksamensSpil
         /// </summary>
         protected override void Initialize()
         {
-			// TODO: Add your initialization logic here
-			//Screen setup
-			graphics.PreferredBackBufferWidth = /*GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width*/ 1920;
-			graphics.PreferredBackBufferHeight = /*GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height*/ 1080;
-			graphics.ApplyChanges();
+            // TODO: Add your initialization logic here
+            //Screen setup
+            graphics.PreferredBackBufferWidth = displayWidth;
+            graphics.PreferredBackBufferHeight = displayHeight;
 			//graphics.ToggleFullScreen();
+			graphics.ApplyChanges();
 
-			//Make levels
-			Level = new Level();
-
-            //Make rooms
-            TheRoom = new Room(false, false, "The Room");
-            TheHall = new Room(false, false, "The Hall");
-
-            //Add rooms to level
-            Level.Add(TheRoom);
-            Level.Add(TheHall);
-
-            ActiveRoom = TheHall;
+			
             //Run, game, Run!
             base.Initialize();
         }
@@ -123,22 +114,36 @@ namespace EksamensSpil
             Crosshair = new Crosshair();
             Player = new Player(new Vector2(200, 400));
 
+            //Make levels
+            Level = new Level();
+
+            //Make rooms
+            TheRoom = new Room(false, false, "The Room");
+            TheHall = new Room(false, false, "The Hall");
+
+            //Add rooms to level
+            Level.Add(TheRoom);
+            Level.Add(TheHall);
+
+
             //Add object to room
             TheHall.Add(new Enemy(new Vector2(600, 200)));
-            TheHall.Add(new Enemy(new Vector2(900, 500), true));
-            for (int i = 0; i < 10; i++)
-            {
-                TheHall.Add(new Wall(new Vector2(0, i * 64), false, Wall.WallMode.Randomized));
-            }
+            TheHall.Add(new Enemy(new Vector2(1200, 400)));
+            TheHall.Add(new Enemy(new Vector2(1600, 600)));
+            TheHall.Add(new Enemy(new Vector2(900, 500)));
             TheHall.Add(new Wall(new Vector2(200, 600)));
-            TheHall.Add(new Wall(new Vector2(280, 600), true, Wall.WallMode.Toggled));
+            TheHall.Add(new Wall(new Vector2(280, 600), false, Wall.WallMode.Toggled));
             TheHall.Add(new Pistol(new Vector2(1000, 1000)));
             TheHall.Add(new Pistol(new Vector2(600, 100)));
 			TheHall.Add(new Chest(new Vector2(400, 400)));
 			TheHall.Add(new Sword(new Vector2(500, 500)));
+			TheHall.Add(new Sword(new Vector2(600, 600)));
+
             //Make walls random
             Level.RandomizeWalls();
 
+            //Set active room
+            ActiveRoom = TheHall;
 
             //Load Debug hitbox
 #if DEBUG
@@ -200,7 +205,7 @@ namespace EksamensSpil
                     ActiveRoom.Remove(go);
                 }
             }
-
+            RemoveGameObjects.Clear();
 
             // TODO: Add your update logic here
             base.Update(gameTime);
@@ -239,11 +244,15 @@ namespace EksamensSpil
 #endif
             }
 
+            //Draw UI elements
+            UI.AmmoAndClip(spriteBatch);
+            UI.Health(spriteBatch);
+
             base.Draw(gameTime);
             spriteBatch.End();
         }
 
-        // Borrowed from another projekt
+        // Borrowed from another project
         public static Vector2 GetMousePosition()
         {
             return Mouse.GetState().Position.ToVector2();
