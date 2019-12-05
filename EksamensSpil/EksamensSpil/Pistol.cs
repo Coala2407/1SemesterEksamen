@@ -45,6 +45,12 @@ namespace EksamensSpil
             ChangeSprite(Assets.PistolSprite);
         }
 
+        public float ProjectileSpeed
+        {
+            get { return projectileSpeed; }
+            set { projectileSpeed = value; }
+        }
+
         public override ShootResult Attack(Vector2 targetCords)
         {
 

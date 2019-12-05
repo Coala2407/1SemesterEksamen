@@ -43,10 +43,10 @@ namespace EksamensSpil
             // Sets default Player sprite
             ChangeSprite(Assets.PlayerSprite);
             drawLayer = 0.1f;
-            health = 3;
+            health = 10;
 
             //Invinsibility for testing
-            invinsibilityTimeAfterDamage = 99999999f;
+            //invinsibilityTimeAfterDamage = 99999999f;
         }
 
         /// <summary>
@@ -79,8 +79,6 @@ namespace EksamensSpil
                     weapons.Add(weapon);
                     SelectedWeapon = weapon;
                     weapon.Holder = this;
-                    GameWorld.RemoveGameObject(weapon);
-
                 }
             }
         }
@@ -93,7 +91,6 @@ namespace EksamensSpil
                 weapons.Remove(weapon);
                 SelectedWeapon = null;
                 weapon.Holder = null;
-                GameWorld.AddGameObject(weapon, GameWorld.ActiveRoom);
                 CycleWeapons();
             }
         }

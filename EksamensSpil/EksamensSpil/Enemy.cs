@@ -39,10 +39,16 @@ namespace EksamensSpil
             movementSpeed = 0.1f;
             if (isBoss)
             {
-                health = 100;
+                health = 50;
                 selectedWeapon.ReloadSpeed = 0f;
-                selectedWeapon.AttackSpeed = .1f;
-                stopThreshold = 800f;
+                selectedWeapon.AttackSpeed = .05f;
+                selectedWeapon.Size *= 2;
+                Pistol p = selectedWeapon as Pistol;
+                if (p != null)
+                {
+                    p.ProjectileSpeed = 1200f;
+                }
+                stopThreshold = 1000f;
                 ChangeSprite(Assets.BossSprite);
             }
             else
