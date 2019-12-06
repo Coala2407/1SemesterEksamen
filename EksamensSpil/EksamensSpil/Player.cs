@@ -43,10 +43,7 @@ namespace EksamensSpil
             // Sets default Player sprite
             ChangeSprite(Assets.PlayerSprite);
             drawLayer = 0.1f;
-            health = 999;
-
-            //Invinsibility for testing
-            invinsibilityTimeAfterDamage = 1f;
+            health = 999999999;
         }
 
         /// <summary>

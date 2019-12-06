@@ -87,16 +87,16 @@ namespace EksamensSpil
         /// </summary>
         protected override void Initialize()
         {
-			// TODO: Add your initialization logic here
-			//Screen setup
-			graphics.PreferredBackBufferWidth = 1920;
-			graphics.PreferredBackBufferHeight = 1080;
-			//graphics.ToggleFullScreen();
-			graphics.ApplyChanges();
+            // TODO: Add your initialization logic here
+            //Screen setup
+            graphics.PreferredBackBufferWidth = displayWidth;
+            graphics.PreferredBackBufferHeight = displayHeight;
+            //graphics.ToggleFullScreen();
+            graphics.ApplyChanges();
 
 
-			//Run, game, Run!
-			base.Initialize();
+            //Run, game, Run!
+            base.Initialize();
         }
 
         /// <summary>
@@ -130,21 +130,37 @@ namespace EksamensSpil
 
             //Add object to room
             TheHall.Add(Player);
-            TheHall.Add(new Enemy(new Vector2(600, 200)));
-            TheHall.Add(new Enemy(new Vector2(1200, 400)));
-            TheHall.Add(new Enemy(new Vector2(1600, 900)));
-            TheHall.Add(new Enemy(new Vector2(900, 500)));
-            TheHall.Add(new Enemy(new Vector2(1000, 500)));
-            TheHall.Add(new Enemy(new Vector2(1100, 500)));
-            TheHall.Add(new Enemy(new Vector2(1600, 500), true));
-            TheHall.Add(new Wall(new Vector2(200, 600)));
-            TheHall.Add(new Wall(new Vector2(280, 600), false, Wall.WallMode.Toggled));
-            TheHall.Add(new Pistol(new Vector2(1000, 1000)));
-            TheHall.Add(new Pistol(new Vector2(600, 100)));
-            TheHall.Add(new Chest(new Vector2(400, 400)));
-            TheHall.Add(new Sword(new Vector2(500, 500)));
-            TheHall.Add(new Sword(new Vector2(600, 600)));
+            //TheHall.Add(new Enemy(new Vector2(1200, 400)));
+            //TheHall.Add(new Enemy(new Vector2(1600, 900)));
+            //TheHall.Add(new Enemy(new Vector2(900, 500)));
+            //TheHall.Add(new Enemy(new Vector2(1000, 500)));
+            //TheHall.Add(new Enemy(new Vector2(1100, 500)));
+            ////TheHall.Add(new Enemy(new Vector2(1600, 500), true));
+            //TheHall.Add(new Wall(new Vector2(280, 600), false, Wall.WallMode.Toggled));
+            //TheHall.Add(new Pistol(new Vector2(1000, 1000)));
+            //TheHall.Add(new Sword(new Vector2(500, 500)));
+            //TheHall.Add(new Sword(new Vector2(600, 600)));
 
+            //Weapons and chests
+            TheHall.Add(new Pistol(new Vector2(1750, 150)));
+            TheHall.Add(new Sword(new Vector2(1750, 900)));
+            TheHall.Add(new Chest(new Vector2(250, 750)));
+            //Enemies
+            //for (int i = 0; i < 5; i++)
+            //{
+            //    TheHall.Add(new Enemy(new Vector2(1600, 300 + 150 * i)));
+            //}
+            TheHall.Add(new Enemy(new Vector2(1600, 300 + 150), true));
+            //Walls
+            for (int i = 1; i <= 7; i++)
+            {
+                TheHall.Add(new Wall(new Vector2(64 * i, 600)));
+            }
+            for (int i = 0; i <= 3; i++)
+            {
+                TheHall.Add(new Wall(new Vector2(64 * 7, 600 + 64 * i)));
+            }
+            TheHall.Add(new Wall(new Vector2(64 * 7, 600 + 64 * 5), false, Wall.WallMode.Randomized));
             //Make walls random
             Level.RandomizeWalls();
 
@@ -223,6 +239,8 @@ namespace EksamensSpil
             // TODO: Add your drawing code here
 
             spriteBatch.Begin(SpriteSortMode.FrontToBack);
+            //Background
+            spriteBatch.Draw(Assets.Background1, new Vector2(), null, Color.White, 0, new Vector2(), 1, SpriteEffects.None, 0f);
 
             //Draw Player, Player selected weapon, and croshair
             Crosshair.Draw(spriteBatch);
