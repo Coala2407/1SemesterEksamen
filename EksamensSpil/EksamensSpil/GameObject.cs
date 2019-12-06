@@ -13,7 +13,7 @@ namespace EksamensSpil
     {
         protected Vector2 position;
 
-        protected float drawLayer;
+        protected float drawLayer = 0.01f;
 
         protected float rotation;
 

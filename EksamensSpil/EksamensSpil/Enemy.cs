@@ -41,7 +41,7 @@ namespace EksamensSpil
             {
                 health = 10;
                 selectedWeapon.ReloadSpeed = .5f;
-                selectedWeapon.AttackSpeed = .05f;
+                selectedWeapon.AttackSpeed = .1f;
                 selectedWeapon.Size *= 2;
                 selectedWeapon.ClipSize = 20;
                 Pistol p = selectedWeapon as Pistol;
@@ -52,10 +52,12 @@ namespace EksamensSpil
                 stopThreshold = 1000f;
                 lootDropChance = 100;
                 ChangeSprite(Assets.BossSprite);
+                drawLayer = .05f;
             }
             else
             {
                 health = 2;
+                drawLayer = .06f;
                 ChangeSprite(Assets.EnemySprite);
             }
         }
@@ -144,7 +146,7 @@ namespace EksamensSpil
             base.OnCollision(otherObject);
 
             Enemy enemy = otherObject as Enemy;
-            if (enemy != null && enemy != this)
+            if (enemy != null && enemy != this && !enemy.isBoss)
             {
                 position = positionPreMove;
             }

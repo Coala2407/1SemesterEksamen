@@ -26,7 +26,7 @@ namespace EksamensSpil
             this.position = position;
             if (isHidden)
             {
-                this.isHidden = true;
+                this.IsHidden = true;
             }
             initialize();
         }
@@ -36,7 +36,7 @@ namespace EksamensSpil
             this.position = position;
             if (isHidden)
             {
-                this.isHidden = true;
+                this.IsHidden = true;
             }
             if (mode == WallMode.Randomized)
             {
@@ -65,22 +65,22 @@ namespace EksamensSpil
                 int randomInt = GameWorld.rng.Next(0, 2);
                 if (randomInt == 0)
                 {
-                    isHidden = false;
+                    IsHidden = false;
                 }
                 else if (randomInt == 1)
                 {
-                    isHidden = true;
+                    IsHidden = true;
                 }
             }
             else if (canBeToggled)
             {
-                if (isHidden)
+                if (IsHidden)
                 {
-                    isHidden = false;
+                    IsHidden = false;
                 }
                 else
                 {
-                    isHidden = true;
+                    IsHidden = true;
                 }
             }
         }

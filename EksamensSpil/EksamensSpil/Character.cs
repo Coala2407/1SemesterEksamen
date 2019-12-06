@@ -17,7 +17,7 @@ namespace EksamensSpil
         //Used for collisions on walls
         protected Vector2 positionPreMove;
         //Invinsibility frames
-        protected float invinsibilityTimeAfterDamage = 1f;
+        protected float invinsibilityTimeAfterDamage = .25f;
         protected float invinsibilityTimer;
 		public bool takeDamage;
 
