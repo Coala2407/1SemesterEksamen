@@ -43,7 +43,11 @@ namespace EksamensSpil
             JewelSprite = content.Load<Texture2D>("Jewel");
 
             Background1 = content.Load<Texture2D>("background1");
-
+			DoorSprites = new Texture2D[1];
+			for (int i = 0; i < ChestSprites.Length; ++i)
+			{
+				DoorSprites[i] = content.Load<Texture2D>($"door{i}");
+			}
 			ChestSprites = new Texture2D[2];
 			for (int i = 0; i < ChestSprites.Length; ++i)
 			{

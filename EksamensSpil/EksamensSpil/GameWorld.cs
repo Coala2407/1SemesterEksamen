@@ -121,6 +121,9 @@ namespace EksamensSpil
             TheRoom = new Room(false, false, "The Room");
             TheHall = new Room(false, false, "The Hall");
 
+			// Make Door
+
+
             //Add rooms to level
             Level.Add(TheRoom);
             Level.Add(TheHall);
