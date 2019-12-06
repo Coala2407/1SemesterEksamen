@@ -62,6 +62,7 @@ namespace EksamensSpil
                     if (cooldown < 0 && canGunReload != true)
                     {
                         cooldown = reloadSpeed;
+
                     }
                     canGunReload = true;
                     return ShootResult.NotEnoughAmmo;
@@ -132,6 +133,7 @@ namespace EksamensSpil
             throw new NotImplementedException();
         }
 
+		// TODO: Meybe give Reload Timer it's own cooldown variable or make some other changes
 		/// <summary>
 		/// Adds a timer before the weapon reloads. The timer can be cancelled if gameObject(player) takes damage 
 		/// </summary>
@@ -145,13 +147,16 @@ namespace EksamensSpil
 
             if (character.takeDamage == true && holder != enemy)
             {
-                canGunReload = false;
                 Console.WriteLine("Reload Canceled");
+				//cooldown = 0;
+				canGunReload = false;
+				character.takeDamage = false;
             }
 
             if (canGunReload == true && ammo < clipSize && cooldown <= 0)
             {
                 Reload();
+				canGunReload = false;
             }
 
             cooldown -= (float)gameTime.ElapsedGameTime.TotalSeconds;
