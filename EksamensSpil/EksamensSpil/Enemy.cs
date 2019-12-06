@@ -110,7 +110,7 @@ namespace EksamensSpil
 
             if (selectedWeapon != null)
             {
-                selectedWeapon.ReloadCooldown(gameTime);
+                selectedWeapon.ReloadCooldown(gameTime, this);
                 selectedWeapon.PositionY = position.Y + 20;
                 selectedWeapon.PositionX = position.X;
                 // rotation (Look at player)

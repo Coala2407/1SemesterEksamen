@@ -54,6 +54,7 @@ namespace EksamensSpil
                     c.UpdateHealth(1);
                     GameWorld.RemoveGameObject(this);
                 }
+
             }
 
             //Projectile hit wall

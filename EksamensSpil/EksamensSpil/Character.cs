@@ -19,13 +19,15 @@ namespace EksamensSpil
         //Invinsibility frames
         protected float invinsibilityTimeAfterDamage = 1f;
         protected float invinsibilityTimer;
+		public bool takeDamage;
 
-        public int Health
+
+		public int Health
         {
             get { return health; }
             set
             {
-                health = value;
+				health = value;				
                 if (health < 0)
                 {
                     health = 0;
@@ -51,6 +53,7 @@ namespace EksamensSpil
             {
                 if (damage > 0)
                 {
+					takeDamage = true;
                     Health -= damage;
                 }
                 else
@@ -67,6 +70,7 @@ namespace EksamensSpil
                     Die();
                 }
             }
+
             return Health;
         }
 
@@ -74,6 +78,12 @@ namespace EksamensSpil
         {
             positionPreMove = position;
             invinsibilityTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+			// Makes the player able to reload once the invinsibilityTimer runs out
+			if (takeDamage == true && invinsibilityTimer >= invinsibilityTimeAfterDamage)
+			{
+				takeDamage = false;
+			}
         }
 
         public virtual void Move(GameTime gameTime)

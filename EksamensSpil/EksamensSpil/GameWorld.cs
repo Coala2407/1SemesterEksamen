@@ -87,16 +87,16 @@ namespace EksamensSpil
         /// </summary>
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
-            //Screen setup
-            graphics.PreferredBackBufferWidth = displayWidth;
-            graphics.PreferredBackBufferHeight = displayHeight;
-            //graphics.ToggleFullScreen();
-            graphics.ApplyChanges();
+			// TODO: Add your initialization logic here
+			//Screen setup
+			graphics.PreferredBackBufferWidth = 1920;
+			graphics.PreferredBackBufferHeight = 1080;
+			//graphics.ToggleFullScreen();
+			graphics.ApplyChanges();
 
 
-            //Run, game, Run!
-            base.Initialize();
+			//Run, game, Run!
+			base.Initialize();
         }
 
         /// <summary>
