@@ -91,10 +91,10 @@ namespace EksamensSpil
             //Screen setup
             graphics.PreferredBackBufferWidth = displayWidth;
             graphics.PreferredBackBufferHeight = displayHeight;
-			//graphics.ToggleFullScreen();
-			graphics.ApplyChanges();
+            //graphics.ToggleFullScreen();
+            graphics.ApplyChanges();
 
-			
+
             //Run, game, Run!
             base.Initialize();
         }
@@ -134,14 +134,16 @@ namespace EksamensSpil
             TheHall.Add(new Enemy(new Vector2(1200, 400)));
             TheHall.Add(new Enemy(new Vector2(1600, 900)));
             TheHall.Add(new Enemy(new Vector2(900, 500)));
+            TheHall.Add(new Enemy(new Vector2(1000, 500)));
+            TheHall.Add(new Enemy(new Vector2(1100, 500)));
             TheHall.Add(new Enemy(new Vector2(1600, 500), true));
             TheHall.Add(new Wall(new Vector2(200, 600)));
             TheHall.Add(new Wall(new Vector2(280, 600), false, Wall.WallMode.Toggled));
             TheHall.Add(new Pistol(new Vector2(1000, 1000)));
             TheHall.Add(new Pistol(new Vector2(600, 100)));
-			TheHall.Add(new Chest(new Vector2(400, 400)));
-			TheHall.Add(new Sword(new Vector2(500, 500)));
-			TheHall.Add(new Sword(new Vector2(600, 600)));
+            TheHall.Add(new Chest(new Vector2(400, 400)));
+            TheHall.Add(new Sword(new Vector2(500, 500)));
+            TheHall.Add(new Sword(new Vector2(600, 600)));
 
             //Make walls random
             Level.RandomizeWalls();
@@ -180,8 +182,6 @@ namespace EksamensSpil
             {
                 //Update all objects in active room
                 go.Update(gameTime);
-                //Check player collision
-                Player.CheckCollision(go);
                 foreach (GameObject other in ActiveRoom.GameObjects)
                 {
                     go.CheckCollision(other);
@@ -225,10 +225,6 @@ namespace EksamensSpil
             spriteBatch.Begin(SpriteSortMode.FrontToBack);
 
             //Draw Player, Player selected weapon, and croshair
-            if (Player.SelectedWeapon != null)
-            {
-                Player.SelectedWeapon.Draw(spriteBatch);
-            }
             Crosshair.Draw(spriteBatch);
 
             //Draws all objects in active room

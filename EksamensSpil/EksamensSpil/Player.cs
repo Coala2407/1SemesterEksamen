@@ -77,8 +77,10 @@ namespace EksamensSpil
                 if (!weapons.Contains(weapon) && weapons.Count < 3)
                 {
                     weapons.Add(weapon);
-                    SelectedWeapon = weapon;
                     weapon.Holder = this;
+                    touchedWeapon = null;
+
+                    CycleWeapons();
                 }
             }
         }
@@ -91,6 +93,8 @@ namespace EksamensSpil
                 weapons.Remove(weapon);
                 SelectedWeapon = null;
                 weapon.Holder = null;
+                weapon.IsHidden = false;
+
                 CycleWeapons();
             }
         }
@@ -208,14 +212,14 @@ namespace EksamensSpil
             //Extra collisions:
             Weapon weapon = otherObject as Weapon;
             Chest chest = otherObject as Chest;
-            if (weapon != null)
+            if ((weapon != null && weapon.Holder == null))
             {
-                //Is touching a weapon. Ready to pick it up in handle input
+                //Is touching a weapon on the ground. Ready to pick it up in handle input
                 touchedWeapon = weapon;
             }
-            if (chest != null && weapon == null)
+            if (chest != null)
             {
-                //Is touching a chest. Ready to pick it up in handle input
+                //Is touching a chest. Ready to open it in handle input
                 touchedChest = chest;
             }
         }
@@ -227,13 +231,12 @@ namespace EksamensSpil
             {
                 OnCollision(otherObject);
             }
-            //Collision with weapons
+            //Collision with weapons and chests
             else if (touchedWeapon != null && touchedWeapon == otherObject)
             {
                 //Is no longer touching the weapon
                 touchedWeapon = null;
             }
-
             else if (touchedChest != null && touchedChest == otherObject)
             {
                 //Is no longer touching the chest
@@ -271,6 +274,7 @@ namespace EksamensSpil
         {
             if (weapons.Count > 0 && selectedWeapon != null)
             {
+                selectedWeapon.IsHidden = true;
                 int selectedWeaponIndex = weapons.IndexOf(selectedWeapon);
                 if (selectedWeaponIndex + 1 == weapons.Count)
                 {
@@ -280,11 +284,16 @@ namespace EksamensSpil
                 {
                     selectedWeapon = weapons[selectedWeaponIndex + 1];
                 }
-                selectedWeapon.Position = position;
+                
             }
             else if (weapons.Count > 0)
             {
                 selectedWeapon = weapons[0];
+            }
+            if (selectedWeapon != null)
+            {
+                selectedWeapon.IsHidden = false;
+                selectedWeapon.Position = position;
             }
         }
     }

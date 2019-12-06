@@ -42,6 +42,12 @@ namespace EksamensSpil
             set { attackSpeed = value; }
         }
 
+        //public int ClipSize
+        //{
+        //    get { return clipSize; }
+        //    set { clipSize = value; }
+        //}
+
         public virtual ShootResult Attack(Vector2 targetCords)
         {
 
@@ -108,7 +114,7 @@ namespace EksamensSpil
             }
             set
             {
-
+                clipSize = value;
             }
         }
 
@@ -119,10 +125,6 @@ namespace EksamensSpil
 
         public override void Update(GameTime gameTime)
         {
-            //if(cooldown >= 0)
-            //{
-            //	Console.WriteLine($"{cooldown}");
-            //}
         }
 
         public override void LoadContent(ContentManager content)

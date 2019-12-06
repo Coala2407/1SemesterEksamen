@@ -14,12 +14,6 @@ namespace EksamensSpil
 
         private bool canBeRandomized;
         private bool canBeToggled;
-        private bool isHidden;
-
-        public bool IsHidden
-        {
-            get { return isHidden; }
-        }
 
         public Wall(Vector2 position)
         {
@@ -97,14 +91,6 @@ namespace EksamensSpil
             Fixed = 0,
             Randomized = 1,
             Toggled = 2
-        }
-
-        public override void Draw(SpriteBatch spriteBatch)
-        {
-            if (!isHidden)
-            {
-                base.Draw(spriteBatch);
-            }
         }
 
         public override void OnCollision(GameObject otherObject)

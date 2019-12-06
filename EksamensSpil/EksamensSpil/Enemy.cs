@@ -10,9 +10,9 @@ namespace EksamensSpil
 {
     public class Enemy : Character
     {
-        private int lootDropChance;
+        private int lootDropChance = 15;
         private bool isBoss;
-        private float stopThreshold = 400f;
+        private float stopThreshold = 600f;
 
         /// <summary>
         /// Default Constructor
@@ -39,16 +39,18 @@ namespace EksamensSpil
             movementSpeed = 0.1f;
             if (isBoss)
             {
-                health = 50;
-                selectedWeapon.ReloadSpeed = 0f;
+                health = 10;
+                selectedWeapon.ReloadSpeed = .5f;
                 selectedWeapon.AttackSpeed = .05f;
                 selectedWeapon.Size *= 2;
+                selectedWeapon.ClipSize = 20;
                 Pistol p = selectedWeapon as Pistol;
                 if (p != null)
                 {
-                    p.ProjectileSpeed = 1200f;
+                    p.ProjectileSpeed = 2800f;
                 }
                 stopThreshold = 1000f;
+                lootDropChance = 100;
                 ChangeSprite(Assets.BossSprite);
             }
             else
@@ -59,13 +61,14 @@ namespace EksamensSpil
         }
 
 
-
-
-
-
-
         public override void Die()
         {
+            int rng = GameWorld.rng.Next(1, 101);
+            if (rng >= lootDropChance)
+            {
+                GameWorld.RemoveGameObject(selectedWeapon);
+            }
+            selectedWeapon.Holder = null;
             GameWorld.RemoveGameObject(this);
         }
 

@@ -33,15 +33,14 @@ namespace EksamensSpil
         protected bool spriteFlippedX;
         protected bool spriteFlippedY;
 
+        protected bool isHidden;
+
         public GameObject(Vector2 position)
         {
             this.position = position;
         }
 
-        public GameObject()
-        {
-
-        }
+        public GameObject() { }
 
         public Room Room
         {
@@ -85,6 +84,7 @@ namespace EksamensSpil
         }
 
         public float Size { get => size; set => size = value; }
+        public bool IsHidden { get; set; }
 
 
         //Not really needed anymore.
@@ -96,7 +96,7 @@ namespace EksamensSpil
 
         public virtual void Draw(SpriteBatch spriteBatch)
         {
-            if (sprite != null)
+            if (sprite != null && !IsHidden)
             {
                 SpriteEffects effect = SpriteEffects.None;
                 if (spriteFlippedX)
