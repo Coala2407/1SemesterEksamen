@@ -17,7 +17,7 @@ namespace EksamensSpil
 		/// <summary>
 		/// Default Constructor
 		/// </summary>
-		public Door()
+		public Door(Vector2 position)
 		{
 
 		}

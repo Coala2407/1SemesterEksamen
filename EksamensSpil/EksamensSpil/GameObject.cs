@@ -13,11 +13,11 @@ namespace EksamensSpil
     {
         protected Vector2 position;
 
-        protected float drawLayer;
+        protected float drawLayer = 0.01f;
 
         protected float rotation;
 
-        protected float size = 1;
+        private float size = 1;
 
         //TODO: Placed name here to avoid repeating the same variable. 
         protected string name;
@@ -33,15 +33,14 @@ namespace EksamensSpil
         protected bool spriteFlippedX;
         protected bool spriteFlippedY;
 
+        protected bool isHidden;
+
         public GameObject(Vector2 position)
         {
             this.position = position;
         }
 
-        public GameObject()
-        {
-
-        }
+        public GameObject() { }
 
         public Room Room
         {
@@ -84,6 +83,9 @@ namespace EksamensSpil
             get { return sprite; }
         }
 
+        public float Size { get => size; set => size = value; }
+        public bool IsHidden { get; set; }
+
 
         //Not really needed anymore.
         public abstract void LoadContent(ContentManager content);
@@ -94,7 +96,7 @@ namespace EksamensSpil
 
         public virtual void Draw(SpriteBatch spriteBatch)
         {
-            if (sprite != null)
+            if (sprite != null && !IsHidden)
             {
                 SpriteEffects effect = SpriteEffects.None;
                 if (spriteFlippedX)
@@ -157,5 +159,5 @@ namespace EksamensSpil
 				);
 			}
 		}
-	}
+    }
 }

@@ -48,11 +48,17 @@ namespace EksamensSpil
             else
             {
                 Character c = otherObject as Character;
+				Enemy enemy = otherObject as Enemy;
                 if (c != null)
                 {
                     c.UpdateHealth(1);
+					if(otherObject != enemy)
+					{
+						c.takeDamage = true;
+					}
                     GameWorld.RemoveGameObject(this);
                 }
+
             }
 
             //Projectile hit wall

@@ -17,15 +17,17 @@ namespace EksamensSpil
         //Used for collisions on walls
         protected Vector2 positionPreMove;
         //Invinsibility frames
-        protected float invinsibilityTimeAfterDamage = 1f;
+        protected float invinsibilityTimeAfterDamage = .25f;
         protected float invinsibilityTimer;
+		public bool takeDamage;
 
-        public int Health
+
+		public int Health
         {
             get { return health; }
             set
             {
-                health = value;
+				health = value;				
                 if (health < 0)
                 {
                     health = 0;
@@ -67,6 +69,7 @@ namespace EksamensSpil
                     Die();
                 }
             }
+
             return Health;
         }
 
@@ -74,6 +77,7 @@ namespace EksamensSpil
         {
             positionPreMove = position;
             invinsibilityTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
+
         }
 
         public virtual void Move(GameTime gameTime)

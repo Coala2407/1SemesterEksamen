@@ -10,9 +10,9 @@ namespace EksamensSpil
 {
     public class Enemy : Character
     {
-        private int lootDropChance;
+        private int lootDropChance = 15;
         private bool isBoss;
-        private float stopThreshold = 400f;
+        private float stopThreshold = 600f;
 
         /// <summary>
         /// Default Constructor
@@ -39,27 +39,38 @@ namespace EksamensSpil
             movementSpeed = 0.1f;
             if (isBoss)
             {
-                health = 100;
-                selectedWeapon.ReloadSpeed = 0f;
+                health = 10;
+                selectedWeapon.ReloadSpeed = .5f;
                 selectedWeapon.AttackSpeed = .1f;
-                stopThreshold = 800f;
+                selectedWeapon.Size *= 2;
+                selectedWeapon.ClipSize = 20;
+                Pistol p = selectedWeapon as Pistol;
+                if (p != null)
+                {
+                    p.ProjectileSpeed = 2800f;
+                }
+                stopThreshold = 1000f;
+                lootDropChance = 100;
                 ChangeSprite(Assets.BossSprite);
+                drawLayer = .05f;
             }
             else
             {
                 health = 2;
+                drawLayer = .06f;
                 ChangeSprite(Assets.EnemySprite);
             }
         }
 
 
-
-
-
-
-
         public override void Die()
         {
+            int rng = GameWorld.rng.Next(1, 101);
+            if (rng >= lootDropChance)
+            {
+                GameWorld.RemoveGameObject(selectedWeapon);
+            }
+            selectedWeapon.Holder = null;
             GameWorld.RemoveGameObject(this);
         }
 
@@ -101,7 +112,7 @@ namespace EksamensSpil
 
             if (selectedWeapon != null)
             {
-                selectedWeapon.ReloadCooldown(gameTime);
+                selectedWeapon.ReloadCooldown(gameTime, this);
                 selectedWeapon.PositionY = position.Y + 20;
                 selectedWeapon.PositionX = position.X;
                 // rotation (Look at player)
@@ -135,7 +146,7 @@ namespace EksamensSpil
             base.OnCollision(otherObject);
 
             Enemy enemy = otherObject as Enemy;
-            if (enemy != null && enemy != this)
+            if (enemy != null && enemy != this && !enemy.isBoss)
             {
                 position = positionPreMove;
             }

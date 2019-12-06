@@ -42,6 +42,12 @@ namespace EksamensSpil
             set { attackSpeed = value; }
         }
 
+        //public int ClipSize
+        //{
+        //    get { return clipSize; }
+        //    set { clipSize = value; }
+        //}
+
         public virtual ShootResult Attack(Vector2 targetCords)
         {
 
@@ -56,6 +62,7 @@ namespace EksamensSpil
                     if (cooldown < 0 && canGunReload != true)
                     {
                         cooldown = reloadSpeed;
+
                     }
                     canGunReload = true;
                     return ShootResult.NotEnoughAmmo;
@@ -108,7 +115,7 @@ namespace EksamensSpil
             }
             set
             {
-
+                clipSize = value;
             }
         }
 
@@ -119,10 +126,6 @@ namespace EksamensSpil
 
         public override void Update(GameTime gameTime)
         {
-            //if(cooldown >= 0)
-            //{
-            //	Console.WriteLine($"{cooldown}");
-            //}
         }
 
         public override void LoadContent(ContentManager content)
@@ -130,21 +133,30 @@ namespace EksamensSpil
             throw new NotImplementedException();
         }
 
-        public void ReloadCooldown(GameTime gameTime)
+		// TODO: Meybe give Reload Timer it's own cooldown variable or make some other changes
+		/// <summary>
+		/// Adds a timer before the weapon reloads. The timer can be cancelled if gameObject(player) takes damage 
+		/// </summary>
+		/// <param name="gameTime"></param>
+		/// <param name="otherObject"></param>
+        public void ReloadCooldown(GameTime gameTime, GameObject otherObject)
         {
-            KeyboardState keyboard = Keyboard.GetState();
 
+			Character character = otherObject as Character;
+			Enemy enemy = otherObject as Enemy;
 
-            if (keyboard.IsKeyDown(Keys.F))
+            if (character.takeDamage == true && holder != enemy)
             {
-                canGunReload = false;
                 Console.WriteLine("Reload Canceled");
+				//cooldown = 0;
+				canGunReload = false;
+				character.takeDamage = false;
             }
 
             if (canGunReload == true && ammo < clipSize && cooldown <= 0)
             {
                 Reload();
-                Console.WriteLine($"reloading in {cooldown}");
+				canGunReload = false;
             }
 
             cooldown -= (float)gameTime.ElapsedGameTime.TotalSeconds;
