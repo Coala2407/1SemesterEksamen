@@ -72,6 +72,14 @@ namespace EksamensSpil
                     GameWorld.RemoveGameObject(this);
                 }
             }
+
+			// Projectile hit closed door
+
+			Door door = otherObject as Door;
+			if(door != null && door.IsOpen == false)
+			{
+				GameWorld.RemoveGameObject(this);
+			}
         }
 
         public override void Update(GameTime gameTime)
