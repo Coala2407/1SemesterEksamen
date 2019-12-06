@@ -46,7 +46,7 @@ namespace EksamensSpil
             health = 3;
 
             //Invinsibility for testing
-            invinsibilityTimeAfterDamage = 99999999f;
+            invinsibilityTimeAfterDamage = 999999999999f;
         }
 
         /// <summary>
@@ -63,7 +63,15 @@ namespace EksamensSpil
         /// <param name="item"></param>
         public void PickUpItem(Item item)
         {
-
+            if(item != null && item.Holder == null)
+            {
+                if (!items.Contains(item)) 
+                {
+                   items.Add(item);
+                   item.Holder = this;
+                   GameWorld.RemoveGameObject(item);
+                }
+            }
         }
 
         /// <summary>
@@ -82,6 +90,14 @@ namespace EksamensSpil
                     GameWorld.RemoveGameObject(weapon);
 
                 }
+            }
+        }
+
+        public void ActivateItem(Item item)
+        {
+            if(item != null)
+            {
+                item.ItemEffect();
             }
         }
 
@@ -138,6 +154,8 @@ namespace EksamensSpil
             }
             if (Keyboard.HasBeenPressed(Keys.E))
             {
+                PickUpItem(touchedItem);
+                ActivateItem(touchedItem);
                 PickUpWeapon(touchedWeapon);
                 OpenChest(touchedChest);
             }
@@ -201,6 +219,8 @@ namespace EksamensSpil
                 selectedWeapon.SpriteFlippedX = GameWorld.Crosshair.PositionX < position.X;
             }
             spriteFlippedY = GameWorld.Crosshair.PositionX < position.X;
+
+           
         }
 
         public override void OnCollision(GameObject otherObject)
@@ -211,6 +231,7 @@ namespace EksamensSpil
             //Extra collisions:
             Weapon weapon = otherObject as Weapon;
             Chest chest = otherObject as Chest;
+            Item item = otherObject as Item;
             if (weapon != null)
             {
                 //Is touching a weapon. Ready to pick it up in handle input
@@ -220,6 +241,11 @@ namespace EksamensSpil
             {
                 //Is touching a chest. Ready to pick it up in handle input
                 touchedChest = chest;
+            }
+            if(item != null)
+            {
+                //is touching an ítem. Ready to pick it up in handle input
+                touchedItem = item;
             }
         }
 
@@ -241,6 +267,12 @@ namespace EksamensSpil
             {
                 //Is no longer touching the chest
                 touchedChest = null;
+            }
+
+            else if (touchedItem != null && touchedItem == otherObject)
+            {
+                //is no longer touching an item
+                touchedItem = null;
             }
         }
 
@@ -290,6 +322,8 @@ namespace EksamensSpil
                 selectedWeapon = weapons[0];
             }
         }
+
+       
     }
 }
 

@@ -139,6 +139,7 @@ namespace EksamensSpil
             TheHall.Add(new Wall(new Vector2(280, 600), false, Wall.WallMode.Toggled));
             TheHall.Add(new Pistol(new Vector2(1000, 1000)));
             TheHall.Add(new Pistol(new Vector2(600, 100)));
+            ActiveRoom.Add(new JewelItem(new Vector2(600, 200)));
 			TheHall.Add(new Chest(new Vector2(400, 400)));
 			TheHall.Add(new Sword(new Vector2(500, 500)));
 			TheHall.Add(new Sword(new Vector2(600, 600)));

@@ -25,7 +25,6 @@ namespace EksamensSpil
             this.pistol = pistol;
             this.movementSpeed = movementSpeed;
             this.targetCords = targetCords;
-
             position = pistol.Position;
             shooter = pistol.Holder;
             movement = targetCords - position;
