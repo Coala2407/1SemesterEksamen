@@ -112,7 +112,7 @@ namespace EksamensSpil
 
             //Make Crosshair
             Crosshair = new Crosshair();
-            Player = new Player(new Vector2(200, 400));
+            Player = new Player(new Vector2(1000, 560));
 
             //Make levels
             Level = new Level();
@@ -126,31 +126,21 @@ namespace EksamensSpil
             Level.Add(TheHall);
 
             //Set active room
-            ActiveRoom = TheHall;
+            ActiveRoom = TheRoom;
 
             //Add object to room
-            TheHall.Add(Player);
-            //TheHall.Add(new Enemy(new Vector2(1200, 400)));
-            //TheHall.Add(new Enemy(new Vector2(1600, 900)));
-            //TheHall.Add(new Enemy(new Vector2(900, 500)));
-            //TheHall.Add(new Enemy(new Vector2(1000, 500)));
-            //TheHall.Add(new Enemy(new Vector2(1100, 500)));
-            ////TheHall.Add(new Enemy(new Vector2(1600, 500), true));
-            //TheHall.Add(new Wall(new Vector2(280, 600), false, Wall.WallMode.Toggled));
-            //TheHall.Add(new Pistol(new Vector2(1000, 1000)));
-            //TheHall.Add(new Sword(new Vector2(500, 500)));
-            //TheHall.Add(new Sword(new Vector2(600, 600)));
+            TheRoom.Add(Player);
 
+            //THE HALL
             //Weapons and chests
-            TheHall.Add(new Pistol(new Vector2(1750, 150)));
-            TheHall.Add(new Sword(new Vector2(1750, 900)));
+            TheHall.Add(new Pistol(new Vector2(1750, 200)));
+            TheHall.Add(new Sword(new Vector2(1700, 900)));
             TheHall.Add(new Chest(new Vector2(250, 750)));
             //Enemies
-            //for (int i = 0; i < 5; i++)
-            //{
-            //    TheHall.Add(new Enemy(new Vector2(1600, 300 + 150 * i)));
-            //}
-            TheHall.Add(new Enemy(new Vector2(1600, 300 + 150), true));
+            for (int i = 0; i < 5; i++)
+            {
+                TheHall.Add(new Enemy(new Vector2(1600, 300 + 150 * i)));
+            }
             //Walls
             for (int i = 1; i <= 7; i++)
             {
@@ -161,6 +151,20 @@ namespace EksamensSpil
                 TheHall.Add(new Wall(new Vector2(64 * 7, 600 + 64 * i)));
             }
             TheHall.Add(new Wall(new Vector2(64 * 7, 600 + 64 * 5), false, Wall.WallMode.Randomized));
+
+            //THE ROOM
+            //Walls
+            for (int i = 0; i <= 2; i++)
+            {
+                TheRoom.Add(new Wall(new Vector2(900 + 64 * i, 600)));
+            }
+            //Enemies
+            TheRoom.Add(new Enemy(new Vector2(150, 150)));
+            TheRoom.Add(new Enemy(new Vector2(1800, 150)));
+            //TheRoom.Add(new Enemy(new Vector2(100, 100)));
+            //TheRoom.Add(new Enemy(new Vector2(100, 100)));
+
+
             //Make walls random
             Level.RandomizeWalls();
 

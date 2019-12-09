@@ -34,23 +34,23 @@ namespace EksamensSpil
         private void initialize()
         {
             selectedWeapon = new Pistol(this);
-            GameWorld.AddGameObject(selectedWeapon, GameWorld.ActiveRoom);
+            //GameWorld.AddGameObject(selectedWeapon, GameWorld.ActiveRoom);
 
             movementSpeed = 0.1f;
             if (isBoss)
             {
                 health = 10;
-                selectedWeapon.ReloadSpeed = .5f;
+                selectedWeapon.ReloadSpeed = 1f;
                 selectedWeapon.AttackSpeed = .1f;
                 selectedWeapon.Size *= 2;
-                selectedWeapon.ClipSize = 20;
+                selectedWeapon.ClipSize = 25;
                 Pistol p = selectedWeapon as Pistol;
                 if (p != null)
                 {
                     p.ProjectileSpeed = 2800f;
                 }
                 stopThreshold = 1000f;
-                lootDropChance = 100;
+                lootDropChance = 2;
                 ChangeSprite(Assets.BossSprite);
                 drawLayer = .05f;
             }

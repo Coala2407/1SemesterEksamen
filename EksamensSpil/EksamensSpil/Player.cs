@@ -43,7 +43,7 @@ namespace EksamensSpil
             // Sets default Player sprite
             ChangeSprite(Assets.PlayerSprite);
             drawLayer = 0.1f;
-            health = 999999999;
+            health = 10;
         }
 
         /// <summary>
@@ -76,7 +76,7 @@ namespace EksamensSpil
                     weapons.Add(weapon);
                     weapon.Holder = this;
                     touchedWeapon = null;
-
+                    GameWorld.RemoveGameObject(weapon);
                     CycleWeapons();
                 }
             }
@@ -90,8 +90,8 @@ namespace EksamensSpil
                 weapons.Remove(weapon);
                 SelectedWeapon = null;
                 weapon.Holder = null;
-                weapon.IsHidden = false;
-
+                //weapon.IsHidden = false;
+                GameWorld.AddGameObject(weapon, GameWorld.ActiveRoom);
                 CycleWeapons();
             }
         }
@@ -271,7 +271,6 @@ namespace EksamensSpil
         {
             if (weapons.Count > 0 && selectedWeapon != null)
             {
-                selectedWeapon.IsHidden = true;
                 int selectedWeaponIndex = weapons.IndexOf(selectedWeapon);
                 if (selectedWeaponIndex + 1 == weapons.Count)
                 {
@@ -281,16 +280,12 @@ namespace EksamensSpil
                 {
                     selectedWeapon = weapons[selectedWeaponIndex + 1];
                 }
-                
+
+                selectedWeapon.Position = position;
             }
             else if (weapons.Count > 0)
             {
                 selectedWeapon = weapons[0];
-            }
-            if (selectedWeapon != null)
-            {
-                selectedWeapon.IsHidden = false;
-                selectedWeapon.Position = position;
             }
         }
     }

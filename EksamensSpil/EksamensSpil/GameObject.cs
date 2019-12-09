@@ -17,7 +17,7 @@ namespace EksamensSpil
 
         protected float rotation;
 
-        private float size = 1;
+        protected float size = 1;
 
         //TODO: Placed name here to avoid repeating the same variable. 
         protected string name;
