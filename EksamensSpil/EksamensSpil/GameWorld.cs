@@ -44,6 +44,7 @@ namespace EksamensSpil
 
         public static Room TheRoom;
         public static Room TheHall;
+        public static Room BossRoom;
 
         //Player
         public static Player Player;
@@ -112,14 +113,15 @@ namespace EksamensSpil
 
             //Make Crosshair
             Crosshair = new Crosshair();
-            Player = new Player(new Vector2(500, 460));
+            Player = new Player(new Vector2(200, 300));
 
             //Make levels
             Level = new Level();
 
             //Make rooms
-            TheRoom = new Room(false, false, "The Room");
-            TheHall = new Room(false, false, "The Hall");
+            TheRoom = new Room(true, false, "The Room");
+            TheHall = new Room(true, false, "The Hall");
+            BossRoom = new Room(true, true, "The Boss");
 
             // Make Door
 
@@ -127,12 +129,10 @@ namespace EksamensSpil
             //Add rooms to level
             Level.Add(TheRoom);
             Level.Add(TheHall);
+            Level.Add(BossRoom);
 
             //Set active room
-            ActiveRoom = TheHall;
-
-            //Test item
-            ActiveRoom.Add(new JewelItem(new Vector2(600, 200)));
+            ActiveRoom = BossRoom;
 
             //Add player to active room
             ActiveRoom.Add(Player);
@@ -143,11 +143,10 @@ namespace EksamensSpil
             TheHall.Add(new Sword(new Vector2(1700, 900)));
             TheHall.Add(new Chest(new Vector2(250, 750)));
             //Enemies
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 3; i++)
             {
-                TheHall.Add(new Enemy(new Vector2(1600, 300 + 150 * i)));
+                TheHall.Add(new Enemy(new Vector2(1600, 300 + 200 * i)));
             }
-            TheHall.Add(new Enemy(new Vector2(1600, 300 + 150), true));
             //Walls
             for (int i = 1; i <= 7; i++)
             {
@@ -160,18 +159,22 @@ namespace EksamensSpil
             TheHall.Add(new Wall(new Vector2(64 * 7, 600 + 64 * 5), false, Wall.WallMode.Randomized));
             /////////////////////////////////////////////////////////////////////////////
             //THE ROOM
-            //Walls
-            for (int i = 0; i <= 2; i++)
-            {
-                TheRoom.Add(new Wall(new Vector2(900 + 64 * i, 600)));
-            }
             //Enemies
             TheRoom.Add(new Enemy(new Vector2(150, 150)));
             TheRoom.Add(new Enemy(new Vector2(1800, 150)));
-
-            //Items
+            TheRoom.Add(new Enemy(new Vector2(1800, 950)));
+            TheRoom.Add(new Enemy(new Vector2(150, 950)));
 
             ////////////////////////////////////////////////////////////////////////////
+            //BOSS ROOM
+            //Weapons
+            BossRoom.Add(new Pistol(new Vector2(1800, 200)));
+            //Enemie
+            BossRoom.Add(new Enemy(new Vector2(1500, 600), true));
+            for (int i = 0; i < 5; i++)
+            {
+                BossRoom.Add(new Enemy(new Vector2(1800, 300 + 150 * i)));
+            }
             //Make walls random
             Level.RandomizeWalls();
 

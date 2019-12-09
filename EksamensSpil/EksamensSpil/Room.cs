@@ -73,9 +73,9 @@ namespace EksamensSpil
                 Add(new Wall(new Vector2(0, i * 64), false, Wall.WallMode.Fixed));
             }
             //Right wall
-            for (int i = 0; i < Math.Ceiling((double)GameWorld.displayHeight / 64); i++)
+            for (int i = 1; i < Math.Ceiling((double)GameWorld.displayHeight / 64 - 1); i++)
             {
-                Add(new Wall(new Vector2(GameWorld.displayWidth - 56, i * 64), false, Wall.WallMode.Fixed));
+                Add(new Wall(new Vector2(GameWorld.displayWidth - 64, i * 64), false, Wall.WallMode.Fixed));
             }
             //Top
             for (int i = 1; i < Math.Ceiling((double)GameWorld.displayWidth / 64); i++)
