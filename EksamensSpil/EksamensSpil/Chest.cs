@@ -28,7 +28,7 @@ namespace EksamensSpil
 
         private void initialize()
         {
-            ChangeSprite(Assets.ChestSprites[0]);
+            //ChangeSprite(Assets.ChestSprites[0]);
             lootType = GameWorld.rng.Next(1, 101);
 			lootItem = GameWorld.rng.Next(1, 101);
             

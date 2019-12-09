@@ -25,7 +25,6 @@ namespace EksamensSpil
             this.pistol = pistol;
             this.movementSpeed = movementSpeed;
             this.targetCords = targetCords;
-
             position = pistol.Position;
             shooter = pistol.Holder;
             movement = targetCords - position;
@@ -72,6 +71,14 @@ namespace EksamensSpil
                     GameWorld.RemoveGameObject(this);
                 }
             }
+
+			// Projectile hit closed door
+
+			Door door = otherObject as Door;
+			if(door != null && door.IsOpen == false)
+			{
+				GameWorld.RemoveGameObject(this);
+			}
         }
 
         public override void Update(GameTime gameTime)

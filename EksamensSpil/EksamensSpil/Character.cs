@@ -96,12 +96,18 @@ namespace EksamensSpil
         public override void OnCollision(GameObject otherObject)
         {
             Wall wall = otherObject as Wall;
+			Door door = otherObject as Door;
             if (wall != null && !wall.IsHidden)
             {
                 //Touched wall. Move to previous position before collision
                 position = positionPreMove;
             }
-        }
+			if (door != null && door.IsOpen == false)
+			{
+				//Touched wall. Move to previous position before collision
+				position = positionPreMove;
+			}
+		}
 
         public override void Draw(SpriteBatch spriteBatch)
         {

@@ -33,6 +33,7 @@ namespace EksamensSpil
         protected bool spriteFlippedX;
         protected bool spriteFlippedY;
 
+		protected bool isOpen;
         protected bool isHidden;
 
         public GameObject(Vector2 position)
@@ -85,6 +86,7 @@ namespace EksamensSpil
 
         public float Size { get => size; set => size = value; }
         public bool IsHidden { get; set; }
+		public bool IsOpen { get; set; }
 
 
         //Not really needed anymore.

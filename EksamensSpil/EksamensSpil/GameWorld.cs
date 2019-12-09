@@ -121,6 +121,9 @@ namespace EksamensSpil
             TheRoom = new Room(false, false, "The Room");
             TheHall = new Room(false, false, "The Hall");
 
+			// Make Door
+
+
             //Add rooms to level
             Level.Add(TheRoom);
             Level.Add(TheHall);
@@ -161,9 +164,9 @@ namespace EksamensSpil
             //Enemies
             TheRoom.Add(new Enemy(new Vector2(150, 150)));
             TheRoom.Add(new Enemy(new Vector2(1800, 150)));
-            //TheRoom.Add(new Enemy(new Vector2(100, 100)));
-            //TheRoom.Add(new Enemy(new Vector2(100, 100)));
 
+            //Items
+            TheRoom.Add(new JewelItem(new Vector2(600, 200)));
 
             //Make walls random
             Level.RandomizeWalls();
