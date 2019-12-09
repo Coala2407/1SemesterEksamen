@@ -15,6 +15,14 @@ namespace EksamensSpil
         private bool canBeRandomized;
         private bool canBeToggled;
 
+        //Determines wether the wall is fixed, randomizable or toggleable. 
+        public enum WallMode
+        {
+            Fixed = 0,
+            Randomized = 1,
+            Toggled = 2
+        }
+
         public Wall(Vector2 position)
         {
             this.position = position;
@@ -85,27 +93,15 @@ namespace EksamensSpil
             }
         }
 
-        //Determines wether the wall is fixed, randomizable or toggleable. 
-        public enum WallMode
-        {
-            Fixed = 0,
-            Randomized = 1,
-            Toggled = 2
-        }
 
         public override void OnCollision(GameObject otherObject)
         {
-            //throw new NotImplementedException();
+
         }
 
         public override void Update(GameTime gameTime)
         {
 
-        }
-
-        public override void LoadContent(ContentManager content)
-        {
-            throw new NotImplementedException();
         }
     }
 }

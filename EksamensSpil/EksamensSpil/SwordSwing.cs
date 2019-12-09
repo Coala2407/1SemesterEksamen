@@ -30,11 +30,6 @@ namespace EksamensSpil
 
 		}
 
-		public override void LoadContent(ContentManager content)
-		{
-			throw new NotImplementedException();
-		}
-
 		public override void OnCollision(GameObject otherObject)
 		{
 			Enemy enemy = otherObject as Enemy;

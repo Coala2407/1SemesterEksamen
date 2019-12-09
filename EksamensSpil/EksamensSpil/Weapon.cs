@@ -128,11 +128,6 @@ namespace EksamensSpil
         {
         }
 
-        public override void LoadContent(ContentManager content)
-        {
-            throw new NotImplementedException();
-        }
-
 		// TODO: Meybe give Reload Timer it's own cooldown variable or make some other changes
 		/// <summary>
 		/// Adds a timer before the weapon reloads. The timer can be cancelled if gameObject(player) takes damage 

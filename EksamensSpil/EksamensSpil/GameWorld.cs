@@ -90,10 +90,10 @@ namespace EksamensSpil
         {
             // TODO: Add your initialization logic here
             //Screen setup
-            //graphics.PreferredBackBufferWidth = displayWidth;
-            //graphics.PreferredBackBufferHeight = displayHeight;
-            ////graphics.ToggleFullScreen();
-            //graphics.ApplyChanges();
+            graphics.PreferredBackBufferWidth = displayWidth;
+            graphics.PreferredBackBufferHeight = displayHeight;
+            //graphics.ToggleFullScreen();
+            graphics.ApplyChanges();
 
 
             //Run, game, Run!
@@ -132,15 +132,17 @@ namespace EksamensSpil
             Level.Add(BossRoom);
 
             //Set active room
-            ActiveRoom = BossRoom;
+            ActiveRoom = TheRoom;
+
+            //ActiveRoom.Add(new JewelItem(new Vector2(200, 200)));
 
             //Add player to active room
             ActiveRoom.Add(Player);
 
-			//THE HALL
+            //THE HALL
 
-			// Door
-			
+            // Door
+
 
             //Weapons and chests
             TheHall.Add(new Pistol(new Vector2(1750, 200)));
@@ -169,8 +171,8 @@ namespace EksamensSpil
             TheRoom.Add(new Enemy(new Vector2(1800, 950)));
             TheRoom.Add(new Enemy(new Vector2(150, 950)));
 
-			// Door
-			TheRoom.Add(new Door(new Vector2(100, 100)));
+            // Door
+            TheRoom.Add(new Door(new Vector2(100, 100)));
             ////////////////////////////////////////////////////////////////////////////
             //BOSS ROOM
             //Weapons
@@ -182,7 +184,7 @@ namespace EksamensSpil
                 BossRoom.Add(new Enemy(new Vector2(1800, 300 + 150 * i)));
             }
 
-			////////////////////////////////////////////////////////////////////////////
+            ////////////////////////////////////////////////////////////////////////////
             //Make walls random
             Level.RandomizeWalls();
 

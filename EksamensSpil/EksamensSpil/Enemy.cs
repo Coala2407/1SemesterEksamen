@@ -74,11 +74,6 @@ namespace EksamensSpil
             GameWorld.RemoveGameObject(this);
         }
 
-        public override void LoadContent(ContentManager content)
-        {
-            throw new NotImplementedException();
-        }
-
         //TODO Do we need this?
         public override void Reload()
         {

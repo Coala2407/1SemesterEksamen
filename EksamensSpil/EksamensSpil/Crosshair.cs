@@ -20,11 +20,6 @@ namespace EksamensSpil
             ChangeSprite(Assets.CrosshairSprite);
         }
 
-        public override void LoadContent(ContentManager content)
-        {
-
-        }
-
         public override void Update(GameTime gameTime)
         {
             //Updates the current position of the mouse

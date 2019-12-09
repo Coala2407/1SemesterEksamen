@@ -12,6 +12,7 @@ namespace EksamensSpil
 	{
 
 		private bool isLocked;
+        private bool isOpen;
 
 		/// <summary>
 		/// Default Constructor
@@ -27,11 +28,13 @@ namespace EksamensSpil
 			drawLayer = 0.9f;
 		}
 
-		/// <summary>
-		/// Takes the Player to the room asociated with the door object
-		/// </summary>
-		/// <param name="room"></param>
-		private void GoToRoom(Room room)
+        public bool IsOpen { get; set; }
+
+        /// <summary>
+        /// Takes the Player to the room asociated with the door object
+        /// </summary>
+        /// <param name="room"></param>
+        private void GoToRoom(Room room)
 		{
 
 		}
@@ -44,11 +47,6 @@ namespace EksamensSpil
 		public override void Update(GameTime gameTime)
 		{
 			ChangeTheSprite();
-		}
-
-		public override void LoadContent(ContentManager content)
-		{
-			throw new NotImplementedException();
 		}
 
 		// Detects player distance from the door

@@ -32,11 +32,6 @@ namespace EksamensSpil
             ChangeTheSprite();
         }
 
-        public override void LoadContent(ContentManager content)
-        {
-
-        }
-
         public override void OnCollision(GameObject otherObject)
         {
 

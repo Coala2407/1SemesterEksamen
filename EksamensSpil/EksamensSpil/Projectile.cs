@@ -33,12 +33,6 @@ namespace EksamensSpil
             drawLayer = 0.8f;
         }
 
-
-        public override void LoadContent(ContentManager content)
-        {
-            throw new NotImplementedException();
-        }
-
         public override void OnCollision(GameObject otherObject)
         {
             if (this.shooter.GetType() == otherObject.GetType())
