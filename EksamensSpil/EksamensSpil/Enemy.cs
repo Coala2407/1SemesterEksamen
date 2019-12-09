@@ -34,23 +34,23 @@ namespace EksamensSpil
         private void initialize()
         {
             selectedWeapon = new Pistol(this);
-            GameWorld.AddGameObject(selectedWeapon, GameWorld.ActiveRoom);
+            //GameWorld.AddGameObject(selectedWeapon, GameWorld.ActiveRoom);
 
             movementSpeed = 0.1f;
             if (isBoss)
             {
-                health = 10;
-                selectedWeapon.ReloadSpeed = .5f;
+                health = 20;
+                selectedWeapon.ReloadSpeed = 1f;
                 selectedWeapon.AttackSpeed = .1f;
                 selectedWeapon.Size *= 2;
-                selectedWeapon.ClipSize = 20;
+                selectedWeapon.ClipSize = 25;
                 Pistol p = selectedWeapon as Pistol;
                 if (p != null)
                 {
                     p.ProjectileSpeed = 2800f;
                 }
                 stopThreshold = 1000f;
-                lootDropChance = 100;
+                lootDropChance = 5;
                 ChangeSprite(Assets.BossSprite);
                 drawLayer = .05f;
             }
@@ -66,11 +66,11 @@ namespace EksamensSpil
         public override void Die()
         {
             int rng = GameWorld.rng.Next(1, 101);
-            if (rng >= lootDropChance)
+            if (rng <= lootDropChance)
             {
-                GameWorld.RemoveGameObject(selectedWeapon);
+                GameWorld.AddGameObject(selectedWeapon, GameWorld.ActiveRoom);
+                selectedWeapon.Holder = null;
             }
-            selectedWeapon.Holder = null;
             GameWorld.RemoveGameObject(this);
         }
 

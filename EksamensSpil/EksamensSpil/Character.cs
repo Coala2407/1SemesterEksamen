@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace EksamensSpil
 {
@@ -101,12 +102,20 @@ namespace EksamensSpil
                 //Touched wall. Move to previous position before collision
                 position = positionPreMove;
             }
-
 			if (door != null && door.IsOpen == false)
 			{
 				//Touched wall. Move to previous position before collision
 				position = positionPreMove;
 			}
 		}
+
+        public override void Draw(SpriteBatch spriteBatch)
+        {
+            base.Draw(spriteBatch);
+            if (selectedWeapon != null)
+            {
+                selectedWeapon.Draw(spriteBatch);
+            }
+        }
     }
 }
