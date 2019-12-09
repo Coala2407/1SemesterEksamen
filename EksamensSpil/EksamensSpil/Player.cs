@@ -60,13 +60,14 @@ namespace EksamensSpil
         /// <param name="item"></param>
         public void PickUpItem(Item item)
         {
-            if(item != null && item.Holder == null)
+            if (item != null && item.Holder == null)
             {
-                if (!items.Contains(item)) 
+                if (!items.Contains(item))
                 {
-                   items.Add(item);
-                   item.Holder = this;
-                   GameWorld.RemoveGameObject(item);
+                    items.Add(item);
+                    item.Holder = this;
+                    ActivateItem(touchedItem);
+                    GameWorld.RemoveGameObject(item);
                 }
             }
         }
@@ -92,7 +93,7 @@ namespace EksamensSpil
 
         public void ActivateItem(Item item)
         {
-            if(item != null)
+            if (item != null)
             {
                 item.ItemEffect();
             }
@@ -153,7 +154,6 @@ namespace EksamensSpil
             if (Keyboard.HasBeenPressed(Keys.E))
             {
                 PickUpItem(touchedItem);
-                ActivateItem(touchedItem);
                 PickUpWeapon(touchedWeapon);
                 OpenChest(touchedChest);
             }
@@ -165,10 +165,10 @@ namespace EksamensSpil
             {
                 Attack();
             }
-			if(Keyboard.HasBeenPressed(Keys.Back))
-			{
-				DropWeapon(selectedWeapon);
-			}
+            if (Keyboard.HasBeenPressed(Keys.Back))
+            {
+                DropWeapon(selectedWeapon);
+            }
             if (velocity != Vector2.Zero)
             {
                 velocity.Normalize();
@@ -182,7 +182,7 @@ namespace EksamensSpil
 
         public override void Attack()
         {
-            if (this.selectedWeapon != null)
+            if (selectedWeapon != null)
             {
                 selectedWeapon.Attack(GameWorld.Crosshair.Position);
             }
@@ -218,7 +218,7 @@ namespace EksamensSpil
             }
             spriteFlippedY = GameWorld.Crosshair.PositionX < position.X;
 
-           
+
         }
 
         public override void OnCollision(GameObject otherObject)
@@ -230,7 +230,7 @@ namespace EksamensSpil
             Weapon weapon = otherObject as Weapon;
             Chest chest = otherObject as Chest;
             Item item = otherObject as Item;
-            if ((weapon != null && weapon.Holder == null))
+            if ((weapon != null) && (weapon.Holder == null))
             {
                 //Is touching a weapon on the ground. Ready to pick it up in handle input
                 touchedWeapon = weapon;
@@ -240,7 +240,7 @@ namespace EksamensSpil
                 //Is touching a chest. Ready to open it in handle input
                 touchedChest = chest;
             }
-            if(item != null)
+            if (item != null)
             {
                 //is touching an ítem. Ready to pick it up in handle input
                 touchedItem = item;
@@ -321,7 +321,7 @@ namespace EksamensSpil
             }
         }
 
-       
+
     }
 }
 

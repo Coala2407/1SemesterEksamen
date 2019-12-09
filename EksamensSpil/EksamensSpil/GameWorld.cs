@@ -112,7 +112,7 @@ namespace EksamensSpil
 
             //Make Crosshair
             Crosshair = new Crosshair();
-            Player = new Player(new Vector2(1000, 560));
+            Player = new Player(new Vector2(500, 460));
 
             //Make levels
             Level = new Level();
@@ -121,7 +121,7 @@ namespace EksamensSpil
             TheRoom = new Room(false, false, "The Room");
             TheHall = new Room(false, false, "The Hall");
 
-			// Make Door
+            // Make Door
 
 
             //Add rooms to level
@@ -129,10 +129,13 @@ namespace EksamensSpil
             Level.Add(TheHall);
 
             //Set active room
-            ActiveRoom = TheRoom;
+            ActiveRoom = TheHall;
 
-            //Add object to room
-            TheRoom.Add(Player);
+            //Test item
+            ActiveRoom.Add(new JewelItem(new Vector2(600, 200)));
+
+            //Add player to active room
+            ActiveRoom.Add(Player);
 
             //THE HALL
             //Weapons and chests
@@ -144,6 +147,7 @@ namespace EksamensSpil
             {
                 TheHall.Add(new Enemy(new Vector2(1600, 300 + 150 * i)));
             }
+            TheHall.Add(new Enemy(new Vector2(1600, 300 + 150), true));
             //Walls
             for (int i = 1; i <= 7; i++)
             {
@@ -154,7 +158,7 @@ namespace EksamensSpil
                 TheHall.Add(new Wall(new Vector2(64 * 7, 600 + 64 * i)));
             }
             TheHall.Add(new Wall(new Vector2(64 * 7, 600 + 64 * 5), false, Wall.WallMode.Randomized));
-
+            /////////////////////////////////////////////////////////////////////////////
             //THE ROOM
             //Walls
             for (int i = 0; i <= 2; i++)
@@ -166,8 +170,8 @@ namespace EksamensSpil
             TheRoom.Add(new Enemy(new Vector2(1800, 150)));
 
             //Items
-            TheRoom.Add(new JewelItem(new Vector2(600, 200)));
 
+            ////////////////////////////////////////////////////////////////////////////
             //Make walls random
             Level.RandomizeWalls();
 

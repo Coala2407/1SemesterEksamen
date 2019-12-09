@@ -36,10 +36,8 @@ namespace EksamensSpil
         }
 
         public override void ItemEffect()
-        {
-           
-            GameWorld.Player.Health += 2;
-            
+        {        
+            GameWorld.Player.Health += 2;     
         }
 
         public override void Update(GameTime gameTime)
