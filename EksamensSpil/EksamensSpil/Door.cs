@@ -13,13 +13,15 @@ namespace EksamensSpil
 
 		private bool isLocked;
         private bool isOpen;
+		private Room room;
 
 		/// <summary>
 		/// Default Constructor
 		/// </summary>
-		public Door(Vector2 position)
+		public Door(Vector2 position, Room room)
 		{
 			this.position = position;
+			this.room = room;
 			Initialize();
 		}
 
@@ -34,14 +36,23 @@ namespace EksamensSpil
         /// Takes the Player to the room asociated with the door object
         /// </summary>
         /// <param name="room"></param>
-        private void GoToRoom(Room room)
+        private void GoToRoom()
 		{
-
+			GameWorld.ActiveRoom = room;
+			GameWorld.Player.PositionX = 300;
+			GameWorld.Player.PositionY = 200;
+			GameWorld.ActiveRoom.Add(GameWorld.Player);
 		}
 
 		public override void OnCollision(GameObject otherObject)
 		{
-			
+			Player player = otherObject as Player;
+
+			if(player != null && IsOpen == true)
+			{
+				// Takes the player to a new room
+				GoToRoom();
+			}
 		}
 
 		public override void Update(GameTime gameTime)

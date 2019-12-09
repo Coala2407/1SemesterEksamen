@@ -172,7 +172,7 @@ namespace EksamensSpil
             TheRoom.Add(new Enemy(new Vector2(150, 950)));
 
             // Door
-            TheRoom.Add(new Door(new Vector2(100, 100)));
+            TheRoom.Add(new Door(new Vector2(100, 100), TheHall));
             ////////////////////////////////////////////////////////////////////////////
             //BOSS ROOM
             //Weapons
