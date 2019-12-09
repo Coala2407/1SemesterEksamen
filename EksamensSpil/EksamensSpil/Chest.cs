@@ -29,8 +29,8 @@ namespace EksamensSpil
         {
             //ChangeSprite(Assets.ChestSprites[0]);
             lootType = GameWorld.rng.Next(1, 101);
-			lootItem = GameWorld.rng.Next(1, 101);
-            
+			lootItem = GameWorld.rng.Next(1, 101);     
+			ChangeTheSprite();
         }
 
         public override void LoadContent(ContentManager content)
@@ -137,7 +137,7 @@ namespace EksamensSpil
 				else if (lootItem > 50)
 				{
 					item = new Sword(position);
-					item.PositionY -= sprite.Height;
+					//  item.PositionY -= sprite.Height;
 				}
 
 			}
