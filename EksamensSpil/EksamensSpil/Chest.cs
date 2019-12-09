@@ -14,7 +14,6 @@ namespace EksamensSpil
 
 		private GameObject item;
 		private bool isOpen;
-		private bool isKeyDown;
 		private bool didLootDrop;
 		private int lootType;
 		private int lootItem;

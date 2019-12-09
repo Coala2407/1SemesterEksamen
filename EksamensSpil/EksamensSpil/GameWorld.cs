@@ -89,10 +89,10 @@ namespace EksamensSpil
         {
             // TODO: Add your initialization logic here
             //Screen setup
-            graphics.PreferredBackBufferWidth = displayWidth;
-            graphics.PreferredBackBufferHeight = displayHeight;
-            //graphics.ToggleFullScreen();
-            graphics.ApplyChanges();
+            //graphics.PreferredBackBufferWidth = displayWidth;
+            //graphics.PreferredBackBufferHeight = displayHeight;
+            ////graphics.ToggleFullScreen();
+            //graphics.ApplyChanges();
 
 
             //Run, game, Run!
@@ -134,7 +134,11 @@ namespace EksamensSpil
             //Add object to room
             TheRoom.Add(Player);
 
-            //THE HALL
+			//THE HALL
+
+			// Door
+			
+
             //Weapons and chests
             TheHall.Add(new Pistol(new Vector2(1750, 200)));
             TheHall.Add(new Sword(new Vector2(1700, 900)));
@@ -168,8 +172,11 @@ namespace EksamensSpil
             //Items
             TheRoom.Add(new JewelItem(new Vector2(600, 200)));
 
-            //Make walls random
-            Level.RandomizeWalls();
+			// Door
+			TheRoom.Add(new Door(new Vector2(100, 100)));
+
+			//Make walls random
+			Level.RandomizeWalls();
 
 
             //Load Debug hitbox
