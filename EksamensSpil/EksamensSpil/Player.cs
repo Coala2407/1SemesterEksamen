@@ -134,14 +134,14 @@ namespace EksamensSpil
 		/// <param name="door"></param>
 		public void OpenDoor()
 		{
-			foreach(GameObject gameObject in GameWorld.TheRoom.GameObjects)
+			foreach(GameObject gameObject in GameWorld.ActiveRoom.GameObjects)
 			{
 
 				if(gameObject is Door)
 				{
 					Door door = gameObject as Door;
 
-					if (door.RangeToOpen(this) == true)
+					if (door.PreviousRoom != GameWorld.ActiveRoom && door.RangeToOpen() == true)
 					{
 						door.ToggleDoor();
 					}
@@ -188,7 +188,7 @@ namespace EksamensSpil
 				{
 					OpenChest(touchedChest);
 				}
-				//else if (touchedWeapon == null && touchedItem == null && touchedChest == null)
+				// else if (touchedWeapon == null && touchedItem == null && touchedChest == null)
 				{
 					OpenDoor();
 				}
@@ -333,7 +333,7 @@ namespace EksamensSpil
 
             if (distance < detectionDistance)
             {
-                Console.WriteLine($"Player within distance {distance}");
+                //Console.WriteLine($"Player within distance {distance}");
                 return true;
             }
             else

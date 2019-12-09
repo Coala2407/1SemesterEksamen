@@ -88,16 +88,16 @@ namespace EksamensSpil
         /// </summary>
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
-            //Screen setup
-            graphics.PreferredBackBufferWidth = displayWidth;
-            graphics.PreferredBackBufferHeight = displayHeight;
-            //graphics.ToggleFullScreen();
-            graphics.ApplyChanges();
+			// TODO: Add your initialization logic here
+			//Screen setup
+			graphics.PreferredBackBufferWidth = displayWidth;
+			graphics.PreferredBackBufferHeight = displayHeight;
+			//graphics.ToggleFullScreen();
+			graphics.ApplyChanges();
 
 
-            //Run, game, Run!
-            base.Initialize();
+			//Run, game, Run!
+			base.Initialize();
         }
 
         /// <summary>
@@ -139,10 +139,11 @@ namespace EksamensSpil
             //Add player to active room
             ActiveRoom.Add(Player);
 
-            //THE HALL
+			//THE HALL
 
-            // Door
-
+			// Door
+			TheHall.Add(new Door(new Vector2(400, 400), TheRoom));
+			TheHall.Add(new Door(new Vector2(1000, 1000), BossRoom));
 
             //Weapons and chests
             TheHall.Add(new Pistol(new Vector2(1750, 200)));

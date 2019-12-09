@@ -10,10 +10,10 @@ namespace EksamensSpil
 {
 	public class Door : GameObject
 	{
-
 		private bool isLocked;
         private bool isOpen;
-		private Room room;
+		//private Room room;
+		private Room previousRoom;
 
 		/// <summary>
 		/// Default Constructor
@@ -23,6 +23,15 @@ namespace EksamensSpil
 			this.position = position;
 			this.room = room;
 			Initialize();
+		}
+
+		public Room PreviousRoom
+		{
+			get { return previousRoom; }
+			set
+			{
+				previousRoom = value;
+			}
 		}
 
 		public void Initialize()
@@ -38,10 +47,13 @@ namespace EksamensSpil
         /// <param name="room"></param>
         private void GoToRoom()
 		{
+			this.IsOpen = false;
+			previousRoom = GameWorld.ActiveRoom;
 			GameWorld.ActiveRoom = room;
 			GameWorld.Player.PositionX = 300;
 			GameWorld.Player.PositionY = 200;
 			GameWorld.ActiveRoom.Add(GameWorld.Player);
+			//GameWorld.RemoveGameObject(GameWorld.Player);
 		}
 
 		public override void OnCollision(GameObject otherObject)
@@ -61,9 +73,9 @@ namespace EksamensSpil
 		}
 
 		// Detects player distance from the door
-		public bool RangeToOpen(Player player)
+		public bool RangeToOpen()
 		{
-			Vector2 vectorDirection = player.Position - this.position;
+			Vector2 vectorDirection = GameWorld.Player.Position - this.position;
 
 			float distance = vectorDirection.Length();
 
