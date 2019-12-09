@@ -138,7 +138,7 @@ namespace EksamensSpil
 				else if (lootItem > 50)
 				{
 					item = new Sword(position);
-					item.PositionY -= sprite.Height;
+					//  item.PositionY -= sprite.Height;
 				}
 
 			}
