@@ -51,6 +51,7 @@ namespace EksamensSpil
 			throw new NotImplementedException();
 		}
 
+		// Detects player distance from the door
 		public bool RangeToOpen(Player player)
 		{
 			Vector2 vectorDirection = player.Position - this.position;
