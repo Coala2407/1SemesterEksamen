@@ -11,13 +11,11 @@ namespace EksamensSpil
 {
     public class Chest : GameObject
     {
-
-        private GameObject item;
-        private bool isOpen;
-        private bool isKeyDown;
-        private bool didLootDrop;
-        private int lootType;
-        private int lootItem;
+		private GameObject item;
+		private bool isOpen;
+		private bool didLootDrop;
+		private int lootType;
+		private int lootItem;
 
 
         public Chest(Vector2 position)

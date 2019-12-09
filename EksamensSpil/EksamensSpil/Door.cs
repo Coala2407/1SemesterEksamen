@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Content;
 
 namespace EksamensSpil
 {
-	class Door : GameObject
+	public class Door : GameObject
 	{
 
 		private bool isLocked;
@@ -18,12 +18,13 @@ namespace EksamensSpil
 		/// </summary>
 		public Door(Vector2 position)
 		{
-
+			this.position = position;
+			Initialize();
 		}
 
-		public void initialize()
+		public void Initialize()
 		{
-			drawLayer = 1.0f;
+			drawLayer = 0.9f;
 		}
 
 		/// <summary>
@@ -37,7 +38,7 @@ namespace EksamensSpil
 
 		public override void OnCollision(GameObject otherObject)
 		{
-			throw new NotImplementedException();
+			
 		}
 
 		public override void Update(GameTime gameTime)
@@ -48,6 +49,24 @@ namespace EksamensSpil
 		public override void LoadContent(ContentManager content)
 		{
 			throw new NotImplementedException();
+		}
+
+		// Detects player distance from the door
+		public bool RangeToOpen(Player player)
+		{
+			Vector2 vectorDirection = player.Position - this.position;
+
+			float distance = vectorDirection.Length();
+
+			if(distance < 100)
+			{
+				Console.WriteLine("Door can open");
+				return true;
+			}
+			else
+			{
+				return false;
+			}
 		}
 
 		public void ToggleDoor()
@@ -61,7 +80,8 @@ namespace EksamensSpil
 			{
 				CloseDoor();
 			}
-
+			
+			
 		}
 
 		public void OpenDoor()
@@ -84,7 +104,7 @@ namespace EksamensSpil
 		{
 			if (IsOpen == true)
 			{
-				ChangeSprite(null);
+				ChangeSprite(Assets.DoorSprites[1]);
 			}
 			else
 			{
