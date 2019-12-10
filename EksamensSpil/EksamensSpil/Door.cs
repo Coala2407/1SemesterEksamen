@@ -85,7 +85,7 @@ namespace EksamensSpil
 
             if (distance < 100)
             {
-                Console.WriteLine("Door can open");
+                //Console.WriteLine("Door can open");
                 return true;
             }
             else

@@ -113,7 +113,7 @@ namespace EksamensSpil
 
             //Make Crosshair
             Crosshair = new Crosshair();
-            Player = new Player(new Vector2(200, 300));
+            Player = new Player(new Vector2(700, 500));
 
             //Make levels
             Level = new Level();
@@ -140,10 +140,9 @@ namespace EksamensSpil
             ActiveRoom.Add(Player);
 
 			//THE HALL
-
 			// Door
 			TheHall.Add(new Door(new Vector2(400, 400), TheRoom));
-			TheHall.Add(new Door(new Vector2(1000, 1000), BossRoom));
+			TheHall.Add(new Door(new Vector2(400, 700), BossRoom));
 
             //Weapons and chests
             TheHall.Add(new Pistol(new Vector2(1750, 200)));
@@ -173,17 +172,19 @@ namespace EksamensSpil
             TheRoom.Add(new Enemy(new Vector2(150, 950)));
 
             // Door
-            TheRoom.Add(new Door(new Vector2(100, 100), TheHall));
+            TheRoom.Add(new Door(new Vector2(600, 100), TheHall));
             ////////////////////////////////////////////////////////////////////////////
             //BOSS ROOM
             //Weapons
             BossRoom.Add(new Pistol(new Vector2(1800, 200)));
-            //Enemie
+            //Enemies
             BossRoom.Add(new Enemy(new Vector2(1500, 600), true));
             for (int i = 0; i < 5; i++)
             {
                 BossRoom.Add(new Enemy(new Vector2(1800, 300 + 150 * i)));
             }
+            //Door
+            BossRoom.Add(new Door(new Vector2(100, 990), TheHall));
 
             ////////////////////////////////////////////////////////////////////////////
             //Make walls random

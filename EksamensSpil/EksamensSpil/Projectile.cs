@@ -35,6 +35,10 @@ namespace EksamensSpil
 
         public override void OnCollision(GameObject otherObject)
         {
+            if (shooter == null)
+            {
+                return;
+            }
             if (this.shooter.GetType() == otherObject.GetType())
             {
                 return;

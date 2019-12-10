@@ -41,8 +41,8 @@ namespace EksamensSpil
             SwordSprite = content.Load<Texture2D>("sword1");
             SwingEffectSprite = content.Load<Texture2D>("swoosh");
             JewelSprite = content.Load<Texture2D>("Jewel");
-
             Background1 = content.Load<Texture2D>("background1");
+
 			DoorSprites = new Texture2D[2];
 			for (int i = 0; i < DoorSprites.Length; ++i)
 			{

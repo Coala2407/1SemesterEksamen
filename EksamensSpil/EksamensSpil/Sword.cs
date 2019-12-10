@@ -52,7 +52,7 @@ namespace EksamensSpil
 			{
 				cooldown = attackSpeed;
 				GameWorld.AddGameObject(new SwordSwing(this, Range), GameWorld.ActiveRoom);
-				Console.WriteLine("Swing sword");
+				//Console.WriteLine("Swing sword");
 				return shootResult;
 			}
 

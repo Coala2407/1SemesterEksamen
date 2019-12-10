@@ -60,7 +60,7 @@ namespace EksamensSpil
             {
                 ammo--;
                 cooldown = attackSpeed;
-                Console.WriteLine($"Shoot pistol: {ammo}");
+                //Console.WriteLine($"Shoot pistol: {ammo}");
                 GameWorld.AddGameObject(new Projectile(this, projectileSpeed, targetCords), GameWorld.ActiveRoom);
                 return shootResult;
             }

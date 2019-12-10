@@ -142,7 +142,7 @@ namespace EksamensSpil
 
             if (character.TakeDamage == true && holder != enemy)
             {
-                Console.WriteLine("Reload Canceled");
+                //Console.WriteLine("Reload Canceled");
 				//cooldown = 0;
 				canGunReload = false;
 				character.TakeDamage = false;

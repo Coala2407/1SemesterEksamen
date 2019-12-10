@@ -21,21 +21,20 @@ namespace EksamensSpil
         {
             this.position = position;
             sprite = Assets.EnemySprite;
-            initialize();
+            Initialize();
         }
 
         public Enemy(Vector2 position, bool isBoss)
         {
             this.position = position;
             this.isBoss = isBoss;
-            initialize();
+            Initialize();
         }
 
-        private void initialize()
+        public void Initialize()
         {
             selectedWeapon = new Pistol(this);
             //GameWorld.AddGameObject(selectedWeapon, GameWorld.ActiveRoom);
-
             movementSpeed = 0.1f;
             if (isBoss)
             {
@@ -73,6 +72,13 @@ namespace EksamensSpil
             }
             //GameWorld.RemoveGameObject(this);
             isAlive = false;
+            foreach (Room room in GameWorld.Level.Rooms)
+            {
+                if (room != GameWorld.ActiveRoom)
+                {
+                    room.RandomizeWalls();
+                }
+            }
         }
 
         //TODO Do we need this?

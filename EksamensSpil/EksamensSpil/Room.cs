@@ -116,14 +116,18 @@ namespace EksamensSpil
 
         public void RespawnEnemies()
         {
-            foreach (GameObject gameobject in GameObjects)
+            foreach (Enemy en in gameObjects.Where(x => x.GetType().Name == "Enemy"))
             {
-                Enemy enemy = gameobject as Enemy;
-                if (enemy == null)
-                {
-                    continue;
-                }
-                enemy.IsAlive = true;
+                en.IsAlive = true;
+                en.Initialize();
+            }
+        }
+
+        public void RandomizeWalls()
+        {
+            foreach (Wall wall in gameObjects.Where(x => x.GetType().Name == "Wall"))
+            {
+                wall.Randomize();
             }
         }
     }
