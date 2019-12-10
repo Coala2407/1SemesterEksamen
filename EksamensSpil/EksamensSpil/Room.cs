@@ -11,7 +11,7 @@ namespace EksamensSpil
     {
         List<GameObject> gameObjects = new List<GameObject>();
 
-        bool isSpawnable;
+        bool isRespawnable;
 
         bool isExit;
 
@@ -31,12 +31,12 @@ namespace EksamensSpil
         /// Constructor. Most used. 
         /// </summary>
         /// <param name="gameObjects">Objects inside the room</param>
-        /// <param name="isSpawnable">Can enemies spawn randomly inside the room?</param>
+        /// <param name="isRespawnable">Can enemies spawn randomly inside the room?</param>
         /// <param name="isBossRoom">Is it a boss room?</param>
-        public Room(List<GameObject> gameObjects, bool isSpawnable, bool isBossRoom, string name)
+        public Room(List<GameObject> gameObjects, bool isRespawnable, bool isBossRoom, string name)
         {
             GameObjects = gameObjects;
-            this.isSpawnable = isSpawnable;
+            this.isRespawnable = isRespawnable;
             this.isBossRoom = isBossRoom;
             this.name = name;
             initialize();
@@ -45,11 +45,11 @@ namespace EksamensSpil
         /// <summary>
         /// Make empty room
         /// </summary>
-        /// <param name="isSpawnable">Can enemies spawn randomly inside the room?</param>
+        /// <param name="isRespawnable">Can enemies spawn randomly inside the room?</param>
         /// <param name="isBossRoom">Is it a boss room?</param>
-        public Room(bool isSpawnable, bool isBossRoom, string name)
+        public Room(bool isRespawnable, bool isBossRoom, string name)
         {
-            this.isSpawnable = isSpawnable;
+            this.isRespawnable = isRespawnable;
             this.isBossRoom = isBossRoom;
             this.name = name;
             initialize();
@@ -64,7 +64,6 @@ namespace EksamensSpil
             this.isExit = isExit;
         }
 
-        //Fix this shit
         private void initialize()
         {
             //Left wall
@@ -89,6 +88,12 @@ namespace EksamensSpil
             }
         }
 
+        public bool IsRespawnable
+        {
+            get { return isRespawnable; }
+            set { isRespawnable = value; }
+        }
+
         /// <summary>
         /// Add an object to the room
         /// </summary>
@@ -106,6 +111,19 @@ namespace EksamensSpil
             if (gameObject != null)
             {
                 GameObjects.Remove(gameObject);
+            }
+        }
+
+        public void RespawnEnemies()
+        {
+            foreach (GameObject gameobject in GameObjects)
+            {
+                Enemy enemy = gameobject as Enemy;
+                if (enemy == null)
+                {
+                    continue;
+                }
+                enemy.IsAlive = true;
             }
         }
     }

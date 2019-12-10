@@ -42,17 +42,12 @@ namespace EksamensSpil
             else
             {
                 Character c = otherObject as Character;
-				Enemy enemy = otherObject as Enemy;
-                if (c != null)
+                if (c != null && c.IsAlive)
                 {
                     c.UpdateHealth(1);
-					if(otherObject != enemy)
-					{
-						c.takeDamage = true;
-					}
+                    c.TakeDamage = true;
                     GameWorld.RemoveGameObject(this);
                 }
-
             }
 
             //Projectile hit wall
@@ -66,13 +61,13 @@ namespace EksamensSpil
                 }
             }
 
-			// Projectile hit closed door
+            // Projectile hit closed door
 
-			Door door = otherObject as Door;
-			if(door != null && door.IsOpen == false)
-			{
-				GameWorld.RemoveGameObject(this);
-			}
+            Door door = otherObject as Door;
+            if (door != null && door.IsOpen == false)
+            {
+                GameWorld.RemoveGameObject(this);
+            }
         }
 
         public override void Update(GameTime gameTime)

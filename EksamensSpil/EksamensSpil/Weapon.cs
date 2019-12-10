@@ -140,12 +140,12 @@ namespace EksamensSpil
 			Character character = otherObject as Character;
 			Enemy enemy = otherObject as Enemy;
 
-            if (character.takeDamage == true && holder != enemy)
+            if (character.TakeDamage == true && holder != enemy)
             {
                 Console.WriteLine("Reload Canceled");
 				//cooldown = 0;
 				canGunReload = false;
-				character.takeDamage = false;
+				character.TakeDamage = false;
             }
 
             if (canGunReload == true && ammo < clipSize && cooldown <= 0)

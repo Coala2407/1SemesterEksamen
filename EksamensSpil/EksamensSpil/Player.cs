@@ -233,6 +233,7 @@ namespace EksamensSpil
         {
             //Get from superclass
             base.Update(gameTime);
+
             Move(gameTime);
             HandleInput();
             ItemDetectionRange();

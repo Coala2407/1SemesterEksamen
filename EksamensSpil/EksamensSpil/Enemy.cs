@@ -71,7 +71,8 @@ namespace EksamensSpil
                 GameWorld.AddGameObject(selectedWeapon, GameWorld.ActiveRoom);
                 selectedWeapon.Holder = null;
             }
-            GameWorld.RemoveGameObject(this);
+            //GameWorld.RemoveGameObject(this);
+            isAlive = false;
         }
 
         //TODO Do we need this?
@@ -80,12 +81,12 @@ namespace EksamensSpil
 
         }
 
-
-
-
-
         public override void Update(GameTime gameTime)
         {
+            if (!isAlive)
+            {
+                return;
+            }
             //Get from superclass
             base.Update(gameTime);
             velocity = GameWorld.Player.Position - position;
@@ -127,14 +128,7 @@ namespace EksamensSpil
             {
                 selectedWeapon.Attack(GameWorld.Player.Position);
             }
-
-
         }
-
-        public void Update(Player player)
-        {
-        }
-
 
         public override void OnCollision(GameObject otherObject)
         {

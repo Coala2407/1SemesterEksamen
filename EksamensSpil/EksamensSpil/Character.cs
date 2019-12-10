@@ -20,21 +20,33 @@ namespace EksamensSpil
         //Invinsibility frames
         protected float invinsibilityTimeAfterDamage = .25f;
         protected float invinsibilityTimer;
-		public bool takeDamage;
-        public bool isAlive = true;
+        protected bool takeDamage;
+        protected bool isAlive = true;
 
 
-		public int Health
+        public int Health
         {
             get { return health; }
             set
             {
-				health = value;				
+                health = value;
                 if (health < 0)
                 {
                     health = 0;
                 }
             }
+        }
+
+        public bool TakeDamage
+        {
+            get { return takeDamage; }
+            set { takeDamage = value; }
+        }
+
+        public bool IsAlive
+        {
+            get { return isAlive; }
+            set { isAlive = value; }
         }
 
         public Weapon SelectedWeapon
@@ -77,6 +89,7 @@ namespace EksamensSpil
 
         public override void Update(GameTime gameTime)
         {
+
             positionPreMove = position;
             invinsibilityTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
 
@@ -97,25 +110,28 @@ namespace EksamensSpil
         public override void OnCollision(GameObject otherObject)
         {
             Wall wall = otherObject as Wall;
-			Door door = otherObject as Door;
+            Door door = otherObject as Door;
             if (wall != null && !wall.IsHidden)
             {
                 //Touched wall. Move to previous position before collision
                 position = positionPreMove;
             }
-			if (door != null && door.IsOpen == false)
-			{
-				//Touched wall. Move to previous position before collision
-				position = positionPreMove;
-			}
-		}
+            if (door != null && door.IsOpen == false)
+            {
+                //Touched wall. Move to previous position before collision
+                position = positionPreMove;
+            }
+        }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            base.Draw(spriteBatch);
-            if (selectedWeapon != null)
+            if (isAlive)
             {
-                selectedWeapon.Draw(spriteBatch);
+                base.Draw(spriteBatch);
+                if (selectedWeapon != null)
+                {
+                    selectedWeapon.Draw(spriteBatch);
+                }
             }
         }
     }
