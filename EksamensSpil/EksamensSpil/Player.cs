@@ -46,7 +46,7 @@ namespace EksamensSpil
             ChangeSprite(Assets.PlayerSprite);
             drawLayer = 0.1f;
             health = 10;
-			invinsibilityTimeAfterDamage = 99999999999999999999999999999999999999f;
+			//invinsibilityTimeAfterDamage = 99999999999999999999999999999999999999f;
         }
 
         /// <summary>

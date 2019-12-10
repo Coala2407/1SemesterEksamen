@@ -21,6 +21,7 @@ namespace EksamensSpil
         protected float invinsibilityTimeAfterDamage = .25f;
         protected float invinsibilityTimer;
 		public bool takeDamage;
+        public bool isAlive = true;
 
 
 		public int Health

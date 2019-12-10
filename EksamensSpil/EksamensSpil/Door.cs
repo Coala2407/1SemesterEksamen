@@ -50,10 +50,10 @@ namespace EksamensSpil
 			this.IsOpen = false;
 			previousRoom = GameWorld.ActiveRoom;
 			GameWorld.ActiveRoom = room;
-			GameWorld.Player.PositionX = 300;
-			GameWorld.Player.PositionY = 200;
-			GameWorld.ActiveRoom.Add(GameWorld.Player);
-			//GameWorld.RemoveGameObject(GameWorld.Player);
+			//GameWorld.Player.PositionX = 300;
+			//GameWorld.Player.PositionY = 200;
+            GameWorld.ActiveRoom.Remove(GameWorld.Player);
+            room.Add(GameWorld.Player);
 		}
 
 		public override void OnCollision(GameObject otherObject)
