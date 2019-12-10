@@ -141,7 +141,7 @@ namespace EksamensSpil
 				{
 					Door door = gameObject as Door;
 
-					if (door.PreviousRoom != GameWorld.ActiveRoom && door.RangeToOpen() == true)
+					if (door.RangeToOpen() == true)
 					{
 						door.ToggleDoor();
 					}
