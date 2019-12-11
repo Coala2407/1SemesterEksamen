@@ -8,10 +8,20 @@ using System.Threading.Tasks;
 
 namespace EksamensSpil
 {
+    /// <summary>
+    /// UI Elements in the game
+    /// </summary>
     public static class UI
     {
+        /// <summary>
+        /// Default font
+        /// </summary>
         private static SpriteFont UIDefault = Assets.UIDefault;
 
+        /// <summary>
+        /// Show ammo and clip for the player's selected pistol
+        /// </summary>
+        /// <param name="spriteBatch"></param>
         public static void AmmoAndClip(SpriteBatch spriteBatch)
         {
             Player player = GameWorld.Player;
@@ -23,6 +33,10 @@ namespace EksamensSpil
             }
         }
 
+        /// <summary>
+        /// Show the player's health
+        /// </summary>
+        /// <param name="spriteBatch"></param>
         public static void Health(SpriteBatch spriteBatch)
         {
             Player player = GameWorld.Player;

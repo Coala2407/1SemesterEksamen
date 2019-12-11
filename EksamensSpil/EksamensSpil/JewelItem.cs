@@ -19,8 +19,7 @@ namespace EksamensSpil
         public JewelItem(GameObject holder)
         {
 
-            this.holder = holder;
-            
+            this.holder = holder;         
             Initialize();
         }
 
@@ -31,8 +30,7 @@ namespace EksamensSpil
             if (holder != null)
             {
                 position = holder.Position;
-            }
-            
+            }         
         }
 
         public override void ItemEffect()

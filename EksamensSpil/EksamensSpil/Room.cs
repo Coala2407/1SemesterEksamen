@@ -10,16 +10,10 @@ namespace EksamensSpil
     public class Room
     {
         List<GameObject> gameObjects = new List<GameObject>();
-
+        //if true, Enemies can respawn in the room
         bool isRespawnable;
-
-        bool isExit;
-
+        //if true, The room is a boss room
         bool isBossRoom;
-
-        float exitTimer;
-
-        string name;
 
         public List<GameObject> GameObjects
         {
@@ -33,12 +27,11 @@ namespace EksamensSpil
         /// <param name="gameObjects">Objects inside the room</param>
         /// <param name="isRespawnable">Can enemies spawn randomly inside the room?</param>
         /// <param name="isBossRoom">Is it a boss room?</param>
-        public Room(List<GameObject> gameObjects, bool isRespawnable, bool isBossRoom, string name)
+        public Room(List<GameObject> gameObjects, bool isRespawnable, bool isBossRoom)
         {
             GameObjects = gameObjects;
             this.isRespawnable = isRespawnable;
             this.isBossRoom = isBossRoom;
-            this.name = name;
             initialize();
         }
 
@@ -47,21 +40,11 @@ namespace EksamensSpil
         /// </summary>
         /// <param name="isRespawnable">Can enemies spawn randomly inside the room?</param>
         /// <param name="isBossRoom">Is it a boss room?</param>
-        public Room(bool isRespawnable, bool isBossRoom, string name)
+        public Room(bool isRespawnable, bool isBossRoom)
         {
             this.isRespawnable = isRespawnable;
             this.isBossRoom = isBossRoom;
-            this.name = name;
             initialize();
-        }
-
-        /// <summary>
-        /// Constructor for making the exit
-        /// </summary>
-        /// <param name="isExit"></param>
-        public Room(bool isExit)
-        {
-            this.isExit = isExit;
         }
 
         private void initialize()
@@ -97,7 +80,7 @@ namespace EksamensSpil
         /// <summary>
         /// Add an object to the room
         /// </summary>
-        /// <param name="gameObject"></param>
+        /// <param name="gameObject">The object to add</param>
         public void Add(GameObject gameObject)
         {
             if (gameObject != null)
@@ -106,6 +89,10 @@ namespace EksamensSpil
             }
         }
 
+        /// <summary>
+        /// Remove an object from the room
+        /// </summary>
+        /// <param name="gameObject">The object to remove</param>
         public void Remove(GameObject gameObject)
         {
             if (gameObject != null)
@@ -114,6 +101,9 @@ namespace EksamensSpil
             }
         }
 
+        /// <summary>
+        /// Respawn all enemies
+        /// </summary>
         public void RespawnEnemies()
         {
             foreach (Enemy en in gameObjects.Where(x => x.GetType().Name == "Enemy"))
@@ -123,6 +113,9 @@ namespace EksamensSpil
             }
         }
 
+        /// <summary>
+        /// Randomize all non-fixed walls
+        /// </summary>
         public void RandomizeWalls()
         {
             foreach (Wall wall in gameObjects.Where(x => x.GetType().Name == "Wall"))

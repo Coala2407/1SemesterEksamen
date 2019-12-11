@@ -14,6 +14,7 @@ namespace EksamensSpil
     {
 
         public static Vector2 currentPosition;
+
         public Crosshair()
         {
             drawLayer = 1;

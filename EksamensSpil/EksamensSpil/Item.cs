@@ -23,7 +23,7 @@ namespace EksamensSpil
             set { holder = value; }
         }
 
-
+        //Different stat changes for the user of the item
         public float ReloadSpeedChange
         {
             get { return reloadSpeedChange; }
@@ -47,35 +47,27 @@ namespace EksamensSpil
             get { return clipSizeChange; }
             set { }
         }
-		public string Name
-		{
-			get
-			{
-				return name;
-			}
-			set
-			{
 
-			}
-		}
-
-       
-
+        /// <summary>
+        /// Use the item
+        /// </summary>
 		public void Use()
 		{
-
 		}
-
 
         public override void OnCollision(GameObject otherObject)
         {
             
         }
 
+        /// <summary>
+        /// The effect the item has
+        /// </summary>
         public virtual void ItemEffect()
         {
 
         }
+
         public override void Update(GameTime gameTime)
 		{
 			//throw new NotImplementedException();

@@ -16,8 +16,6 @@ namespace EksamensSpil
         private Vector2 targetCords;
         private Vector2 movement;
         private Pistol pistol;
-        Weapon weapon;
-        Enemy enemy;
         private GameObject shooter;
 
         public Projectile(Pistol pistol, float movementSpeed, Vector2 targetCords)

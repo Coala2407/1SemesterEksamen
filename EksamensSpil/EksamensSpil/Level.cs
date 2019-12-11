@@ -16,6 +16,10 @@ namespace EksamensSpil
             set { rooms = value; }
         }
 
+        /// <summary>
+        /// Add a room to the level
+        /// </summary>
+        /// <param name="room"></param>
         public void Add(Room room)
         {
             if (room != null)
@@ -23,7 +27,9 @@ namespace EksamensSpil
                 rooms.Add(room);
             }
         }
-
+        /// <summary>
+        /// Randomize all the non-fixed walls in the level
+        /// </summary>
         public void RandomizeWalls()
         {
             foreach (Room room in Rooms)

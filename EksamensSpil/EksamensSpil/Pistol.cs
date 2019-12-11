@@ -31,6 +31,7 @@ namespace EksamensSpil
 
         private void initialize()
         {
+            //Random stats. Taken from Weapon
             int randomAmmo = GameWorld.rng.Next(4, 8);
             this.ammo = randomAmmo;
             this.attackSpeed = (float)GameWorld.rng.Next(50, 81) / 100;
@@ -51,6 +52,11 @@ namespace EksamensSpil
             set { projectileSpeed = value; }
         }
 
+        /// <summary>
+        /// Attack with the pistol
+        /// </summary>
+        /// <param name="targetCords">The position the projectile should go to</param>
+        /// <returns></returns>
         public override ShootResult Attack(Vector2 targetCords)
         {
 
