@@ -10,6 +10,7 @@ namespace EksamensSpil
 {
     public static class Assets
     {
+        //Sprites
         public static Texture2D PlayerSprite;
         public static Texture2D EnemySprite;
         public static Texture2D EnemyBulletSprite;
@@ -28,7 +29,10 @@ namespace EksamensSpil
         //UI Elements
         public static SpriteFont UIDefault;
 
-
+        /// <summary>
+        /// Load all game assets
+        /// </summary>
+        /// <param name="content"></param>
         public static void LoadAssets(ContentManager content)
         {
             PlayerSprite = content.Load<Texture2D>("archerguy");

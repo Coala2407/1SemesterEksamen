@@ -14,25 +14,12 @@ namespace EksamensSpil
 
         private List<Weapon> weapons = new List<Weapon>();
         private List<Item> items = new List<Item>();
-        private Item selectedItem;
-        private Room previousRoom;
-        private bool hasJustClicked;
         private float detectionDistance = 100;
 
-        //Collisions
-        private bool collideBottom;
-        private bool collideTop;
-        private bool collideLeft;
-        private bool collideRight;
         //For picking up weapons and items
-        private bool isTouchingWeapon;
-        private bool isTouchingItem;
-        private bool isTouchingChest;
-		private bool isTouchingDoor;
         private Weapon touchedWeapon;
         private Item touchedItem;
         private Chest touchedChest;
-        private Wall touchedWall;
 		private Door touchedDoor;
 
 
@@ -47,14 +34,6 @@ namespace EksamensSpil
             drawLayer = 0.1f;
             health = 10;
             //invinsibilityTimeAfterDamage = 99999999999999999999999999999999999999f;
-        }
-
-        /// <summary>
-        /// Method to use item.
-        /// </summary>
-        public void UseItem()
-        {
-
         }
 
         /// <summary>
@@ -102,7 +81,6 @@ namespace EksamensSpil
             }
         }
 
-        // TODO: need to add a position for where the weapons spawn
         public void DropWeapon(Weapon weapon)
         {
             if (weapon != null)
@@ -236,7 +214,7 @@ namespace EksamensSpil
 
             Move(gameTime);
             HandleInput();
-            ItemDetectionRange();
+            //ItemDetectionRange();
 
             if (selectedWeapon != null)
             {
@@ -318,31 +296,31 @@ namespace EksamensSpil
 			}
         }
 
-        public bool ItemDetectionRange()
-        {
-            Vector2 directionVector = new Vector2(0, 0);
+        //public bool ItemDetectionRange()
+        //{
+        //    Vector2 directionVector = new Vector2(0, 0);
 
-            foreach (GameObject gameObject in GameWorld.ActiveRoom.GameObjects)
-            {
-                if (gameObject is Weapon || gameObject is Item || gameObject is Chest || gameObject is Door)
-                {
-                    directionVector = gameObject.Position - GameWorld.Player.position;
-                }
-            }
+        //    foreach (GameObject gameObject in GameWorld.ActiveRoom.GameObjects)
+        //    {
+        //        if (gameObject is Weapon || gameObject is Item || gameObject is Chest || gameObject is Door)
+        //        {
+        //            directionVector = gameObject.Position - GameWorld.Player.position;
+        //        }
+        //    }
 
-            float distance = directionVector.Length();
+        //    float distance = directionVector.Length();
 
-            if (distance < detectionDistance)
-            {
-                //Console.WriteLine($"Player within distance {distance}");
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+        //    if (distance < detectionDistance)
+        //    {
+        //        //Console.WriteLine($"Player within distance {distance}");
+        //        return true;
+        //    }
+        //    else
+        //    {
+        //        return false;
+        //    }
 
-        }
+        //}
 
         private void CycleWeapons()
         {
@@ -365,8 +343,6 @@ namespace EksamensSpil
                 selectedWeapon = weapons[0];
             }
         }
-
-
     }
 }
 

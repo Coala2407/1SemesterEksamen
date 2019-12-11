@@ -19,7 +19,6 @@ namespace EksamensSpil
 
         protected float size = 1;
 
-        //TODO: Placed name here to avoid repeating the same variable. 
         protected string name;
 
         protected Vector2 origin;
@@ -31,6 +30,7 @@ namespace EksamensSpil
         protected Room room;
 
         protected bool spriteFlippedX;
+
         protected bool spriteFlippedY;
 
         protected bool isHidden;
@@ -86,10 +86,22 @@ namespace EksamensSpil
         public float Size { get => size; set => size = value; }
         public bool IsHidden { get; set; }
 
+        /// <summary>
+        /// Runs every frame
+        /// </summary>
+        /// <param name="gameTime"></param>
         public abstract void Update(GameTime gameTime);
 
+        /// <summary>
+        /// Runs on collision with other objects
+        /// </summary>
+        /// <param name="otherObject"></param>
         public abstract void OnCollision(GameObject otherObject);
 
+        /// <summary>
+        /// Draw object sprite
+        /// </summary>
+        /// <param name="spriteBatch"></param>
         public virtual void Draw(SpriteBatch spriteBatch)
         {
             if (sprite != null && !IsHidden)
@@ -108,6 +120,10 @@ namespace EksamensSpil
             }
         }
 
+        /// <summary>
+        /// Create the collision box
+        /// </summary>
+        /// <returns></returns>
         public Rectangle GetCollisionBox()
         {
             if (sprite != null)
@@ -120,6 +136,10 @@ namespace EksamensSpil
             }
         }
 
+        /// <summary>
+        /// Check for collisions with other objects
+        /// </summary>
+        /// <param name="otherObject"></param>
         public virtual void CheckCollision(GameObject otherObject)
         {
             if (GetCollisionBox().Intersects(otherObject.GetCollisionBox()))

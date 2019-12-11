@@ -42,12 +42,11 @@ namespace EksamensSpil
             set { attackSpeed = value; }
         }
 
-        //public int ClipSize
-        //{
-        //    get { return clipSize; }
-        //    set { clipSize = value; }
-        //}
-
+        /// <summary>
+        /// Use the weapon to attack
+        /// </summary>
+        /// <param name="targetCords">The position of the attack</param>
+        /// <returns></returns>
         public virtual ShootResult Attack(Vector2 targetCords)
         {
 
@@ -83,52 +82,25 @@ namespace EksamensSpil
 
         }
 
-        public string Name
-        {
-            get
-            {
-                return name;
-            }
-            set
-            {
-
-            }
-        }
-
         public int Ammo
         {
-            get
-            {
-                return ammo;
-            }
-            set
-            {
-
-            }
+            get { return ammo;}
         }
 
         public int ClipSize
         {
             get
-            {
-                return clipSize;
-            }
+            { return clipSize; }
             set
-            {
-                clipSize = value;
-            }
+            { clipSize = value; }
         }
 
         public override void OnCollision(GameObject otherObject)
-        {
-            //throw new NotImplementedException();
-        }
+        {}
 
         public override void Update(GameTime gameTime)
-        {
-        }
+        {}
 
-		// TODO: Meybe give Reload Timer it's own cooldown variable or make some other changes
 		/// <summary>
 		/// Adds a timer before the weapon reloads. The timer can be cancelled if gameObject(player) takes damage 
 		/// </summary>

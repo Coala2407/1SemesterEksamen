@@ -85,7 +85,6 @@ namespace EksamensSpil
 
             if (distance < 100)
             {
-                //Console.WriteLine("Door can open");
                 return true;
             }
             else
@@ -96,7 +95,6 @@ namespace EksamensSpil
 
         public void ToggleDoor()
         {
-
             if (IsDoorOpen() == false)
             {
                 OpenDoor();
@@ -105,8 +103,6 @@ namespace EksamensSpil
             {
                 CloseDoor();
             }
-
-
         }
 
         public void OpenDoor()

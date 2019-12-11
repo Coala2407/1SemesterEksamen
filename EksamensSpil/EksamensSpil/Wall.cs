@@ -15,7 +15,9 @@ namespace EksamensSpil
         private bool canBeRandomized;
         private bool canBeToggled;
 
-        //Determines wether the wall is fixed, randomizable or toggleable. 
+        /// <summary>
+        /// Determines wether the wall is fixed, randomizable or toggleable. 
+        /// </summary>
         public enum WallMode
         {
             Fixed = 0,
@@ -64,7 +66,7 @@ namespace EksamensSpil
         }
 
         /// <summary>
-        /// Randomizes tiles
+        /// Randomize the wall
         /// </summary>
         public void Randomize()
         {
@@ -92,7 +94,6 @@ namespace EksamensSpil
                 }
             }
         }
-
 
         public override void OnCollision(GameObject otherObject)
         {

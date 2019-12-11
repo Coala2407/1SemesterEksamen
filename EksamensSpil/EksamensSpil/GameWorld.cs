@@ -119,12 +119,9 @@ namespace EksamensSpil
             Level = new Level();
 
             //Make rooms
-            TheRoom = new Room(true, false, "The Room");
-            TheHall = new Room(true, false, "The Hall");
-            BossRoom = new Room(true, true, "The Boss");
-
-            // Make Door
-
+            TheRoom = new Room(true, false);
+            TheHall = new Room(true, false);
+            BossRoom = new Room(true, true);
 
             //Add rooms to level
             Level.Add(TheRoom);
@@ -170,7 +167,6 @@ namespace EksamensSpil
             TheRoom.Add(new Enemy(new Vector2(1800, 150)));
             TheRoom.Add(new Enemy(new Vector2(1800, 950)));
             TheRoom.Add(new Enemy(new Vector2(150, 950)));
-
             // Door
             TheRoom.Add(new Door(new Vector2(600, 100), TheHall));
             ////////////////////////////////////////////////////////////////////////////
@@ -185,7 +181,6 @@ namespace EksamensSpil
             }
             //Door
             BossRoom.Add(new Door(new Vector2(100, 990), TheHall));
-
             ////////////////////////////////////////////////////////////////////////////
             //Make walls random
             Level.RandomizeWalls();
@@ -294,6 +289,5 @@ namespace EksamensSpil
         {
             return Mouse.GetState().Position.ToVector2();
         }
-
     }
 }

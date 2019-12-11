@@ -61,7 +61,6 @@ namespace EksamensSpil
             }
         }
 
-
         public override void Die()
         {
             int rng = GameWorld.rng.Next(1, 101);
@@ -72,6 +71,7 @@ namespace EksamensSpil
             }
             //GameWorld.RemoveGameObject(this);
             isAlive = false;
+            //Randomize walls
             foreach (Room room in GameWorld.Level.Rooms)
             {
                 if (room != GameWorld.ActiveRoom)

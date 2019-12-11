@@ -10,18 +10,28 @@ namespace EksamensSpil
 {
     public abstract class Character : GameObject
     {
-
+        /// <summary>
+        ///Default: 500
+        /// </summary>
         protected float movementSpeed = 500;
+        /// <summary>
+        /// Default: 1
+        /// </summary>
         protected int health = 1;
+        /// <summary>
+        /// Default: .25f
+        /// </summary>
+        protected float invinsibilityTimeAfterDamage = .25f;
+        /// <summary>
+        /// Default: true
+        /// </summary>
+        protected bool isAlive = true;
+
         protected Vector2 velocity;
         protected Weapon selectedWeapon;
-        //Used for collisions on walls
         protected Vector2 positionPreMove;
-        //Invinsibility frames
-        protected float invinsibilityTimeAfterDamage = .25f;
         protected float invinsibilityTimer;
         protected bool takeDamage;
-        protected bool isAlive = true;
 
 
         public int Health
@@ -55,12 +65,26 @@ namespace EksamensSpil
             set { selectedWeapon = value; }
         }
 
+        /// <summary>
+        /// Character dies
+        /// </summary>
         public abstract void Die();
 
-        // This can be used by both Player and Enemy.
+        /// <summary>
+        /// Character attacks
+        /// </summary>
         public abstract void Attack();
 
-        //TODO get & set metode?
+        /// <summary>
+        /// Character reloads selected weapon
+        /// </summary>
+        public abstract void Reload();
+
+        /// <summary>
+        /// Update health of character
+        /// </summary>
+        /// <param name="damage">Damage the character loses. Negative numbers give the character health.</param>
+        /// <returns></returns>
         public virtual int UpdateHealth(int damage)
         {
             if (invinsibilityTimer > invinsibilityTimeAfterDamage)
@@ -71,7 +95,7 @@ namespace EksamensSpil
                 }
                 else
                 {
-                    Health += damage;
+                    Health += Math.Abs(damage);
                 }
 
                 //Reset timer, so they cant take damage again
@@ -87,14 +111,6 @@ namespace EksamensSpil
             return Health;
         }
 
-        public override void Update(GameTime gameTime)
-        {
-
-            positionPreMove = position;
-            invinsibilityTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
-
-        }
-
         public virtual void Move(GameTime gameTime)
         {
             //deltaTime based on gameTime
@@ -104,9 +120,14 @@ namespace EksamensSpil
             position += ((velocity * movementSpeed) * deltaTime);
         }
 
-        public abstract void Reload();
+        public override void Update(GameTime gameTime)
+        {
 
-        // This can be used for Player and Enemy
+            positionPreMove = position;
+            invinsibilityTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+        }
+
         public override void OnCollision(GameObject otherObject)
         {
             Wall wall = otherObject as Wall;
