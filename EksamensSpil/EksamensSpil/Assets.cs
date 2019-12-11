@@ -13,7 +13,6 @@ namespace EksamensSpil
         //Sprites
         public static Texture2D PlayerSprite;
         public static Texture2D EnemySprite;
-        public static Texture2D EnemyBulletSprite;
         public static Texture2D BossSprite;
         public static Texture2D[] ChestSprites;
         public static Texture2D[] WallSprites;
@@ -37,7 +36,6 @@ namespace EksamensSpil
         {
             PlayerSprite = content.Load<Texture2D>("archerguy");
             EnemySprite = content.Load<Texture2D>("kingguy");
-            EnemyBulletSprite = content.Load<Texture2D>("EnemyBullet");
             BossSprite = content.Load<Texture2D>("goldguy");
             CrosshairSprite = content.Load<Texture2D>("Corshair");
             BulletSprite = content.Load<Texture2D>("Bullet");

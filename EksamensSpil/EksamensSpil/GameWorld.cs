@@ -12,11 +12,11 @@ namespace EksamensSpil
     public class GameWorld : Game
     {
         GraphicsDeviceManager graphics;
+        SpriteBatch spriteBatch;
 
         public static int displayWidth = 1920;
         public static int displayHeight = 1080;
 
-        SpriteBatch spriteBatch;
         //To get random numbers
         public static Random rng = new Random();
         //To add and remove objects in runtime
@@ -34,7 +34,7 @@ namespace EksamensSpil
             RemoveGameObjects.Add(gameObject);
         }
 
-        //Active room. Only objects from the active room, Player and Crosshair get updated
+        //Active room. Only objects from the active room and Crosshair get updated
         public static Room ActiveRoom;
 
         //Levels
@@ -51,9 +51,6 @@ namespace EksamensSpil
 
         //Crosshair
         public static Crosshair Crosshair;
-
-        //Enemy
-        public static Enemy Enemy;
 
         //Debug hitboxes
 #if DEBUG

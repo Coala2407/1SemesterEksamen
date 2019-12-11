@@ -11,7 +11,6 @@ using Microsoft.Xna.Framework.Input;
 namespace EksamensSpil
 {
 
-    public enum ShootResult { Successfull, NotEnoughAmmo, CoolDownActive }
 
     public abstract class Weapon : GameObject
     {
@@ -23,6 +22,8 @@ namespace EksamensSpil
         protected int clipSize;
         protected bool canGunReload;
         protected GameObject holder;
+
+        public enum ShootResult { Successfull, NotEnoughAmmo, CoolDownActive }
 
         public GameObject Holder
         {

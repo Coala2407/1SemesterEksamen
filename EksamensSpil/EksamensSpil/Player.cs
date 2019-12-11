@@ -179,7 +179,7 @@ namespace EksamensSpil
             {
                 Attack();
             }
-            if (Keyboard.HasBeenPressed(Keys.Back))
+            if (Keyboard.HasBeenPressed(Keys.Back) || Keyboard.HasBeenPressed(Keys.C))
             {
                 DropWeapon(selectedWeapon);
             }

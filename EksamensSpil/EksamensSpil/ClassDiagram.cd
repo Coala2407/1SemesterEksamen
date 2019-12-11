@@ -1,0 +1,172 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="EksamensSpil.Assets">
+    <Position X="27.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAEAAIAAAACAAAAAAAAAEAEgIAAoAAAQCAEw=</HashCode>
+      <FileName>Assets.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EksamensSpil.Character">
+    <Position X="1.5" Y="1.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AQQACAAABIAQAgAgEAAAAAiAAIAAAACIKAQAgAEAAAg=</HashCode>
+      <FileName>Character.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EksamensSpil.Chest">
+    <Position X="10.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQABAAAAAAQAAAAAAUAAQAAAEAAAABAIAQQASAAggA=</HashCode>
+      <FileName>Chest.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EksamensSpil.Crosshair">
+    <Position X="15" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAAACAAAAAAAAIAAAAAAAAAA=</HashCode>
+      <FileName>Crosshair.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EksamensSpil.Door">
+    <Position X="17.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>YAQAAACCAAAQAQAAAAgIBAAAAAAAAAAAKAAAACgAAAg=</HashCode>
+      <FileName>Door.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EksamensSpil.Enemy">
+    <Position X="0.5" Y="8.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAQAACAAAAAAAQAgAAAAABAAAIAAAAAAKAAAAAAAACA=</HashCode>
+      <FileName>Enemy.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EksamensSpil.GameObject" Collapsed="true">
+    <Position X="12.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CgQQAQAAAAQAggAgApCAIAAQABQkAACQIAAEAACAEBI=</HashCode>
+      <FileName>GameObject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EksamensSpil.GameWorld">
+    <Position X="29" Y="0.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AARkEEAIAAAQAwAAgAUCACAACAABAAgBAAACAQAAAAQ=</HashCode>
+      <FileName>GameWorld.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EksamensSpil.Helper">
+    <Position X="31" Y="0.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAIAAAAEAAAAAAEAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Helper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EksamensSpil.Item">
+    <Position X="19.75" Y="1.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAQABAAAAAAAAQAAAAQAAEAECABEBBAAIAAQAAAAAAA=</HashCode>
+      <FileName>Item.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EksamensSpil.JewelItem">
+    <Position X="19.5" Y="7" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>JewelItem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EksamensSpil.Level">
+    <Position X="29" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAAAAAAAAIAAAACAAAAAAAAAAAAAAAAAQA=</HashCode>
+      <FileName>Level.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EksamensSpil.Pistol">
+    <Position X="8" Y="7.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEAAAABAAAAEAAAAAAIAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Pistol.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EksamensSpil.Player">
+    <Position X="3" Y="8.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AEQCBACAAAAAAAAgAEgABAAAAKAAAACgKAAAECgBCAA=</HashCode>
+      <FileName>Player.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EksamensSpil.Projectile">
+    <Position X="22.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAQAEAQAAAAAAAAAAAAAAAAAIJAAAAAAAAAA=</HashCode>
+      <FileName>Projectile.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EksamensSpil.Room">
+    <Position X="31" Y="2.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAEAAAABAAAAAEABAAAABAAAAAQAAAgAABAAQA=</HashCode>
+      <FileName>Room.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EksamensSpil.Sword">
+    <Position X="5.5" Y="7.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAACAAAAAEAAAAAAIAAAAAAAAAAAAAAgAA=</HashCode>
+      <FileName>Sword.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EksamensSpil.SwordSwing">
+    <Position X="12.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQSAQAAIAAAEAAAAAAAAAAAAAAAAAAAIIAAAAAAAAAA=</HashCode>
+      <FileName>SwordSwing.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EksamensSpil.UI">
+    <Position X="27.25" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAE=</HashCode>
+      <FileName>UI.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EksamensSpil.Wall">
+    <Position X="24.5" Y="1.75" Width="1.75" />
+    <NestedTypes>
+      <Enum Name="EksamensSpil.Wall.WallMode" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Wall.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAQIAAAAAAAAAAAAAAEAAACAQAAAAAAAIAAAAAAAAAA=</HashCode>
+      <FileName>Wall.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EksamensSpil.Weapon">
+    <Position X="7" Y="1.75" Width="1.5" />
+    <NestedTypes>
+      <Enum Name="EksamensSpil.Weapon.ShootResult" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Weapon.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>ACYCAAAAAAAAAAACABIACgAAAKAAABIAKAAQAAAgAAA=</HashCode>
+      <FileName>Weapon.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Keyboard">
+    <Position X="27.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAEAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAIAAAg=</HashCode>
+      <FileName>Keyboard.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
