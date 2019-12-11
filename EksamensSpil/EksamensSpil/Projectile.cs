@@ -74,15 +74,21 @@ namespace EksamensSpil
             }
         }
 
+		public void Move(GameTime gameTime)
+		{
+			//Normalizes movement of the bullet
+			if (movement != Vector2.Zero)
+			{
+				movement.Normalize();
+			}
+			//Gives the bullet movement
+			position += movement * movementSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+		}
+
         public override void Update(GameTime gameTime)
         {
-            //Normalizes movement of the bullet
-            if (movement != Vector2.Zero)
-            {
-                movement.Normalize();
-            }
-            //Gives the bullet movement
-            position += movement * movementSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+			Move(gameTime);
         }
-    }
+
+	}
 }

@@ -42,7 +42,7 @@ namespace EksamensSpil
         public bool IsOpen { get; set; }
 
         /// <summary>
-        /// Takes the Player to the room asociated with the door object
+        /// Takes the Player to the room associated with the door object
         /// </summary>
         /// <param name="room"></param>
         private void GoToRoom()
@@ -94,6 +94,7 @@ namespace EksamensSpil
             }
         }
 
+		// A series of methodes that together makes it prosible to toggle between true and false.
         public void ToggleDoor()
         {
 
