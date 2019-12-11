@@ -63,14 +63,21 @@ namespace EksamensSpil
 
         public override void Die()
         {
+            isAlive = false;
             int rng = GameWorld.rng.Next(1, 101);
             if (rng <= lootDropChance)
             {
                 GameWorld.AddGameObject(selectedWeapon, GameWorld.ActiveRoom);
                 selectedWeapon.Holder = null;
             }
-            //GameWorld.RemoveGameObject(this);
-            isAlive = false;
+            else if (isBoss)
+            {
+                rng = GameWorld.rng.Next(1, 16);
+                if (rng <= lootDropChance)
+                {
+                    GameWorld.AddGameObject(new JewelItem(position), GameWorld.ActiveRoom);
+                }
+            }
             //Randomize walls
             foreach (Room room in GameWorld.Level.Rooms)
             {
@@ -79,12 +86,6 @@ namespace EksamensSpil
                     room.RandomizeWalls();
                 }
             }
-        }
-
-        //TODO Do we need this?
-        public override void Reload()
-        {
-
         }
 
         public override void Update(GameTime gameTime)
@@ -128,6 +129,7 @@ namespace EksamensSpil
             spriteFlippedY = GameWorld.Player.PositionX < position.X;
 
         }
+
         public override void Attack()
         {
             if (movementSpeed == 0f)
@@ -146,5 +148,8 @@ namespace EksamensSpil
                 position = positionPreMove;
             }
         }
+
+        public override void Reload()
+        { }
     }
 }
