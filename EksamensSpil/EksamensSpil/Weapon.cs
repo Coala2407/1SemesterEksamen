@@ -31,6 +31,19 @@ namespace EksamensSpil
             set { holder = value; }
         }
 
+        public int Ammo
+        {
+            get { return ammo;}
+        }
+
+        public int ClipSize
+        {
+            get
+            { return clipSize; }
+            set
+            { clipSize = value; }
+        }
+
         public float ReloadSpeed
         {
             get { return reloadSpeed; }
@@ -81,19 +94,6 @@ namespace EksamensSpil
             ammo = clipSize;
             canGunReload = false;
 
-        }
-
-        public int Ammo
-        {
-            get { return ammo;}
-        }
-
-        public int ClipSize
-        {
-            get
-            { return clipSize; }
-            set
-            { clipSize = value; }
         }
 
         public override void OnCollision(GameObject otherObject)

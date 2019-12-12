@@ -87,7 +87,6 @@ namespace EksamensSpil
                 weapons.Remove(weapon);
                 SelectedWeapon = null;
                 weapon.Holder = null;
-                //weapon.IsHidden = false;
                 GameWorld.AddGameObject(weapon, GameWorld.ActiveRoom);
                 CycleWeapons();
             }

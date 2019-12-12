@@ -10,13 +10,18 @@ namespace EksamensSpil
 {
     class Pistol : Weapon
     {
-
         private float projectileSpeed;
 
         /// <summary>
         /// Default Constructor
         /// </summary>
         /// 
+        public float ProjectileSpeed
+        {
+            get { return projectileSpeed; }
+            set { projectileSpeed = value; }
+        }
+
         public Pistol(Vector2 position)
         {
             this.position = position;
@@ -46,12 +51,6 @@ namespace EksamensSpil
             ChangeSprite(Assets.PistolSprite);
         }
 
-        public float ProjectileSpeed
-        {
-            get { return projectileSpeed; }
-            set { projectileSpeed = value; }
-        }
-
         /// <summary>
         /// Attack with the pistol
         /// </summary>
@@ -72,6 +71,5 @@ namespace EksamensSpil
             }
             return shootResult;
         }
-
     }
 }
