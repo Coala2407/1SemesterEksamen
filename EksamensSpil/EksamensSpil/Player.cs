@@ -14,7 +14,6 @@ namespace EksamensSpil
 
         private List<Weapon> weapons = new List<Weapon>();
         private List<Item> items = new List<Item>();
-        private float detectionDistance = 100;
 
         //For picking up weapons and items
         private Weapon touchedWeapon;

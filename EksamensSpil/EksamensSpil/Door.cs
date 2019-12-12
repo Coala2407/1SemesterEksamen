@@ -10,9 +10,7 @@ namespace EksamensSpil
 {
     public class Door : GameObject
     {
-        private bool isLocked;
         private bool isOpen;
-        //private Room room;
         private Room previousRoom;
 
         /// <summary>
@@ -83,7 +81,7 @@ namespace EksamensSpil
 
             float distance = vectorDirection.Length();
 
-            if (distance < 100)
+            if (distance < 140)
             {
                 return true;
             }

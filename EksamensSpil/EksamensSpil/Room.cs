@@ -38,7 +38,7 @@ namespace EksamensSpil
         /// <summary>
         /// Make empty room
         /// </summary>
-        /// <param name="isRespawnable">Can enemies spawn randomly inside the room?</param>
+        /// <param name="isRespawnable">Can enemies respawn inside the room?</param>
         /// <param name="isBossRoom">Is it a boss room?</param>
         public Room(bool isRespawnable, bool isBossRoom)
         {

@@ -122,7 +122,6 @@ namespace EksamensSpil
         {
             if (lootType <= 90)
             {
-
                 item = new JewelItem(position);
                 item.PositionY -= sprite.Height;
             }

@@ -13,17 +13,17 @@ namespace EksamensSpil
         {
             this.position = position;
             ChangeSprite(Assets.JewelSprite);
-            Initialize();
+            initialize();
         }
 
         public JewelItem(GameObject holder)
         {
 
             this.holder = holder;         
-            Initialize();
+            initialize();
         }
 
-        private void Initialize()
+        private void initialize()
         {
             
             drawLayer = 0.21f;
