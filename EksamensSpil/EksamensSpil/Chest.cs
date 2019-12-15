@@ -44,23 +44,7 @@ namespace EksamensSpil
             ChangeTheSprite();
         }
 
-        // Different methodes made to toggel between two sprites
-
-        //public void ChestStateInput()
-        //{
-        //	//KeyboardState keyboard = Microsoft.Xna.Framework.Input.Keyboard.GetState();
-
-        //	if(Keyboard.IsPressed(Keys.B) && isKeyDown == false && GameWorld.Player.ItemDetectionRange() == true)
-        //	{
-        //		ToggleChest();
-        //		isKeyDown = true;
-        //	}
-        //          else if (!Keyboard.IsPressed(Keys.B) && isKeyDown == true && GameWorld.Player.ItemDetectionRange() == true)
-        //          {
-        //              isKeyDown = false;
-        //          }
-        //      }
-
+		// A series of methodes made to be able to toggle between two sprites
         public void ToggleChest()
         {
 
@@ -108,7 +92,7 @@ namespace EksamensSpil
         // Makes a random GameObject from the Item Class spawn when opened. Has a slight chance of nothing happening
         public void LootDrop()
         {
-            ItemAddList();
+            ItemAdd();
 
             if (isOpen == true && item != null && didLootDrop == false)
             {
@@ -118,7 +102,7 @@ namespace EksamensSpil
         }
 
         // All the items that can spawn and their spawn chance
-        public void ItemAddList()
+        public void ItemAdd()
         {
             if (lootType <= 90)
             {
