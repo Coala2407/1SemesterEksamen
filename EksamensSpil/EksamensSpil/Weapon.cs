@@ -113,6 +113,7 @@ namespace EksamensSpil
 			Character character = otherObject as Character;
 			Enemy enemy = otherObject as Enemy;
 
+			// Makes the player unable to reload when he takes damage and must restart the timer
             if (character.TakeDamage == true && holder != enemy)
             {
                 //Console.WriteLine("Reload Canceled");
@@ -121,12 +122,14 @@ namespace EksamensSpil
 				character.TakeDamage = false;
             }
 
+			// Reloads the weapon when the timer hits zero and the player has not taken any damage
             if (canGunReload == true && ammo < clipSize && cooldown <= 0)
             {
                 Reload();
 				canGunReload = false;
             }
 
+			// Cooldown before reload
             cooldown -= (float)gameTime.ElapsedGameTime.TotalSeconds;
         }
     }
