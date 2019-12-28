@@ -15,19 +15,19 @@ namespace EksamensSpil
         //if true, The room is a boss room
         bool isBossRoom;
 
-        public List<GameObject> GameObjects
-        {
-            get { return gameObjects; }
-            set { gameObjects = value; }
-        }
+		public List<GameObject> GameObjects
+		{
+			get { return gameObjects; }
+			set { gameObjects = value; }
+		}
 
-        /// <summary>
-        /// Constructor. Most used. 
-        /// </summary>
-        /// <param name="gameObjects">Objects inside the room</param>
-        /// <param name="isRespawnable">Can enemies spawn randomly inside the room?</param>
-        /// <param name="isBossRoom">Is it a boss room?</param>
-        public Room(List<GameObject> gameObjects, bool isRespawnable, bool isBossRoom)
+		/// <summary>
+		/// Constructor. Most used. 
+		/// </summary>
+		/// <param name="gameObjects">Objects inside the room</param>
+		/// <param name="isRespawnable">Can enemies spawn randomly inside the room?</param>
+		/// <param name="isBossRoom">Is it a boss room?</param>
+		public Room(List<GameObject> gameObjects, bool isRespawnable, bool isBossRoom)
         {
             GameObjects = gameObjects;
             this.isRespawnable = isRespawnable;

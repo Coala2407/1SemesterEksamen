@@ -9,7 +9,7 @@ namespace EksamensSpil
 {
     class Sword : Weapon
     {
-
+		// TODO: Make the sword able to reflect bullets
 		public float Range;
 		public float SwingTime;
 

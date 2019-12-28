@@ -292,6 +292,7 @@ namespace EksamensSpil
 				//is no longer touching a door
 				touchedDoor = null;
 			}
+
         }
 
         //public bool ItemDetectionRange()

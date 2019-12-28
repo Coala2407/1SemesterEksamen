@@ -10,8 +10,9 @@ namespace EksamensSpil
 {
     public class Door : GameObject
     {
-        private bool isOpen;
-        private Room previousRoom;
+        //private bool isOpen;
+		private bool playerFree;
+		private Room previousRoom;
 
         /// <summary>
         /// Default Constructor
@@ -21,15 +22,6 @@ namespace EksamensSpil
             this.position = position;
             this.room = room;
             Initialize();
-        }
-
-        public Room PreviousRoom
-        {
-            get { return previousRoom; }
-            set
-            {
-                previousRoom = value;
-            }
         }
 
         public void Initialize()
@@ -46,17 +38,50 @@ namespace EksamensSpil
         private void GoToRoom()
         {
             this.IsOpen = false;
-            previousRoom = GameWorld.ActiveRoom;
+			previousRoom = GameWorld.ActiveRoom;
             GameWorld.ActiveRoom = room;
             //GameWorld.Player.PositionX = 300;
             //GameWorld.Player.PositionY = 200;
             GameWorld.ActiveRoom.Remove(GameWorld.Player);
             room.Add(GameWorld.Player);
+			MovePlayer();
             if (room.IsRespawnable)
             {
                 room.RespawnEnemies();
             }
         }
+
+		public void MovePlayer()
+		{
+
+			foreach (GameObject gameObject in GameWorld.ActiveRoom.GameObjects)
+			{
+				Wall wall = gameObject as Wall;
+				if (gameObject is Door)
+				{
+					Door door = gameObject as Door;
+
+					// if the door is in the left side of the room.
+					if (door.room == previousRoom && door.PositionX <= 960)
+					{
+						GameWorld.Player.PositionX = door.PositionX + this.sprite.Width;
+						GameWorld.Player.PositionY = door.PositionY;
+					}
+
+					// if the door is in the right side of the room.
+					else if (door.room == previousRoom && door.PositionX > 960)
+					{
+						GameWorld.Player.PositionX = door.PositionX - this.sprite.Width;
+						GameWorld.Player.PositionY = door.PositionY;
+					}
+
+				}
+
+				
+			}
+
+			
+		}
 
         public override void OnCollision(GameObject otherObject)
         {

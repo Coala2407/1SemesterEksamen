@@ -136,7 +136,7 @@ namespace EksamensSpil
 			//THE HALL
 			// Door
 			TheHall.Add(new Door(new Vector2(400, 400), TheRoom));
-			TheHall.Add(new Door(new Vector2(400, 700), BossRoom));
+			TheHall.Add(new Door(new Vector2(1800, 700), BossRoom));
 
             //Weapons and chests
             TheHall.Add(new Pistol(new Vector2(1750, 200)));
