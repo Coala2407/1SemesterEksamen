@@ -11,7 +11,6 @@ namespace EksamensSpil
     public class Door : GameObject
     {
         //private bool isOpen;
-		private bool playerFree;
 		private Room previousRoom;
 
         /// <summary>
@@ -51,6 +50,9 @@ namespace EksamensSpil
             }
         }
 
+		/// <summary>
+		/// Moves the player to the door connected to the previous room
+		/// </summary>
 		public void MovePlayer()
 		{
 
