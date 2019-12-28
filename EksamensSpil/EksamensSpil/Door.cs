@@ -39,8 +39,6 @@ namespace EksamensSpil
             this.IsOpen = false;
 			previousRoom = GameWorld.ActiveRoom;
             GameWorld.ActiveRoom = room;
-            //GameWorld.Player.PositionX = 300;
-            //GameWorld.Player.PositionY = 200;
             GameWorld.ActiveRoom.Remove(GameWorld.Player);
             room.Add(GameWorld.Player);
 			MovePlayer();
@@ -58,7 +56,7 @@ namespace EksamensSpil
 
 			foreach (GameObject gameObject in GameWorld.ActiveRoom.GameObjects)
 			{
-				Wall wall = gameObject as Wall;
+
 				if (gameObject is Door)
 				{
 					Door door = gameObject as Door;
@@ -78,7 +76,6 @@ namespace EksamensSpil
 					}
 
 				}
-
 				
 			}
 
