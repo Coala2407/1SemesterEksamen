@@ -19,7 +19,7 @@ namespace EksamensSpil
         private Weapon touchedWeapon;
         private Item touchedItem;
         private Chest touchedChest;
-		private Door touchedDoor;
+        private Door touchedDoor;
 
 
         /// <summary>
@@ -41,7 +41,7 @@ namespace EksamensSpil
         /// <param name="item"></param>
         public void PickUpItem(Item item)
         {
-            if (item != null && item.Holder == null)
+            if (item != null)
             {
                 if (!items.Contains(item))
                 {
@@ -104,28 +104,28 @@ namespace EksamensSpil
             }
         }
 
-		/// <summary>
-		/// Methode to open doors
-		/// </summary>
-		/// <param name="door"></param>
-		public void OpenDoor()
-		{
-			foreach(GameObject gameObject in GameWorld.ActiveRoom.GameObjects)
-			{
+        /// <summary>
+        /// Methode to open doors
+        /// </summary>
+        /// <param name="door"></param>
+        public void OpenDoor()
+        {
+            foreach (GameObject gameObject in GameWorld.ActiveRoom.GameObjects)
+            {
 
-				if(gameObject is Door)
-				{
-					Door door = gameObject as Door;
+                if (gameObject is Door)
+                {
+                    Door door = gameObject as Door;
 
-					if (door.RangeToOpen() == true)
-					{
-						door.ToggleDoor();
-					}
-				}
-							
-			}
-			
-		}
+                    if (door.RangeToOpen() == true)
+                    {
+                        door.ToggleDoor();
+                    }
+                }
+
+            }
+
+        }
 
         /// <summary>
         /// User input to Player
@@ -156,18 +156,18 @@ namespace EksamensSpil
             if (Keyboard.HasBeenPressed(Keys.E))
             {
                 PickUpWeapon(touchedWeapon);
-				//if(touchedWeapon == null)
-				{
-					PickUpItem(touchedItem);
-				}
-				//else if(touchedWeapon == null && touchedItem == null)
-				{
-					OpenChest(touchedChest);
-				}
-				// else if (touchedWeapon == null && touchedItem == null && touchedChest == null)
-				{
-					OpenDoor();
-				}
+                //if(touchedWeapon == null)
+                {
+                    PickUpItem(touchedItem);
+                }
+                //else if(touchedWeapon == null && touchedItem == null)
+                {
+                    OpenChest(touchedChest);
+                }
+                // else if (touchedWeapon == null && touchedItem == null && touchedChest == null)
+                {
+                    OpenDoor();
+                }
             }
             if (Keyboard.HasBeenPressed(Keys.Tab))
             {
@@ -238,7 +238,7 @@ namespace EksamensSpil
             Weapon weapon = otherObject as Weapon;
             Chest chest = otherObject as Chest;
             Item item = otherObject as Item;
-			Door door = otherObject as Door;
+            Door door = otherObject as Door;
 
             if ((weapon != null && weapon.Holder == null))
             {
@@ -255,11 +255,11 @@ namespace EksamensSpil
                 //is touching an ítem. Ready to pick it up in handle input
                 touchedItem = item;
             }
-			if(door != null)
-			{
-				//Is touching a door. Ready to open it in handle input
-				touchedDoor = door;
-			}
+            if (door != null)
+            {
+                //Is touching a door. Ready to open it in handle input
+                touchedDoor = door;
+            }
         }
 
         public override void CheckCollision(GameObject otherObject)
@@ -287,39 +287,13 @@ namespace EksamensSpil
                 touchedItem = null;
             }
 
-			else if (touchedDoor != null && touchedDoor == otherObject)
-			{
-				//is no longer touching a door
-				touchedDoor = null;
-			}
+            else if (touchedDoor != null && touchedDoor == otherObject)
+            {
+                //is no longer touching a door
+                touchedDoor = null;
+            }
 
         }
-
-        //public bool ItemDetectionRange()
-        //{
-        //    Vector2 directionVector = new Vector2(0, 0);
-
-        //    foreach (GameObject gameObject in GameWorld.ActiveRoom.GameObjects)
-        //    {
-        //        if (gameObject is Weapon || gameObject is Item || gameObject is Chest || gameObject is Door)
-        //        {
-        //            directionVector = gameObject.Position - GameWorld.Player.position;
-        //        }
-        //    }
-
-        //    float distance = directionVector.Length();
-
-        //    if (distance < detectionDistance)
-        //    {
-        //        //Console.WriteLine($"Player within distance {distance}");
-        //        return true;
-        //    }
-        //    else
-        //    {
-        //        return false;
-        //    }
-
-        //}
 
         private void CycleWeapons()
         {
@@ -340,6 +314,23 @@ namespace EksamensSpil
             else if (weapons.Count > 0)
             {
                 selectedWeapon = weapons[0];
+            }
+        }
+
+        public override void OnTakeDamage()
+        {
+            //Chance to drop the first item when taking damage
+            int randomInt = GameWorld.rng.Next(1, 101);
+            const int itemDropChance = 25;
+            if (randomInt <= itemDropChance)
+            {
+                Item item = items.FirstOrDefault();
+                if (item != null)
+                {
+                    items.Remove(item);
+                    item.Position = this.position;
+                    GameWorld.AddGameObject(item, GameWorld.ActiveRoom);
+                }
             }
         }
     }

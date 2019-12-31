@@ -151,5 +151,8 @@ namespace EksamensSpil
 
         public override void Reload()
         { }
+
+        public override void OnTakeDamage()
+        {}
     }
 }

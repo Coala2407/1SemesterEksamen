@@ -106,6 +106,8 @@ namespace EksamensSpil
                 {
                     Die();
                 }
+
+                OnTakeDamage();
             }
 
             return Health;
@@ -143,6 +145,8 @@ namespace EksamensSpil
                 position = positionPreMove;
             }
         }
+
+        public abstract void OnTakeDamage();
 
         public override void Draw(SpriteBatch spriteBatch)
         {

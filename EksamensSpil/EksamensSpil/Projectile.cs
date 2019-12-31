@@ -47,7 +47,7 @@ namespace EksamensSpil
                 if (c != null && c.IsAlive)
                 {
                     c.UpdateHealth(1);
-                    c.TakeDamage = true;
+                    c.TakeDamage = true;                
                     GameWorld.RemoveGameObject(this);
                 }
             }
