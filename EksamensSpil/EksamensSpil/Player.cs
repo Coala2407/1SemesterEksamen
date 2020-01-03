@@ -286,6 +286,7 @@ namespace EksamensSpil
             }
 			if(key != null)
 			{
+				// Is touching a key/button. Ready to start the timer in the boss room
 				touchedKey = key;
 			}
         }

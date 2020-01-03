@@ -118,6 +118,7 @@ namespace EksamensSpil
 
         public override void Update(GameTime gameTime)
         {
+			// Timer in boss room
 			if(startTimer == true)
 			{
 				timer -= (float)gameTime.ElapsedGameTime.TotalSeconds;
@@ -146,7 +147,6 @@ namespace EksamensSpil
 		/// <summary>
 		/// Sets and starts the timer for when the player can escape the boss room.
 		/// </summary>
-		/// <param name="key"></param>
 		public void EscapeTimer()
 		{
 			startTimer = true;

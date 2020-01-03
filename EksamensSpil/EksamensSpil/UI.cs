@@ -44,6 +44,10 @@ namespace EksamensSpil
             spriteBatch.DrawString(UIDefault, $"{player.Health}", pos, Color.White, 0, new Vector2(0, 0), 1, SpriteEffects.None, 0.95f);
         }
 
+		/// <summary>
+		/// Show the time left before the player can leave a boss room
+		/// </summary>
+		/// <param name="spriteBatch"></param>
 		public static void Timer(SpriteBatch spriteBatch)
 		{
 			if(GameWorld.ActiveRoom == GameWorld.BossRoom)
