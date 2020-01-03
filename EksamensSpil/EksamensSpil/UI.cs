@@ -43,5 +43,26 @@ namespace EksamensSpil
             Vector2 pos = new Vector2(75, 75);
             spriteBatch.DrawString(UIDefault, $"{player.Health}", pos, Color.White, 0, new Vector2(0, 0), 1, SpriteEffects.None, 0.95f);
         }
+
+		public static void Timer(SpriteBatch spriteBatch)
+		{
+			if(GameWorld.ActiveRoom == GameWorld.BossRoom)
+			{
+				foreach (GameObject gameObject in GameWorld.ActiveRoom.GameObjects)
+				{
+					if (gameObject is Door)
+					{
+						Door door = gameObject as Door;
+
+						if (door.StartTimer == true && door.Timer > 0)
+						{
+							Vector2 pos = new Vector2(990, 75);
+							spriteBatch.DrawString(UIDefault, $"{(int)door.Timer}", pos, Color.White, 0, new Vector2(0, 0), 1, SpriteEffects.None, 0.95f);
+						}
+					}
+				}
+			}
+			
+		}
     }
 }

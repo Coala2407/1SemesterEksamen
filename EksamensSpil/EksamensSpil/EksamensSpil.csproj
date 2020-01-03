@@ -49,6 +49,7 @@
     <Compile Include="GameObject.cs" />
     <Compile Include="Helper.cs" />
     <Compile Include="JewelItem.cs" />
+    <Compile Include="Key.cs" />
     <Compile Include="Keyboard.cs" />
     <Compile Include="SwordSwing.cs" />
     <Compile Include="UI.cs" />

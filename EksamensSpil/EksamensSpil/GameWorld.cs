@@ -178,6 +178,8 @@ namespace EksamensSpil
             }
             //Door
             BossRoom.Add(new Door(new Vector2(100, 990), TheHall));
+			// Key
+			BossRoom.Add(new Key(new Vector2(700, 1000)));
             ////////////////////////////////////////////////////////////////////////////
             //Make walls random
             Level.RandomizeWalls();
@@ -276,6 +278,7 @@ namespace EksamensSpil
             //Draw UI elements
             UI.AmmoAndClip(spriteBatch);
             UI.Health(spriteBatch);
+			UI.Timer(spriteBatch);
 
             base.Draw(gameTime);
             spriteBatch.End();

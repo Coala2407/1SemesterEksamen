@@ -24,7 +24,7 @@ namespace EksamensSpil
         public static Texture2D SwingEffectSprite;
         public static Texture2D JewelSprite;
         public static Texture2D Background1;
-
+		public static Texture2D DoorKey;
         //UI Elements
         public static SpriteFont UIDefault;
 
@@ -43,9 +43,10 @@ namespace EksamensSpil
             SwordSprite = content.Load<Texture2D>("sword1");
             SwingEffectSprite = content.Load<Texture2D>("swoosh");
             JewelSprite = content.Load<Texture2D>("Jewel");
+			DoorKey = content.Load<Texture2D>("Key");
             Background1 = content.Load<Texture2D>("background1");
 
-			DoorSprites = new Texture2D[2];
+			DoorSprites = new Texture2D[3];
 			for (int i = 0; i < DoorSprites.Length; ++i)
 			{
 				DoorSprites[i] = content.Load<Texture2D>($"door{i}");

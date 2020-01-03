@@ -20,6 +20,7 @@ namespace EksamensSpil
         private Item touchedItem;
         private Chest touchedChest;
         private Door touchedDoor;
+		private Key touchedKey;
 
 
         /// <summary>
@@ -32,7 +33,7 @@ namespace EksamensSpil
             ChangeSprite(Assets.PlayerSprite);
             drawLayer = 0.1f;
             health = 10;
-            //invinsibilityTimeAfterDamage = 99999999999999999999999999999999999999f;
+            invinsibilityTimeAfterDamage = 99999999999999999999999999999999999999f;
         }
 
         /// <summary>
@@ -79,6 +80,24 @@ namespace EksamensSpil
                 item.ItemEffect();
             }
         }
+
+		public void PressButton(Key key)
+		{
+			if(key != null)
+			{
+				foreach (GameObject gameObject in GameWorld.ActiveRoom.GameObjects)
+				{
+
+					if (gameObject is Door)
+					{
+						Door door = gameObject as Door;
+
+						door.EscapeTimer();
+					}
+
+				}
+			}
+		}
 
         public void DropWeapon(Weapon weapon)
         {
@@ -168,6 +187,10 @@ namespace EksamensSpil
                 {
                     OpenDoor();
                 }
+
+				{
+					PressButton(touchedKey);
+				}
             }
             if (Keyboard.HasBeenPressed(Keys.Tab))
             {
@@ -239,6 +262,7 @@ namespace EksamensSpil
             Chest chest = otherObject as Chest;
             Item item = otherObject as Item;
             Door door = otherObject as Door;
+			Key key = otherObject as Key;
 
             if ((weapon != null && weapon.Holder == null))
             {
@@ -260,6 +284,10 @@ namespace EksamensSpil
                 //Is touching a door. Ready to open it in handle input
                 touchedDoor = door;
             }
+			if(key != null)
+			{
+				touchedKey = key;
+			}
         }
 
         public override void CheckCollision(GameObject otherObject)
@@ -292,6 +320,12 @@ namespace EksamensSpil
                 //is no longer touching a door
                 touchedDoor = null;
             }
+
+			else if (touchedKey != null && touchedKey == otherObject)
+			{
+				// is no longer touching a key
+				touchedKey = null;
+			}
 
         }
 

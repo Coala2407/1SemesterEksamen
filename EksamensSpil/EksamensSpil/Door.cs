@@ -8,27 +8,49 @@ using Microsoft.Xna.Framework.Content;
 
 namespace EksamensSpil
 {
-    public class Door : GameObject
-    {
-        //private bool isOpen;
+	public class Door : GameObject
+	{
+		//private bool isOpen;
 		private Room previousRoom;
+		private bool startTimer = false;
+		private float timer;
 
-        /// <summary>
-        /// Default Constructor
-        /// </summary>
-        public Door(Vector2 position, Room room)
-        {
-            this.position = position;
-            this.room = room;
-            Initialize();
-        }
+		/// <summary>
+		/// Default Constructor
+		/// </summary>
+		public Door(Vector2 position, Room room)
+		{
+			this.position = position;
+			this.room = room;
+			Initialize();
+		}
 
-        public void Initialize()
-        {
-            drawLayer = 0.9f;
-        }
+		public void Initialize()
+		{
+			drawLayer = 0.9f;
+		}
+
+
+		public float Timer
+		{
+			get { return timer; }
+			set
+			{
+				timer = value;
+			}
+		}
+
+		public bool StartTimer
+		{
+			get { return startTimer; }
+			set
+			{
+				startTimer = value;
+			}
+		}
 
         public bool IsOpen { get; set; }
+
 
         /// <summary>
         /// Takes the Player to the room associated with the door object
@@ -37,6 +59,7 @@ namespace EksamensSpil
         private void GoToRoom()
         {
             this.IsOpen = false;
+			startTimer = false;
 			previousRoom = GameWorld.ActiveRoom;
             GameWorld.ActiveRoom = room;
             GameWorld.ActiveRoom.Remove(GameWorld.Player);
@@ -95,6 +118,11 @@ namespace EksamensSpil
 
         public override void Update(GameTime gameTime)
         {
+			if(startTimer == true)
+			{
+				timer -= (float)gameTime.ElapsedGameTime.TotalSeconds;
+			}
+
             ChangeTheSprite();
         }
 
@@ -115,17 +143,31 @@ namespace EksamensSpil
             }
         }
 
-		// A series of methodes that together makes it prosible to toggle between true and false.
+		/// <summary>
+		/// Sets and starts the timer for when the player can escape the boss room.
+		/// </summary>
+		/// <param name="key"></param>
+		public void EscapeTimer()
+		{
+			startTimer = true;
+			timer = 15;						
+		}
+
+		// A series of methodes that together makes it posible to toggle between true and false.
         public void ToggleDoor()
         {
-            if (IsDoorOpen() == false)
-            {
-                OpenDoor();
-            }
-            else
-            {
-                CloseDoor();
-            }
+			// TODO: Make the player able to leave the room after killing the boss
+			if(GameWorld.ActiveRoom != GameWorld.BossRoom || startTimer == true && timer <= 0)
+			{
+				if (IsDoorOpen() == false)
+				{
+					OpenDoor();
+				}
+				else
+				{
+					CloseDoor();
+				}
+			}           
         }
 
         public void OpenDoor()
@@ -143,13 +185,20 @@ namespace EksamensSpil
             return IsOpen;
         }
 
-        // switches between two sprites
+        // switches between three sprites
         public void ChangeTheSprite()
         {
-            if (IsOpen == true)
+			// Locket door for bossRoom
+			if(GameWorld.ActiveRoom == GameWorld.BossRoom && startTimer == false || GameWorld.ActiveRoom == GameWorld.BossRoom && startTimer == true && timer > 0)
+			{
+				ChangeSprite(Assets.DoorSprites[2]);
+			}
+			// open door
+            else if (IsOpen == true)
             {
                 ChangeSprite(Assets.DoorSprites[1]);
             }
+			// closed door
             else
             {
                 ChangeSprite(Assets.DoorSprites[0]);
