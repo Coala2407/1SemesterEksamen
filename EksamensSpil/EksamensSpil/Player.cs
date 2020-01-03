@@ -81,6 +81,10 @@ namespace EksamensSpil
             }
         }
 
+		/// <summary>
+		/// Methode to make the player able to start the timer in boss room
+		/// </summary>
+		/// <param name="key"></param>
 		public void PressButton(Key key)
 		{
 			if(key != null)
@@ -92,7 +96,10 @@ namespace EksamensSpil
 					{
 						Door door = gameObject as Door;
 
-						door.EscapeTimer();
+						if(door.StartTimer == false)
+						{
+							door.EscapeTimer();
+						}
 					}
 
 				}
