@@ -31,6 +31,18 @@ namespace EksamensSpil
             Initialize();
         }
 
+
+		public bool IsBoss
+		{
+			get { return isBoss; }
+			set
+			{
+				isBoss = value;
+			}
+		}
+
+
+
         public void Initialize()
         {
             selectedWeapon = new Pistol(this);

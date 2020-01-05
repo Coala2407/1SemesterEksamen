@@ -124,6 +124,11 @@ namespace EksamensSpil
 				timer -= (float)gameTime.ElapsedGameTime.TotalSeconds;
 			}
 
+			if(GameWorld.ActiveRoom == GameWorld.BossRoom)
+			{
+				DefeatBoss();
+			}
+
             ChangeTheSprite();
         }
 
@@ -153,11 +158,38 @@ namespace EksamensSpil
 			timer = 15;						
 		}
 
-		// A series of methodes that together makes it posible to toggle between true and false.
+		/// <summary>
+		/// Checks if the boss(es) in the room is dead
+		/// </summary>
+		/// <returns></returns>
+		public bool DefeatBoss()
+		{
+			foreach(GameObject gameObject in GameWorld.ActiveRoom.GameObjects)
+			{
+				if(gameObject is Enemy)
+				{
+					Enemy enemy = gameObject as Enemy;
+
+					if(enemy.IsBoss == true && enemy.IsAlive == true)
+					{
+						return false;
+					}
+
+					else
+					{
+						return true;
+					}
+
+				}
+			}
+
+			return true;
+		}
+
+		// A series of methodes that toggether makes it possible to toggle between true and false.
         public void ToggleDoor()
         {
-			// TODO: Make the player able to leave the room after killing the boss
-			if(GameWorld.ActiveRoom != GameWorld.BossRoom || startTimer == true && timer <= 0)
+			if(GameWorld.ActiveRoom != GameWorld.BossRoom || startTimer == true && timer <= 0 || DefeatBoss() == true)
 			{
 				if (IsDoorOpen() == false)
 				{
@@ -189,7 +221,8 @@ namespace EksamensSpil
         public void ChangeTheSprite()
         {
 			// Locket door for bossRoom
-			if(GameWorld.ActiveRoom == GameWorld.BossRoom && startTimer == false || GameWorld.ActiveRoom == GameWorld.BossRoom && startTimer == true && timer > 0)
+			if(GameWorld.ActiveRoom == GameWorld.BossRoom && startTimer == false && DefeatBoss() == false || 
+			   GameWorld.ActiveRoom == GameWorld.BossRoom && startTimer == true && timer > 0 && DefeatBoss() == false)
 			{
 				ChangeSprite(Assets.DoorSprites[2]);
 			}

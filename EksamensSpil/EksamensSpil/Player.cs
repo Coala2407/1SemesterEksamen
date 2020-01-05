@@ -96,7 +96,7 @@ namespace EksamensSpil
 					{
 						Door door = gameObject as Door;
 
-						if(door.StartTimer == false)
+						if(door.StartTimer == false && door.DefeatBoss() == false)
 						{
 							door.EscapeTimer();
 						}
