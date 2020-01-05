@@ -132,8 +132,11 @@ namespace EksamensSpil
             ChangeTheSprite();
         }
 
-        // Detects player distance from the door
-        public bool RangeToOpen()
+		/// <summary>
+		/// Detects player distance from the door
+		/// </summary>
+		/// <returns></returns>
+		public bool RangeToOpen()
         {
             Vector2 vectorDirection = GameWorld.Player.Position - this.position;
 
