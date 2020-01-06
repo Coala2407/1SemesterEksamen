@@ -34,13 +34,9 @@ namespace EksamensSpil
         {
             foreach (Room room in Rooms)
             {
-                foreach (GameObject go in room.GameObjects)
+                foreach (Wall wall in room.GameObjects.Where(x => x is Wall))
                 {
-                    Wall wall = go as Wall;
-                    if (wall != null)
-                    {
-                        wall.Randomize();
-                    }
+                    wall.Randomize();
                 }
             }
         }
