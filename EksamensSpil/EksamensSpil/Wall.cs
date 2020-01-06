@@ -41,12 +41,12 @@ namespace EksamensSpil
             initialize();
         }
 
-        public Wall(Vector2 position, bool isHidden, WallMode mode = WallMode.Fixed)
+        public Wall(Vector2 position, bool isHidden, WallMode mode)
         {
             this.position = position;
             if (isHidden)
             {
-                this.IsHidden = true;
+                isHidden = true;
             }
             if (mode == WallMode.Randomized)
             {
