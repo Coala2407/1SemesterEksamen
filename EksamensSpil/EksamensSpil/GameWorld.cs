@@ -172,7 +172,6 @@ namespace EksamensSpil
             BossRoom.Add(new Pistol(new Vector2(1800, 200)));
             //Enemies
             BossRoom.Add(new Enemy(new Vector2(1500, 600), true));
-			BossRoom.Add(new Enemy(new Vector2(600, 600), true));
 			for (int i = 0; i < 5; i++)
             {
                 BossRoom.Add(new Enemy(new Vector2(1800, 300 + 150 * i)));
